@@ -121,28 +121,28 @@ h2{
 }
 .sdesc{color:var(--text-2); margin:0 0 22px; max-width:66ch; font-size:14.5px}
 /* ---------- 컬럼 정의 ---------- */
-.coldef{
-  margin-top:26px; display:grid; gap:28px 44px; align-items:start;
-  grid-template-columns:repeat(auto-fit, minmax(440px, 1fr));
-}
+/* 요약표 바로 위. 항목이 아홉이라 가로를 다 쓰도록 두 단으로 흘린다 —
+   grid 가 아니라 multi-column 이어야 읽는 순서가 위에서 아래로 유지된다 */
+.coldef{margin:14px 0 24px}
 .coldef h3{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
   color:var(--text-3); font-weight:600; margin:0 0 4px; padding-bottom:8px;
   border-bottom:1px solid var(--line);
 }
-.coldef dl{margin:0}
+.coldef dl{margin:0; columns:2; column-gap:48px}
 /* 컬럼명과 정의를 두 칸으로 — 컬럼명은 표 머리글과 같은 모노 서체로 맞춘다 */
 .coldef dl > div{
+  break-inside:avoid;
   display:grid; grid-template-columns:112px 1fr; gap:0 16px;
   padding:9px 0; border-bottom:1px solid var(--line-soft);
 }
-.coldef dl > div:last-child{border-bottom:none}
 .coldef dt{
   font-family:var(--mono); font-size:11.5px; font-weight:600; color:var(--ink);
   line-height:1.55; word-break:keep-all;
 }
 .coldef dd{margin:0; font-size:13px; line-height:1.68; color:var(--text-2); word-break:keep-all}
 .coldef dd b{color:var(--text); font-weight:600}
+@media(max-width:1000px){ .coldef dl{columns:1} }
 @media(max-width:760px){
   .coldef dl > div{grid-template-columns:1fr; gap:3px}
 }
@@ -228,9 +228,12 @@ tr.detail.show{display:table-row}
 tr.detail > td{padding:0 !important; border-bottom:1px solid var(--line) !important}
 table.dtable{width:100%; border-collapse:collapse; font-size:11.5px}
 /* 전형 표만 고정 폭 - th 에 px 폭이 박혀 있고 반영비중 7열의 폭을 여기서 정한다.
-   폭이 없는 열은 "특이사항" 하나뿐이라 남는 폭을 전부 가져간다.
-   입결 표(.atable / 최근 3년 입결)는 열 폭이 없으므로 auto 그대로 둔다 */
+   폭이 없는 열은 "특이사항" 하나뿐이라 남는 폭을 전부 가져간다 */
 table.ftable{table-layout:fixed}
+/* 어디가 입결 표는 내용 폭 - 100% 로 늘리면 전형명이 잔여 폭을 전부 먹어
+   숫자 네 열이 오른쪽 끝으로 밀린다. 전형명은 실측 최장값(237px)이 한 줄에
+   들어가는 폭으로 고정하고, 표 자체를 내용 폭으로 줄여 왼쪽에 붙인다 */
+table.atable{table-layout:fixed; width:auto}
 table.ftable > thead > tr > th.mx{width:29px}
 .atable tr.abase td{background:var(--sunk)}
 .atable tr.abase td:nth-child(6){font-weight:650}
@@ -361,7 +364,7 @@ footer b{color:var(--text-2)}
       <div><dt>지역</dt><dd>수도권 중심</dd></div>
       <div><dt>제외</dt><dd>여대 · 최상위권 7개교 · 야간</dd></div>
       <div><dt>근거</dt><dd>2028 시행계획 PDF 201건</dd></div>
-      <div><dt>확인일</dt><dd>2026-08-31 (대학 공식 재확인)</dd></div>
+      <div><dt>마지막 확인 날짜</dt><dd>2026-08-31</dd></div>
     </dl>
   </div>
 </header>
@@ -403,6 +406,20 @@ footer b{color:var(--text-2)}
 
 <section>
   <div class="shead"><span class="snum">01</span><h2>요약표</h2></div>
+  <div class="coldef">
+    <h3>요약표 컬럼</h3>
+    <dl>
+        <div><dt>#</dt><dd>어디가(대입정보포털)가 공시한 <b>2026학년도 수시 학생부위주 일반전형 교과등급 70%컷</b> 중 그 모집단위의 가장 낮은 값을 뽑아, <b>이 표 안에서만</b> 오름차순으로 매긴 번호다. 대학 서열이 아니다. 농어촌·기회균형 같은 특별전형은 합격선이 다르게 형성되므로 산정에서 뺐다. 28개 중 23개에 번호가 붙었고(동점 한 쌍), 컷이 없는 5개는 <span class="unk">—</span>로 두고 맨 뒤에 놓았다. 등급은 모두 <b>9등급제</b>이며 5등급제로 환산하지 않았다.</dd></div>
+        <div><dt>대학</dt><dd>대학명 아래에 캠퍼스 소재지를 함께 적었다. 같은 대학이 여러 모집단위로 들어온 경우 행이 나뉜다.</dd></div>
+        <div><dt>모집단위 (원문)</dt><dd>대학이 공표한 표기 그대로다. 색 라벨은 학과군 — <b>A 문헌정보 · B 문예창작 · C 정보사회·데이터 · D 통합·자유전공</b>.</dd></div>
+        <div><dt>모집인원</dt><dd>원문에 적힌 그 모집단위의 모집인원이다. 원문에서 읽어내지 못한 곳은 <span class="unk">미확인</span>으로 둔다.</dd></div>
+        <div><dt>주력 전형</dt><dd>그 모집단위를 대표하도록 고른 <b>한 전형</b>의 원문 전형명이다. 오른쪽의 <b>반영 비중 7열과 수능최저는 모두 이 전형 기준</b>이며, 같은 모집단위의 나머지 전형은 펼친 행의 전형 표에 따로 있다.</dd></div>
+        <div><dt>수능최저</dt><dd>주력 전형에 걸린 수능 최저학력기준을 원문 표기 그대로 옮겼다(예: <span style="font-family:var(--mono)">2개영역 합7</span>). 적용 범위가 전형마다 다르면 괄호로 적었다(예: <span style="font-family:var(--mono)">2개영역 합6 (학교장추천만)</span>).</dd></div>
+        <div><dt>내신 민감도</dt><dd>주력 전형의 반영비율 구조에서 직접 계산한 값이다 — <b>교과 비중 90% 이상이면 높음, 실기 60% 이상이면 낮음</b>, 그 사이는 중간. 배지에 마우스를 올리면 그렇게 판단한 근거가 나온다. 현재 높음 13 · 중간 7 · 낮음 8이다.</dd></div>
+        <div><dt>입결 판정</dt><dd>과거 합격선을 확보한 <b>4개 모집단위</b>에서만 계산한다. 시나리오 등급을 9등급제로 환산한 뒤 그 모집단위의 <b>가장 완화된 과거 기준</b>과 비교해 ±0.5등급을 경계로 상향·적정·하향을 가른다. 나머지 24개는 추정하지 않고 <span class="unk">판정불가</span>로 둔다. 아래 02의 경고를 함께 읽을 것.</dd></div>
+        <div><dt>출처</dt><dd>근거 문서로 연결되는 링크다. 28개 모집단위가 <b>전부 A — 대학이 공표한 전형시행계획 원문</b>이며, 입시업체 자료는 쓰지 않았다.</dd></div>
+    </dl>
+  </div>
   <div class="tscroll">
     <table class="main">
       <!-- fixed 레이아웃의 폭 정의. 펼친 행의 colspan 셀이 폭에 끼어들지 못하게 한다 -->
@@ -433,32 +450,6 @@ footer b{color:var(--text-2)}
       </thead>
       <tbody id="tbody"></tbody>
     </table>
-  </div>
-  <div class="coldef">
-    <div>
-      <h3>요약표 컬럼</h3>
-      <dl>
-        <div><dt>#</dt><dd>어디가(대입정보포털)가 공시한 <b>2026학년도 수시 학생부위주 일반전형 교과등급 70%컷</b> 중 그 모집단위의 가장 낮은 값을 뽑아, <b>이 표 안에서만</b> 오름차순으로 매긴 번호다. 대학 서열이 아니다. 농어촌·기회균형 같은 특별전형은 합격선이 다르게 형성되므로 산정에서 뺐다. 28개 중 23개에 번호가 붙었고(동점 한 쌍), 컷이 없는 5개는 <span class="unk">—</span>로 두고 맨 뒤에 놓았다. 등급은 모두 <b>9등급제</b>이며 5등급제로 환산하지 않았다.</dd></div>
-        <div><dt>대학</dt><dd>대학명 아래에 캠퍼스 소재지를 함께 적었다. 같은 대학이 여러 모집단위로 들어온 경우 행이 나뉜다.</dd></div>
-        <div><dt>모집단위 (원문)</dt><dd>대학이 공표한 표기 그대로다. 색 라벨은 학과군 — <b>A 문헌정보 · B 문예창작 · C 정보사회·데이터 · D 통합·자유전공</b>.</dd></div>
-        <div><dt>모집인원</dt><dd>원문에 적힌 그 모집단위의 모집인원이다. 원문에서 읽어내지 못한 곳은 <span class="unk">미확인</span>으로 둔다.</dd></div>
-        <div><dt>주력 전형</dt><dd>그 모집단위를 대표하도록 고른 <b>한 전형</b>의 원문 전형명이다. 오른쪽의 <b>반영 비중 7열과 수능최저는 모두 이 전형 기준</b>이며, 같은 모집단위의 나머지 전형은 펼친 행의 전형 표에 따로 있다.</dd></div>
-        <div><dt>수능최저</dt><dd>주력 전형에 걸린 수능 최저학력기준을 원문 표기 그대로 옮겼다(예: <span style="font-family:var(--mono)">2개영역 합7</span>). 적용 범위가 전형마다 다르면 괄호로 적었다(예: <span style="font-family:var(--mono)">2개영역 합6 (학교장추천만)</span>).</dd></div>
-        <div><dt>내신 민감도</dt><dd>주력 전형의 반영비율 구조에서 직접 계산한 값이다 — <b>교과 비중 90% 이상이면 높음, 실기 60% 이상이면 낮음</b>, 그 사이는 중간. 배지에 마우스를 올리면 그렇게 판단한 근거가 나온다. 현재 높음 13 · 중간 7 · 낮음 8이다.</dd></div>
-        <div><dt>입결 판정</dt><dd>과거 합격선을 확보한 <b>4개 모집단위</b>에서만 계산한다. 시나리오 등급을 9등급제로 환산한 뒤 그 모집단위의 <b>가장 완화된 과거 기준</b>과 비교해 ±0.5등급을 경계로 상향·적정·하향을 가른다. 나머지 24개는 추정하지 않고 <span class="unk">판정불가</span>로 둔다. 아래 02의 경고를 함께 읽을 것.</dd></div>
-        <div><dt>출처</dt><dd>근거 문서로 연결되는 링크다. 28개 모집단위가 <b>전부 A — 대학이 공표한 전형시행계획 원문</b>이며, 입시업체 자료는 쓰지 않았다.</dd></div>
-      </dl>
-    </div>
-    <div>
-      <h3>반영 비중 (%) 7열</h3>
-      <dl>
-        <div><dt>교과 · 서류<br>면접 · 논술<br>실기 · 수능<br>출결</dt><dd>주력 전형의 <b>전형요소별 반영 비율</b>이다. 원문 문장에 적힌 숫자를 그대로 옮겼고, 임의로 합을 맞추거나 보간하지 않았다.</dd></div>
-        <div><dt><span style="font-family:var(--mono);color:var(--text-3)">·</span> (가운뎃점)</dt><dd>그 전형이 <b>해당 요소를 반영하지 않는다</b>는 뜻이다. 값이 0이라는 뜻도, 확인하지 못했다는 뜻도 아니다.</dd></div>
-        <div><dt><span class="mxs">†</span> (단검표)</dt><dd>단계별 전형(1단계 통과 후 2단계)을 <b>실질 비중으로 환산</b>한 값이라는 표시다. 1단계 성적이 2단계에 반영되는 비율까지 곱했다. 예를 들어 명지대 교과면접의 "1단계 교과 90% + 출결 10% → 2단계 1단계 60% + 면접 40%"는 <b>교과 54 · 출결 6 · 면접 40</b>이 된다.</dd></div>
-        <div><dt>정시 배점</dt><dd>배점이 과목별로만 적힌 경우(국어 35% + 수학 25% …)는 전형요소로 보면 <b>수능 100%</b>이므로 수능 열에 넣고, 과목별 배점은 펼친 행에 그대로 남겼다.</dd></div>
-        <div><dt><span class="unk">미확인</span></dt><dd>원문에서 비율을 읽어내지 못한 칸이다. 추정치로 채우지 않았다.</dd></div>
-      </dl>
-    </div>
   </div>
 </section>
 
@@ -586,19 +577,6 @@ footer b{color:var(--text-2)}
   <div class="srcs srctab"><table>
     <thead><tr><th style="width:132px">대학</th><th>공식 입학처 원문</th></tr></thead>
     <tbody id="srclinks"></tbody>
-  </table></div>
-
-  <h3 style="font-family:var(--serif); font-size:15px; margin:26px 0 6px">더 새로운 2028 문서가 나왔는지 다시 확인한 결과</h3>
-  <p class="sdesc" style="margin-bottom:10px">2026년 8월 31일에 각 대학 입학처 게시판을 다시 훑었다. 결론은 <b>대부분 바뀐 것이 없다</b>는 것이다. 2028학년도 전형시행계획은 법령상 2026년 4월 30일이 공표 기한이고, 확인한 대학 거의 전부가 그날 올린 문서가 여전히 최신본이었다. 예외는 아래 둘뿐이다.</p>
-  <div class="srcs srctab"><table>
-    <thead><tr><th style="width:132px">대학</th><th>재확인 결과</th></tr></thead>
-    <tbody>
-      <tr><td style="font-weight:600">명지대학교</td><td><b>개정본 있음.</b> 2026-06-12자 <code>2028학년도 대학입학전형 시행계획(명지대학교)_수정.pdf</code>가 새로 올라와 있어, 이 페이지의 명지대 수치는 전부 <b>개정본 기준</b>으로 다시 읽었다. 게시글 본문에도 2026-06-04·2026-06-12 두 차례 수정 이력이 적혀 있다.</td></tr>
-      <tr><td style="font-weight:600">인천대학교</td><td>2026-06-02에 <b>같은 파일명의 HWP</b>가 추가 첨부됐다. 게시글 제목과 PDF 파일명은 그대로다. HWP를 변환할 도구가 없어 <span class="unk">내용이 실제로 바뀌었는지는 미확인</span>으로 둔다.</td></tr>
-      <tr><td style="font-weight:600">동국대·단국대<br>한경국립대</td><td><b>게시판 목록까지 다시 훑었으나 새 문서가 없다.</b> 동국대는 2026.04.29자 <code>2028학년도 동국대학교 대학입학전형 시행계획</code> 한 건뿐이고, 단국대는 2026.04.30자 <code>[죽전/천안 공통] 2028학년도 대학입학전형시행계획</code> 한 건뿐이다 — 이 “죽전/천안 공통”이 문예창작과 소재를 천안으로 확정하는 근거이기도 하다. 한경국립대도 2026.04.29자 한 건뿐인데 <b>제목 자체가 “(주요 변경사항)”</b>이고 본문에 <b>“향후 구조개혁 등 학생정원 조정이 있을 시 재공지 하겠습니다”</b>라고 적혀 있다 — 이 대학 모집인원이 <span class="unk">미확인</span>인 이유가 이것이다. 문서에 모집단위별 인원표가 아예 없다.</td></tr>
-      <tr><td style="font-weight:600">그 외 대학</td><td>상명대·경기대·대진대·중부대·협성대·한신대·숭실대·추계예대·전남대·충남대·서울과기대·한성대 — <b>2026년 4~6월 최초 공표본이 최신본</b>이며 그 뒤 개정·재공지가 없다. 협성대 첨부파일명은 <code>…_2026.3.30(최종).pdf</code>로 3월 확정본이다. <span class="unk">한성대·서울과기대는 입학처 게시판이 스크립트로 그려져 목록 전체를 기계적으로 훑지는 못했고, 확보한 게시글 본문까지만 확인했다.</span></td></tr>
-      <tr><td style="font-weight:600">2028 모집요강</td><td><b>어느 대학도 아직 내지 않았다.</b> 상명대 입학처 수시 모집요강 자료실의 최신본은 <code>2027학년도 수시모집요강</code>이었고, 한경국립대 공지 목록의 최신 요강도 <code>2027학년도 대학입학전형 수시 모집요강</code>(2026.06.28)이었다. 각 시행계획에 "세부내용은 2028학년도 모집요강 참고"가 반복된다 — 이 페이지의 수치는 전부 <b>시행계획 단계 값</b>이다.</td></tr>
-    </tbody>
   </table></div>
 </section>
 
@@ -1532,9 +1510,9 @@ function adigaBlock(u){
              : '<span class="unk"> \u00b7 일반전형 등급컷이 없어 번호를 매기지 않았다</span>'}
     <div style="overflow-x:auto;margin:8px 0 2px">
       <table class="dtable atable">
-        <thead><tr><th style="width:74px">시기</th><th style="width:100%">전형명</th>
-          <th class="num" style="width:76px">경쟁률</th><th class="num" style="width:62px">모집</th>
-          <th class="num" style="width:70px">50%컷</th><th class="num" style="width:70px">70%컷</th></tr></thead>
+        <thead><tr><th style="width:84px">시기</th><th style="width:258px">전형명</th>
+          <th class="num" style="width:104px">경쟁률</th><th class="num" style="width:84px">모집</th>
+          <th class="num" style="width:96px">50%컷</th><th class="num" style="width:96px">70%컷</th></tr></thead>
         <tbody>${body}</tbody>
       </table>
     </div>
@@ -1691,7 +1669,6 @@ function render(){
       ${noAdm.length ? `<div class="dnote"${refs.length ? ' style="border-top:none"' : ''}><b>이 모집단위에 배정이 없는 전형 —</b> ${noAdm.map(a =>
         `<b>${a.t}</b> ${a.n.replace(/\s*[—-]\s*(해당 없음|미시행|배정 없음).*$/, '')}: ${a.d || a.r}`).join('<br>')}</div>` : ''}
       <div class="dnote"${(noAdm.length || refs.length) ? ' style="border-top:none"' : ''}><b>원문 확인 내용 —</b> ${u.note}</div>
-      ${u.sensWhy ? `<div class="dnote" style="border-top:none"><b>내신 민감도 근거 —</b> ${u.sensWhy} <span class="unk">(전형 구조에서 도출한 추정. 과거 합격선과 무관하다.)</span></div>` : ''}
       ${adigaBlock(u)}
       ${pastBlock(u)}
       <div class="dnote" style="border-top:none"><b>입결 판정 근거 —</b> ${verdict(u, state.grade).why}</div>
