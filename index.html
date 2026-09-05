@@ -1,0 +1,1757 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{color-scheme:light}
+body{margin:0;font:14px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:#faf9f7}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>인문학 계열</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ink:#16324F; --ink-2:#254A6E; --vermilion:#C4442E; --teal:#1F6E6A; --plum:#5B4B7A;
+  --paper:#F5F6F8; --card:#FFFFFF; --sunk:#ECEEF1;
+  --line:#D3D8DE; --line-soft:#E4E8EC;
+  --text:#1A2430; --text-2:#4C5A69; --text-3:#7A8794;
+  --ok:#1F6E4A; --warn:#8A6510; --stop:#A3311F;
+  --shadow:0 1px 2px rgba(22,50,79,.06), 0 8px 24px -12px rgba(22,50,79,.18);
+  --serif:'Gowun Batang', 'Apple SD Gothic Neo', serif;
+  --sans:'IBM Plex Sans KR', 'Apple SD Gothic Neo', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--text);
+  font-family:var(--sans); font-weight:400; font-size:15px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1440px; margin:0 auto; padding:0 50px}
+@media(max-width:760px){ .wrap{padding:0 18px} }
+
+/* ---------- 헤더 ---------- */
+header.top{
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg, var(--sunk), var(--paper));
+  padding:52px 0 34px;
+}
+.eyebrow{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink); font-weight:600; margin:0 0 14px;
+}
+h1{
+  font-family:var(--serif); font-weight:700; font-size:clamp(30px,5.2vw,50px);
+  line-height:1.12; letter-spacing:-.01em; margin:0 0 6px; text-wrap:balance; color:var(--text);
+}
+.sub{
+  font-family:var(--serif); font-size:clamp(15px,2.1vw,19px); color:var(--text-2);
+  margin:0 0 26px; max-width:60ch;
+}
+.premise{
+  display:flex; flex-wrap:wrap; gap:0; border:1px solid var(--line); border-radius:3px;
+  background:var(--card); overflow:hidden;
+}
+.premise div{
+  flex:1 1 150px; padding:11px 15px; border-right:1px solid var(--line-soft);
+}
+.premise div:last-child{border-right:none}
+.premise dt{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--text-3); margin:0 0 3px;
+}
+.premise dd{margin:0; font-size:14px; font-weight:500; color:var(--text)}
+
+/* ---------- 컨트롤 바 ---------- */
+.bar{
+  position:sticky; top:0; z-index:40;
+  background:color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.bar-in{display:flex; flex-wrap:wrap; gap:18px; align-items:center; padding:12px 50px}
+@media(max-width:760px){ .bar-in{padding:12px 18px} }
+.ctl{display:flex; align-items:center; gap:8px}
+.ctl > span.lab{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--text-3); white-space:nowrap;
+}
+.seg{display:flex; border:1px solid var(--line); border-radius:3px; overflow:hidden; background:var(--card)}
+.seg button{
+  font:inherit; font-size:12.5px; font-weight:500; padding:5px 11px;
+  background:transparent; color:var(--text-2); border:none; border-right:1px solid var(--line-soft);
+  cursor:pointer; white-space:nowrap; font-family:var(--mono);
+}
+.seg button:last-child{border-right:none}
+.seg button[disabled]{opacity:.4; cursor:not-allowed}
+.z0{font-size:10px; color:var(--vermilion)}
+.seg button:hover{background:var(--sunk); color:var(--text)}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+/* 학과군 필터만 예외 — 표의 모집단위 라벨과 같은 색을 쓴다 */
+#segGroup button::before{
+  content:""; display:inline-block; width:7px; height:7px; border-radius:50%;
+  margin-right:6px; background:var(--gc); opacity:.4;
+}
+#segGroup button:hover{background:color-mix(in srgb,var(--gc) 8%,transparent); color:var(--gc)}
+#segGroup button[aria-pressed="true"]{background:color-mix(in srgb,var(--gc) 14%,transparent); color:var(--gc)}
+#segGroup button[aria-pressed="true"]::before{opacity:1}
+.seg button:focus-visible{outline:2px solid var(--vermilion); outline-offset:-2px}
+.tally{
+  font-family:var(--mono); font-size:11.5px; color:var(--text-3); margin-left:auto; white-space:nowrap;
+}
+.tally b{color:var(--ink); font-weight:600}
+
+/* ---------- 섹션 ---------- */
+section{padding:44px 0; border-bottom:1px solid var(--line-soft)}
+section:last-of-type{border-bottom:none}
+.shead{display:flex; align-items:baseline; gap:12px; margin:0 0 6px; flex-wrap:wrap}
+h2{
+  font-family:var(--serif); font-weight:700; font-size:clamp(21px,3vw,28px);
+  margin:0; letter-spacing:-.01em; text-wrap:balance;
+}
+.snum{
+  font-family:var(--mono); font-size:11px; font-weight:600; color:var(--ink);
+  letter-spacing:.1em; padding-top:5px;
+}
+.sdesc{color:var(--text-2); margin:0 0 22px; max-width:66ch; font-size:14.5px}
+
+/* ---------- 경고 블록 ---------- */
+.alert{
+  border:1px solid var(--line); border-left:3px solid var(--vermilion);
+  background:var(--card); border-radius:0 3px 3px 0; padding:18px 20px; box-shadow:var(--shadow);
+}
+.alert h3{
+  font-family:var(--sans); font-size:14px; font-weight:600; margin:0 0 12px;
+  color:var(--vermilion); letter-spacing:.01em;
+}
+.alert ol{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px}
+.alert li{font-size:14px; color:var(--text-2); line-height:1.6}
+.alert li b{color:var(--text); font-weight:600}
+.conv{
+  margin-top:16px; width:100%; border-collapse:collapse; font-family:var(--mono); font-size:12px;
+}
+.conv th,.conv td{border:1px solid var(--line-soft); padding:5px 9px; text-align:left}
+.conv th{background:var(--sunk); font-weight:600; color:var(--text-2); font-size:11px}
+.conv td{font-variant-numeric:tabular-nums}
+
+/* ---------- 표 ---------- */
+.tscroll{
+  border:1px solid var(--line); border-radius:3px;
+  background:var(--card); box-shadow:var(--shadow);
+}
+/* 표가 들어가지 않는 좁은 화면에서만 가로 스크롤 — 이때는 헤더 고정을 포기한다 */
+@media(max-width:1180px){ .tscroll{overflow-x:auto} }
+table.main{width:100%; border-collapse:collapse; font-size:12.5px; table-layout:fixed}
+/* 2단 헤더: 둘째 줄은 첫 줄 높이만큼 내려서 고정한다.
+   셀렉터는 반드시 직계 자식으로 — 자손 셀렉터면 tr.detail 안의 상세 표 헤더까지
+   sticky 와 height:31px 를 물려받아 글씨가 겹치고 잘린다 */
+table.main > thead > tr:first-child{height:31px}
+table.main > thead > tr#mxHead > th{top:calc(var(--barh,58px) + 31px)}
+table.main > thead > tr > th{
+  position:sticky; z-index:5;
+  background:var(--sunk); border-bottom:1px solid var(--line);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--text-2); font-weight:600; text-align:left; padding:8px 7px; white-space:normal;
+  word-break:keep-all;
+}
+/* 컨트롤 바 높이(--barh)는 화면 폭에 따라 달라지므로 render 에서 실측해 넣는다 */
+table.main > thead > tr:first-child > th{top:var(--barh,58px)}
+table.main > thead > tr > th.mx{white-space:nowrap; font-size:11px}
+table.main > thead > tr > th.sortable{cursor:pointer; user-select:none}
+table.main > thead > tr > th.sortable:hover{color:var(--ink); background:var(--line-soft)}
+/* 정렬 중인 열은 아이콘 없이 색으로만 표시한다 */
+table.main > thead > tr > th.sortable[aria-sort]{color:var(--vermilion)}
+table.main > tbody > tr > td{
+  border-bottom:1px solid var(--line-soft); padding:9px 7px; vertical-align:top; word-break:keep-all;
+}
+table.main > tbody > tr.uni{cursor:pointer}
+table.main > tbody > tr.uni:hover{background:var(--sunk)}
+table.main > tbody > tr.uni.open{background:var(--sunk)}
+.uname{font-weight:600; font-size:13px; color:var(--text); word-break:keep-all}
+.ucamp{font-family:var(--mono); font-size:10.5px; color:var(--text-3); display:block; margin-top:1px}
+.srctab a{color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--line); word-break:break-all}
+.srctab a:hover{color:var(--vermilion); border-bottom-color:currentColor}
+.unit{
+  display:inline-block; font-family:var(--serif); font-size:13px; line-height:1.45;
+  padding:2px 8px; border-radius:3px; word-break:keep-all;
+}
+.num{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap}
+.ratio{font-size:12px; color:var(--text-2); line-height:1.5}
+/* 반영 비중 — 문장이 아니라 요소별 컬럼 */
+.mx{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; font-size:11.5px;
+    padding-left:2px !important; padding-right:6px !important; white-space:nowrap}
+.mx b{font-weight:600; color:var(--ink)}
+.mx .z{color:var(--line); font-weight:400}
+.mxg{border-left:1px solid var(--line)}
+.mxend{border-right:1px solid var(--line)}
+.mxwide{text-align:left !important; font-family:var(--sans) !important; font-size:11.5px; color:var(--text-2);
+        white-space:normal; line-height:1.5; word-break:keep-all}
+.mxhead{text-align:center !important; letter-spacing:.04em}
+.mxs{color:var(--plum); font-weight:700; font-size:10px; margin-left:1px}
+.rawr{font-size:11.5px; color:var(--text-2); line-height:1.5; word-break:keep-all}
+
+/* 하위 전형 행 */
+tr.detail{display:none; background:var(--paper)}
+tr.detail.show{display:table-row}
+tr.detail > td{padding:0 !important; border-bottom:1px solid var(--line) !important}
+table.dtable{width:100%; border-collapse:collapse; font-size:11.5px}
+/* 전형 표만 고정 폭 - th 에 px 폭이 박혀 있고 반영비중 7열의 폭을 여기서 정한다.
+   폭이 없는 열은 "특이사항" 하나뿐이라 남는 폭을 전부 가져간다.
+   입결 표(.atable / 최근 3년 입결)는 열 폭이 없으므로 auto 그대로 둔다 */
+table.ftable{table-layout:fixed}
+table.ftable > thead > tr > th.mx{width:29px}
+.atable tr.abase td{background:var(--sunk)}
+.atable tr.abase td:nth-child(6){font-weight:650}
+.dtable th{
+  font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--text-3); font-weight:600; text-align:left; padding:7px 7px 5px;
+  /* 전부 짧은 라벨이다 - 줄바꿈을 막지 않으면 한글이 글자 단위로 쪼개진다 */
+  white-space:nowrap;
+  border-bottom:1px solid var(--line-soft);
+}
+/* 숫자 열은 값이 오른쪽 정렬이므로 머리글도 오른쪽에 둔다 —
+   기본 th 의 text-align:left 가 .num / .mx 보다 특정성이 높아 따로 눌러 준다 */
+.dtable th.num, .dtable th.mx{text-align:right}
+table.main > thead > tr > th.num, table.main > thead > tr > th.mx{text-align:right}
+.dtable td{padding:7px 7px; word-break:keep-all; border-bottom:1px solid var(--line-soft); vertical-align:top}
+.dtable tr:last-child td{border-bottom:none}
+.dnote{
+  padding:11px 13px; font-size:12.5px; color:var(--text-2); background:var(--sunk);
+  border-top:1px solid var(--line-soft); line-height:1.6;
+}
+.dnote b{color:var(--text)}
+
+/* ---------- 배지 ---------- */
+.b{
+  display:inline-block; font-family:var(--mono); font-size:10px; font-weight:600;
+  letter-spacing:.05em; padding:2px 6px; border-radius:2px; white-space:nowrap; line-height:1.5;
+}
+.g-A{--gc:var(--ink)}
+.g-B{--gc:var(--vermilion)}
+.g-C{--gc:var(--teal)}
+.g-D{--gc:var(--plum)}
+.g-A,.g-B,.g-C,.g-D{background:color-mix(in srgb,var(--gc) 14%,transparent); color:var(--gc)}
+.s-A{background:color-mix(in srgb,var(--ok) 15%,transparent); color:var(--ok)}
+.b.lnk{text-decoration:none; cursor:pointer; transition:box-shadow .12s, filter .12s}
+.b.lnk:hover{filter:brightness(.9); box-shadow:0 0 0 1px currentColor inset}
+.b.lnk:focus-visible{outline:2px solid var(--vermilion); outline-offset:1px}
+.s-B{background:color-mix(in srgb,var(--warn) 18%,transparent); color:var(--warn)}
+.s-C{background:var(--sunk); color:var(--text-3)}
+.s-X{background:transparent; color:var(--text-3); border:1px dashed var(--line)}
+.unk{font-family:var(--mono); font-size:11.5px; color:var(--text-3); font-style:normal}
+.rk{width:34px; color:var(--text-2); font-size:12px; padding-right:2px}
+.rk b{font-weight:650; color:var(--text-1)}
+.rkh{cursor:help}
+.new{background:var(--vermilion); color:#fff}
+
+.sens{font-family:var(--mono); font-size:11px; font-weight:600; white-space:nowrap}
+.sens-hi{color:var(--stop)} .sens-mid{color:var(--warn)} .sens-lo{color:var(--ok)}
+
+/* ---------- A vs B 비교 ---------- */
+.vs{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:3px; overflow:hidden; background:var(--card); box-shadow:var(--shadow)}
+@media(max-width:720px){ .vs{grid-template-columns:1fr} }
+.vs > div{padding:20px 22px}
+.vs > div:first-child{border-right:1px solid var(--line)}
+@media(max-width:720px){ .vs > div:first-child{border-right:none; border-bottom:1px solid var(--line)} }
+.vs h3{font-family:var(--serif); font-size:19px; margin:0 0 3px; font-weight:700}
+.vs .vtag{font-family:var(--mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; margin:0 0 16px}
+.vs dl{margin:0; display:flex; flex-direction:column; gap:13px}
+.vs dt{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-3); margin-bottom:2px}
+.vs dd{margin:0; font-size:13.5px; color:var(--text-2); line-height:1.55}
+.vs dd b{color:var(--text); font-weight:600}
+
+.deadline{
+  margin-top:22px; border:1px solid var(--line); border-left:3px solid var(--ink);
+  background:var(--card); padding:16px 19px; border-radius:0 3px 3px 0;
+}
+.deadline h3{font-size:14px; font-weight:600; margin:0 0 10px; color:var(--ink)}
+.deadline p{margin:0 0 8px; font-size:13.5px; color:var(--text-2); line-height:1.6}
+.deadline p:last-child{margin-bottom:0}
+
+/* ---------- 전형유형 ---------- */
+.types{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px}
+.tcard{border:1px solid var(--line); border-radius:3px; background:var(--card); padding:17px 19px; box-shadow:var(--shadow)}
+.tcard h3{font-family:var(--serif); font-size:17px; margin:0 0 4px; font-weight:700}
+.tcard .tmeta{font-family:var(--mono); font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--text-3); margin:0 0 12px}
+.tcard p{margin:0 0 11px; font-size:13px; color:var(--text-2); line-height:1.58}
+.tcard ul{margin:0; padding-left:17px; display:flex; flex-direction:column; gap:5px}
+.tcard li{font-size:12.5px; color:var(--text-2); line-height:1.5}
+.tcard li b{color:var(--text); font-weight:600}
+
+/* ---------- 개설 전수 ---------- */
+.census{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px}
+.cregion{border:1px solid var(--line-soft); border-radius:3px; background:var(--card); padding:13px 15px}
+.cregion h4{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink); margin:0 0 9px; font-weight:600; border-bottom:1px solid var(--line-soft); padding-bottom:6px;
+}
+.cregion ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:4px}
+.cregion li{font-size:13px; color:var(--text-2); display:flex; justify-content:space-between; gap:8px}
+.cregion li span.hit{font-family:var(--mono); font-size:11px; color:var(--text-3); font-variant-numeric:tabular-nums}
+.cregion li.excl{color:var(--text-3); text-decoration:line-through}
+
+/* ---------- 출처 ---------- */
+.pdfl{
+  display:inline-block; font-family:var(--mono); font-size:9.5px; letter-spacing:.06em;
+  padding:1px 5px; border:1px solid var(--line); border-radius:2px; color:var(--dim); vertical-align:1px;
+}
+.srcs{border:1px solid var(--line); border-radius:3px; background:var(--card); overflow:hidden}
+.srcs table{width:100%; border-collapse:collapse; font-size:13px}
+.srcs th{
+  background:var(--sunk); font-family:var(--mono); font-size:10.5px; letter-spacing:.07em;
+  text-transform:uppercase; color:var(--text-2); font-weight:600; text-align:left; padding:9px 13px;
+  border-bottom:1px solid var(--line);
+}
+.srcs td{padding:9px 13px; border-bottom:1px solid var(--line-soft); vertical-align:top; color:var(--text-2)}
+.srcs tr:last-child td{border-bottom:none}
+.srcs a{color:var(--ink); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:2px; word-break:break-all}
+.srcs a:hover{color:var(--vermilion)}
+.srcs code{font-family:var(--mono); font-size:11.5px; background:var(--sunk); padding:1px 5px; border-radius:2px; color:var(--text)}
+
+footer{padding:34px 0 60px; color:var(--text-3); font-size:12.5px; line-height:1.7}
+footer p{margin:0 0 7px; max-width:74ch}
+footer b{color:var(--text-2)}
+
+.empty{padding:34px 16px; text-align:center; color:var(--text-3); font-size:14px}
+:focus-visible{outline:2px solid var(--vermilion); outline-offset:2px}
+@media(prefers-reduced-motion:reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">2028학년도 · 대학입학전형 시행계획 분석</p>
+    <h1>인문학 계열</h1>
+    <dl class="premise">
+      <div><dt>대상</dt><dd>2028학년도 (현 고2)</dd></div>
+      <div><dt>내신</dt><dd>5등급제 2등급</dd></div>
+      <div><dt>지역</dt><dd>수도권 중심</dd></div>
+      <div><dt>제외</dt><dd>여대 · 최상위권 7개교</dd></div>
+      <div><dt>근거</dt><dd>2028 시행계획 PDF 201건</dd></div>
+      <div><dt>확인일</dt><dd>2026-08-31 (대학 공식 재확인)</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <div class="ctl">
+      <span class="lab">내신 시나리오</span>
+      <div class="seg" id="segGrade">
+        <button data-v="2" aria-pressed="true">2등급</button>
+        <button data-v="2.5" aria-pressed="false">2.5등급</button>
+        <button data-v="3" aria-pressed="false">3등급</button>
+      </div>
+    </div>
+    <div class="ctl">
+      <span class="lab">전형</span>
+      <div class="seg" id="segType">
+        <button data-v="교과" aria-pressed="true">교과</button>
+        <button data-v="종합" aria-pressed="true">종합</button>
+        <button data-v="논술" aria-pressed="true">논술</button>
+        <button data-v="실기" aria-pressed="true">실기</button>
+        <button data-v="정시" aria-pressed="true">정시</button>
+      </div>
+    </div>
+    <div class="ctl">
+      <span class="lab">학과군</span>
+      <div class="seg" id="segGroup">
+        <button class="g-A" data-v="A" aria-pressed="true">A 문헌정보</button>
+        <button class="g-B" data-v="B" aria-pressed="true">B 문예창작</button>
+        <button class="g-C" data-v="C" aria-pressed="true">C 정보사회·데이터</button>
+        <button class="g-D" data-v="D" aria-pressed="true">D 통합·자유전공</button>
+      </div>
+    </div>
+    <div class="tally" id="tally"></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section>
+  <div class="shead"><span class="snum">01</span><h2>요약표</h2></div>
+  <p class="sdesc"><b>표 머리글을 클릭하면 그 열로 정렬한다</b> — <b>#</b>(순위), <b>모집인원</b>, <b>반영 비중</b>의 교과·서류·면접·논술·실기·수능·출결 <b>일곱 요소 각각</b>, 그리고 <b>내신 민감도</b>. 같은 머리글을 다시 누르면 방향이 뒤집히고, 값이 없는 모집단위는 방향과 무관하게 항상 맨 뒤로 간다. 행을 클릭하면 그 모집단위의 전형별 반영비율이 펼쳐진다. 모든 수치는 각 대학이 공표한 2028학년도 전형시행계획 PDF에서 직접 읽은 값이고, 읽어내지 못한 칸은 <span class="unk">미확인</span>으로 비워 두었다 — 추정치로 채우지 않았다.<br>
+      <b>반영 비중은 요소별 컬럼으로 나눠 놓았다.</b> 숫자는 원문 문장에서 그대로 뽑은 값이고, <span class="z" style="font-family:var(--mono)">·</span> 는 그 전형이 해당 요소를 반영하지 않는다는 뜻이다.
+      단계별 전형(1단계 통과 후 2단계)은 <b>1단계 성적이 2단계에 반영되는 비율까지 곱해 실질 비중으로 환산</b>했고 <span class="mxs">†</span> 로 표시했다 —
+      예를 들어 명지대 교과면접의 "1단계 교과 90% + 출결 10% → 2단계 1단계 60% + 면접 40%"는 교과 54 · 출결 6 · 면접 40이 된다.
+      정시 배점이 과목별로만 적힌 경우(국어 35% + 수학 25% …)는 전형요소로는 수능 100%이므로 수능 열에 넣고 과목 배점은 펼친 행에 남겼다.</p>
+  <div class="tscroll">
+    <table class="main">
+      <!-- fixed 레이아웃의 폭 정의. 펼친 행의 colspan 셀이 폭에 끼어들지 못하게 한다 -->
+      <colgroup>
+      <col style="width:2.54%"><col style="width:9.41%"><col style="width:26.59%">
+      <col style="width:3.95%"><col style="width:15.81%">
+      <col style="width:2.15%">
+      <col style="width:2.15%">
+      <col style="width:2.15%">
+      <col style="width:2.15%">
+      <col style="width:2.15%">
+      <col style="width:2.15%">
+      <col style="width:2.15%">
+      <col style="width:12.51%"><col style="width:5.02%">
+      <col style="width:4.83%"><col style="width:4.29%">
+      </colgroup>
+      <thead id="mainHead">
+        <tr>
+          <th class="num sortable" data-sort="rank" rowspan="2" title="어디가가 공시한 2026학년도 수시 일반전형 교과등급 70%컷을 이 표 안에서 낮은 순으로 매긴 번호다. 대학 서열이 아니다. 클릭하면 이 열로 정렬한다.">#</th>
+          <th rowspan="2">대학</th><th rowspan="2">모집단위 (원문)</th>
+          <th class="num sortable" data-sort="quota" rowspan="2" title="모집인원으로 정렬">모집인원</th>
+          <th rowspan="2">주력 전형</th>
+          <th colspan="7" class="mxhead">주력 전형의 반영 비중 (%)</th>
+          <th rowspan="2">수능최저</th><th class="sortable" data-sort="sens" rowspan="2" title="내신 민감도로 정렬">내신 민감도</th>
+          <th rowspan="2">입결 판정</th><th rowspan="2">출처</th>
+        </tr>
+        <tr id="mxHead"></tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <p class="sdesc" style="margin-top:14px; margin-bottom:0">
+    <b>맨 앞 번호(#)</b>는 대학 서열이 아니다. <b>어디가(대입정보포털)가 공시한 2026학년도 입시결과</b>에서, 각 모집단위의
+    <b>수시 학생부위주(교과·종합) 일반전형 교과등급 70%컷</b> 중 가장 낮은 값을 뽑아 이 표 안에서만 오름차순으로 매긴 번호다.
+    농어촌·기회균형 같은 특별전형은 합격선이 다르게 형성되므로 제외했다. 행을 펼치면 그 번호의 근거가 된 전형이 굵게 표시된다.<br>
+    처음에는 정시 합격선으로 매기려 했으나 <b>어디가는 정시 수능 성적 컷을 공개하지 않고</b>, 입학처 18곳을 다시 훑어도 정시 백분위 컷을 공표한 곳이 없었다.
+    없는 수치를 만들어내지 않기 위해 수시 교과등급 컷으로 대체했다 — 즉 이 번호는 <b>내신으로 이 학과에 들어간 사람들의 성적 순서</b>이지, 대학의 위상이나 정시 난이도가 아니다.
+    24개 모집단위에서 22개 번호가 나왔고(동점 2쌍), 나머지 5개는 어디가에 컷이 없어 <span class="unk">—</span>로 두고 표 맨 뒤로 보냈다.
+    한성대는 어디가가 주·야를 합산해 공시하므로 두 행이 같은 값을 쓴다. 이 등급은 모두 <b>9등급제</b>이고 5등급제로 환산하지 않았다.<br>
+    <b>내신 민감도</b>는 전형의 반영비율 구조에서 직접 계산한 값이다(교과 비중 90% 이상 → 높음, 실기 60% 이상 → 낮음). <b>입결 판정</b>은 과거 합격선을 확보한 <b>4개 모집단위</b>에서만 계산한다 — 시나리오 등급을 9등급제로 환산한 뒤, 그 모집단위에서 <b>가장 완화된 과거 기준</b>과 비교해 ±0.5등급을 경계로 상향·적정·하향을 가른다. 판정 배지에 마우스를 올리면 무엇과 비교했는지 나온다. 나머지는 추정하지 않고 <span class="unk">판정불가</span>로 둔다. 아래 02의 경고를 먼저 읽기를 권한다.
+  </p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">02</span><h2>이 표를 믿기 전에 알아야 할 것</h2></div>
+  <p class="sdesc">2028학년도는 제도가 바뀌는 첫 해다. 이 자료의 한계를 숨기면 표 전체가 오도가 된다.</p>
+  <div class="alert">
+    <h3>⚠ 반드시 읽어야 할 5가지</h3>
+    <ol>
+      <li><b>2028학년도 입시 결과는 존재하지 않는다.</b> 첫 시행 연도라 참고할 전례가 없다. 이 표의 모든 숫자는 "대학이 하겠다고 공표한 계획"이며, 실제 합격선이 아니다.</li>
+      <li><b>과거 3년 입결(2024·2025·2026학년도)은 전부 9등급제 기준이다.</b> 5등급제 등급과 직접 비교할 수 없다. 이 자료에는 <b>4개 모집단위(명지대·전남대·충남대 문헌정보, 한신대 문예창작)</b>의 3개년 입결이 수록됐고, 전부 <b>9등급제 원본 그대로</b> 표기했다 — 환산하지 않았다. 나머지 모집단위는 확보하지 못해 <span class="unk">판정불가</span>로 남겼다.</li>
+      <li><b>9↔5등급 환산은 누적 백분위의 산술적 대응일 뿐</b>, 합격선이 그대로 따라 움직인다는 보장이 없다.
+        <table class="conv">
+          <thead><tr><th>5등급제</th><th>누적 비율</th><th>9등급제 대응 구간</th></tr></thead>
+          <tbody>
+            <tr><td>1등급</td><td>~10%</td><td>1~2등급 (4% / 11%)</td></tr>
+            <tr><td><b>2등급</b></td><td><b>~34%</b></td><td><b>3~4등급 사이 (23% / 40%)</b></td></tr>
+            <tr><td>3등급</td><td>~66%</td><td>5~6등급 사이 (60% / 77%)</td></tr>
+          </tbody>
+        </table>
+      </li>
+      <li><b>1등급 문턱이 4%에서 10%로 넓어져 내신 변별력이 떨어진다.</b> 대학이 수능·면접·논술·실기 비중을 올리는 쪽으로 움직일 여지가 있고, 그래서 위 표의 반영비율은 확정이 아니라 "현재 공표된 계획"이다. 실제 수시모집요강은 2027년 봄에 나온다.</li>
+      <li><b>시행계획은 요강이 아니다.</b> 모집인원과 반영비율은 요강 단계에서 조정될 수 있다. 특히 신설 전형은 첫 해 경쟁률이 예측 불가다.</li>
+      <li><b>수집 경로 — 처음엔 아카이브, 지금은 대학 공식 사이트.</b> 최초 수집은 EST 진학정보실(jinhak.esteacher.kr)이 모아 둔 제3자 아카이브를 경유했다. <b>2026년 8월 31일에 각 대학 입학처를 직접 찾아가 같은 문서를 다시 내려받아 대조했고</b>, 확인된 공식 주소는 06 출처 절과 <b>요약표 맨 오른쪽 출처 배지</b>에 달아 두었다 — 배지를 누르면 그 대학의 시행계획 원문이 바로 열린다. <b>이 표에 실린 18개 대학은 전부 공식 입학처 원문 주소를 확보했다</b> — 아카이브만 근거인 대학은 남아 있지 않다. 최종 지원 판단은 2027년 봄에 나올 <b>모집요강</b>으로 다시 확인할 것 — 시행계획은 요강이 아니다.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">03</span><h2>두 갈래 — 문헌정보 대 문예창작</h2></div>
+  <p class="sdesc">1지망을 아직 정하지 않았다면 이 절이 가장 중요하다. 두 계열은 같은 성적으로 지원해도 준비 과정이 전혀 다르다.</p>
+  <div class="vs">
+    <div>
+      <h3>문헌정보학</h3>
+      <p class="vtag" style="color:var(--ink)">A군 · 서류와 교과의 싸움</p>
+      <dl>
+        <dt>주 전형축</dt><dd>학생부교과 · 학생부종합 · 정시 수능</dd>
+        <dt>실기</dt><dd><b>없다.</b> 확인된 수도권 6개 모집단위 전부 실기전형이 없다.</dd>
+        <dt>내신 의존</dt><dd><b>높다.</b> 교과전형이 교과 90~100%를 반영하는 구조가 지배적이다.</dd>
+        <dt>역전 수단</dt><dd>면접(대진대 30%) · 서류평가(종합전형 100%) · 정시 수능 · <b>자유전공 우회</b>(경기대 논술 90%, 인천대 서류 100%)</dd>
+        <dt>수도권 규모</dt><dd>확인된 6개 모집단위 합계 <b>144명</b> (상명 21 · 인천 26 · 경기 21 · 대진 39 · 명지 17 · 중부 20 — 전원 원문 확인). 지방 국립대 2곳(충남대 21 · 전남대 24)은 별도</dd>
+        <dt>준비 기간</dt><dd>교과는 이미 진행 중. 종합은 세특·독서·진로활동의 누적이 필요해 <b>지금이 마지막 학기</b></dd>
+        <dt>여대 제외의 영향</dt><dd><b>크다.</b> 문헌정보학과는 여대 개설 비중이 높아, 이화·숙명·동덕·덕성·서울여대가 빠지면서 수도권 선택지가 크게 줄었다. 줄어든 자리를 <b>자유전공 우회로</b>가 일부 메운다 — 04의 학부 통합모집 카드를 볼 것</dd>
+      </dl>
+    </div>
+    <div>
+      <h3>문예창작</h3>
+      <p class="vtag" style="color:var(--vermilion)">B군 · 실기가 판을 뒤집는다</p>
+      <dl>
+        <dt>주 전형축</dt><dd>실기/실적 위주 · 학생부종합 · 정시(실기+수능) · <b>논술</b>(한신대 6명 · 동국대 5명)</dd>
+        <dt>실기</dt><dd><b>중심이다.</b> 실기 60~70%가 표준. 숭실대 70%, 단국대 70%, 동국대 70%(운문·산문 120분), 추계예대 60%. <span class="unk">단 전부는 아니다 — 한신대 문예창작학·서울과기대 문예창작학과는 실기전형 자체가 없다</span></dd>
+        <dt>내신 의존</dt><dd><b>낮다.</b> 실기 위주 전형은 학생부를 아예 반영하지 않는 경우가 있다(숭실대 정시: 실기 70% + 수능 30%, 학생부 없음)</dd>
+        <dt>실기 종목</dt><dd>작문(시·소설·희곡·중수필) · 운문창작 · 산문창작. 고사 당일 주제 발표가 일반적</dd>
+        <dt>수도권 규모</dt><dd>확인된 8개 모집단위 합계 <b>228명</b> (동국 62 · 서울과기 36 · 대진 35 · 숭실 25 · 협성 24 · 추계 20 · 한신 16 · 명지 10) — 문헌정보의 <b>1.6배</b>. <span class="unk">한경국립대는 원문에 모집단위별 인원표가 없어 미확인</span>. 단국대 문예창작과는 <b>천안</b>이라 이 합계에서 뺐다</dd>
+        <dt>준비 기간</dt><dd><b>실기 준비에 최소 1년.</b> 백일장 실적을 쌓으려면 더 길다(추계예대 수상실적특기자전형 서류 100%)</dd>
+        <dt>2028 호재</dt><dd><span class="b new">신설</span> <b>숭실대가 문예창작전공 수시 학생부종합을 새로 만들었다.</b> 2027학년도에는 정시 실기만 있었다</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="deadline">
+    <h3>⏱ 언제까지 결정해야 하는가</h3>
+    <p><b>문예창작을 선택하려면 늦어도 고3 진급 전, 즉 2027년 2월까지 결정해야 한다.</b> 실기고사는 당일 주제를 받아 시·소설·희곡을 완성해 내는 시험이다. 추계예대는 120분, 숭실대는 고사 당일 주제 발표 후 자유선택이다. 이 형식은 축적 없이 통과할 수 없다.</p>
+    <p><b>문헌정보만 노린다면 실기 준비 시간을 교과와 세특에 쓸 수 있다.</b> 대신 여대 제외로 수도권 선택지가 5개 남았고, 그중 교과전형은 교과 90~100% 반영이라 내신이 곧 결과다.</p>
+    <p><b>양쪽을 동시에 살리는 조합도 있다.</b> 명지대와 대진대는 문헌정보와 문예창작을 <b>같은 학교에서 모두 개설</b>한다. 1지망을 늦게까지 미룰 수 있는 유일한 카드다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">04</span><h2>전형 유형별 구조</h2></div>
+  <p class="sdesc">각 유형이 실제로 무엇을 보는지, 그리고 확인된 대학에서 어떤 비율로 나타나는지 정리했다.</p>
+  <div class="types" id="types"></div>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">05</span><h2>전국 개설 대학 전수 확인</h2></div>
+  <p class="sdesc">전국 221개 대학의 2028학년도 전형시행계획 PDF를 내려받아 201건을 텍스트로 변환하고, 학과명을 전수 검색해 개설 여부를 확정했다. 옆 숫자는 원문 내 언급 횟수로, <b>개설 확인 지표일 뿐 모집 규모가 아니다.</b> 취소선은 이번 조건에서 제외된 대학(여대 또는 최상위권 7개교)이다.</p>
+  <div class="census" id="census"></div>
+  <p class="sdesc" style="margin-top:16px; margin-bottom:0">검색 결과 0건인 대학은 미개설로 판단했다. 단 <b>강원대학교 본교</b>는 원문이 HWP 형식이고 추출된 본문이 6,070자에 불과해 불완전할 수 있어, 미개설로 단정하지 않고 <span class="unk">미확인</span>으로 남긴다. 단국대 문예창작과는 죽전이 아니라 <b>천안캠퍼스 예술대학</b> 소속임을 2028 원문 모집인원표에서 확인해, 수도권 목록에서 지방으로 옮겼다.</p>
+</section>
+
+<section>
+  <div class="shead"><span class="snum">06</span><h2>출처</h2></div>
+  <p class="sdesc">이 페이지의 모든 전형 수치는 아래 원문에서 직접 읽었다. 입시업체(B)·커뮤니티(C) 출처는 이번 판에 수록된 것이 없다 — 대학 입학처와 대교협 공식 포털 두 곳뿐이다.</p>
+  <div class="srcs">
+    <table>
+      <thead><tr><th style="width:70px">등급</th><th>출처</th><th style="width:110px">확인일</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="b s-A">A 원문</span></td>
+          <td><b>2028학년도 대학입학전형 시행계획</b> — 전국 221개 대학 원문 PDF. EST 진학정보실(jinhak.esteacher.kr) 아카이브를 경유해 각 대학 공표본을 수집했다.<br>
+          <a href="https://jinhak.esteacher.kr/2028-admission-plans/" target="_blank" rel="noopener">jinhak.esteacher.kr/2028-admission-plans/</a><br>
+          <span class="unk">수집 201건 / 시도 221건. 나머지 20건은 HWP 형식으로 별도 추출(16건 성공).</span></td>
+          <td class="num">2026-08-28</td>
+        </tr>
+        <tr>
+          <td><span class="b s-A">A 원문</span></td>
+          <td>개별 대학 원문 — 상명대·경기대·인천대·대진대·명지대·추계예술대·숭실대·단국대·서울과학기술대·한성대·협성대·한신대·동국대·한경국립대·중부대 각 <code>2028학년도 전형시행계획</code>. 위 아카이브에서 대학별 PDF로 제공된다.<br>
+          <b>2026-08-31 재확인:</b> 아카이브에만 의존하지 않도록 각 대학 <b>공식 입학처</b>에서 같은 문서를 다시 찾아 내려받고, 미확인으로 남아 있던 항목을 원문에서 다시 읽었다. 이 과정에서 <b>충남대 수치가 2027학년도 문서에서 온 것임을 발견해 2028학년도 원문으로 전면 교체</b>했고, <b>명지대는 2026-06-12자 "_수정" 개정본</b>이 새로 올라와 있어 그것으로 대조했다. 전남대는 배포용 HWP가 DRM으로 잠겨 있었으나 입학처가 뷰어용으로 올린 <b>같은 문서의 PDF 변환본</b>으로 해결했다. <b>성공회대</b>는 그때까지 아카이브 경유본만 있었는데 입학처 게시판에서 2028 시행계획 PDF를 직접 내려받아 두 가지를 정정했다 — ① <b>인문융합콘텐츠학부는 영어학·일어일본학·중어중국학·종교와신학으로 이뤄진 어학·신학 학부</b>라 문헌정보·문예창작과 접점이 없고, ② <b>미디어콘텐츠융합학부 67명은 전공별 몫이 아니라 학부 전체 정원</b>이었다. 이 과정에서 동국대 실기·논술 전형의 반영비율 표기가 학생부 30%와 그 내역(교과 20% + 출결 10%)을 겹쳐 적어 합이 110%가 되던 것도 바로잡았다. 그 뒤 <b>서울과학기술대</b>와 <b>한성대</b>의 2028 시행계획 PDF도 각각 입학처에서 직접 내려받아 두 학교의 <b>기회균형 전형</b>(서울과기대 국가보훈·기회균등·농어촌 / 한성대 고른기회)을 바로잡았다 — 둘 다 학생부<b>교과</b>가 아니라 학생부<b>종합</b>이었고, 반영비율 칸에는 비율 대신 정원 내역이 들어가 있었다. 한성대는 “게시판이 스크립트로 그려져 직링크를 만들 수 없다”고 적어 뒀던 것도 이때 게시글 주소를 찾아 갈아끼웠다. 확인된 주소는 아래 표에 있고, 요약표 맨 오른쪽의 <b>출처 배지</b>를 눌러도 같은 곳으로 연결된다.</td>
+          <td class="num">2026-08-31</td>
+        </tr>
+        <tr>
+          <td><span class="b s-A">A 원문</span></td>
+          <td><b>최근 3년 입시 결과(2024·2025·2026학년도)</b> — <b>각 대학 입학처에서 직접 내려받은 공시 자료</b>(제3자 아카이브 경유 아님). 명지대·전남대·충남대 문헌정보학과, 한신대 문예창작학 4곳을 수록했고 전부 9등급제 원본 그대로다. 대학마다 공표 통계가 달라 열 구성이 다르다 — 명지대는 70%컷만, 전남대는 50%·70%컷 병기, 충남대는 70%컷과 충원율, 한신대는 <b>컷 자체를 공시하지 않아 평균·최저만</b> 있다. 없는 통계는 만들지 않았다.<br>
+          충남대 결과분석자료 <a href="https://ipsi.cnu.ac.kr/_prog/_board/?mode=V&amp;no=2025630&amp;code=recsroom_01&amp;site_dvs_cd=uadm&amp;menu_dvs_cd=0105" target="_blank" rel="noopener">2026학년도</a> · <a href="https://ipsi.cnu.ac.kr/_prog/_board/?mode=V&amp;no=2021596&amp;code=recsroom_01&amp;site_dvs_cd=uadm&amp;menu_dvs_cd=0105" target="_blank" rel="noopener">2025학년도</a> / 전남대 <a href="https://admission.jnu.ac.kr/Susi/ImplPlan" target="_blank" rel="noopener">입학처 입시자료실</a></td>
+          <td class="num">2026-08-31</td>
+        </tr>
+        <tr>
+          <td><span class="b s-A">A 공식</span></td>
+          <td><b>어디가(대입정보포털) 2026학년도 입시결과</b> — 한국대학교육협의회가 운영하는 공식 포털. 요약표 맨 앞의 <b>#</b> 번호와, 행을 펼쳤을 때 나오는 전형별 <b>경쟁률·모집인원·50%컷·70%컷</b>이 여기서 온 값이다. 이 표의 <b>28개 모집단위 중 23개</b>에서 105건의 전형 기록을 확보했다.<br>
+          <a href="https://www.adiga.kr/ucp/prc/uni/admssUnivView.do?menuId=PCPRCINF2000" target="_blank" rel="noopener">adiga.kr — 대학·학과·전형 &gt; 입시결과</a><br>
+          <span class="unk">한계 셋. ① <b>정시 컷은 이 포털에 없다</b> — 수시 학생부위주 전형의 교과등급만 공시하고 정시 수능 성적 컷은 모든 대학에서 비어 있다. ② 등급은 전부 <b>9등급제</b>이므로 5등급제 성적과 직접 비교할 수 없다. ③ 한성대는 주간·야간을 <b>학부 단위로 합산</b>해 공시하므로 분리할 수 없다. 확보하지 못한 5개는 추계예술대 문예창작과, 숭실대 예술창작학부 문예창작전공(둘 다 컷 미공시), 경기대·한신대 자유전공학부와 협성대 자율전공학부 1유형(2028 신설이거나 포털 학과 목록에 없음)이다.</span></td>
+          <td class="num">2026-09-02</td>
+        </tr>
+        <tr>
+          <td><span class="b s-X">— 미공개</span></td>
+          <td><b>2028학년도 수시모집요강</b> — 2027년 봄 공개 예정. 시행계획의 모집인원·반영비율이 이 단계에서 조정될 수 있다.</td>
+          <td class="num">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-family:var(--serif); font-size:15px; margin:26px 0 6px">대학별 공식 입학처 원문 주소</h3>
+  <p class="sdesc" style="margin-bottom:10px">2026년 8월 31일에 직접 접속해 문서 제목까지 확인한 주소만 싣는다. 이 표에 실린 수치의 근거는 전부 아래 주소의 원문이다 — <b>18개 대학 전부 확보해 누락은 없다.</b> 대학이 게시글을 옮기거나 개정본으로 갈아끼우면 주소가 바뀔 수 있으니, 링크가 열리지 않으면 해당 입학처의 “입학전형 시행계획” 게시판을 다시 찾아볼 것.</p>
+  <div class="srcs srctab"><table>
+    <thead><tr><th style="width:132px">대학</th><th>공식 입학처 원문</th></tr></thead>
+    <tbody id="srclinks"></tbody>
+  </table></div>
+
+  <h3 style="font-family:var(--serif); font-size:15px; margin:26px 0 6px">더 새로운 2028 문서가 나왔는지 다시 확인한 결과</h3>
+  <p class="sdesc" style="margin-bottom:10px">2026년 8월 31일에 각 대학 입학처 게시판을 다시 훑었다. 결론은 <b>대부분 바뀐 것이 없다</b>는 것이다. 2028학년도 전형시행계획은 법령상 2026년 4월 30일이 공표 기한이고, 확인한 대학 거의 전부가 그날 올린 문서가 여전히 최신본이었다. 예외는 아래 둘뿐이다.</p>
+  <div class="srcs srctab"><table>
+    <thead><tr><th style="width:132px">대학</th><th>재확인 결과</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600">명지대학교</td><td><b>개정본 있음.</b> 2026-06-12자 <code>2028학년도 대학입학전형 시행계획(명지대학교)_수정.pdf</code>가 새로 올라와 있어, 이 페이지의 명지대 수치는 전부 <b>개정본 기준</b>으로 다시 읽었다. 게시글 본문에도 2026-06-04·2026-06-12 두 차례 수정 이력이 적혀 있다.</td></tr>
+      <tr><td style="font-weight:600">인천대학교</td><td>2026-06-02에 <b>같은 파일명의 HWP</b>가 추가 첨부됐다. 게시글 제목과 PDF 파일명은 그대로다. HWP를 변환할 도구가 없어 <span class="unk">내용이 실제로 바뀌었는지는 미확인</span>으로 둔다.</td></tr>
+      <tr><td style="font-weight:600">동국대·단국대<br>한경국립대</td><td><b>게시판 목록까지 다시 훑었으나 새 문서가 없다.</b> 동국대는 2026.04.29자 <code>2028학년도 동국대학교 대학입학전형 시행계획</code> 한 건뿐이고, 단국대는 2026.04.30자 <code>[죽전/천안 공통] 2028학년도 대학입학전형시행계획</code> 한 건뿐이다 — 이 “죽전/천안 공통”이 문예창작과 소재를 천안으로 확정하는 근거이기도 하다. 한경국립대도 2026.04.29자 한 건뿐인데 <b>제목 자체가 “(주요 변경사항)”</b>이고 본문에 <b>“향후 구조개혁 등 학생정원 조정이 있을 시 재공지 하겠습니다”</b>라고 적혀 있다 — 이 대학 모집인원이 <span class="unk">미확인</span>인 이유가 이것이다. 문서에 모집단위별 인원표가 아예 없다.</td></tr>
+      <tr><td style="font-weight:600">그 외 대학</td><td>상명대·경기대·대진대·중부대·협성대·한신대·숭실대·추계예대·전남대·충남대·서울과기대·한성대 — <b>2026년 4~6월 최초 공표본이 최신본</b>이며 그 뒤 개정·재공지가 없다. 협성대 첨부파일명은 <code>…_2026.3.30(최종).pdf</code>로 3월 확정본이다. <span class="unk">한성대·서울과기대는 입학처 게시판이 스크립트로 그려져 목록 전체를 기계적으로 훑지는 못했고, 확보한 게시글 본문까지만 확인했다.</span></td></tr>
+      <tr><td style="font-weight:600">2028 모집요강</td><td><b>어느 대학도 아직 내지 않았다.</b> 상명대 입학처 수시 모집요강 자료실의 최신본은 <code>2027학년도 수시모집요강</code>이었고, 한경국립대 공지 목록의 최신 요강도 <code>2027학년도 대학입학전형 수시 모집요강</code>(2026.06.28)이었다. 각 시행계획에 "세부내용은 2028학년도 모집요강 참고"가 반복된다 — 이 페이지의 수치는 전부 <b>시행계획 단계 값</b>이다.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<footer>
+  <div>
+    <p><b>이 페이지가 하지 않는 일.</b> 합격 가능성을 예측하지 않는다. 과거 입결이 없고, 있어도 등급제가 달라 비교할 수 없기 때문이다. 대신 대학이 공표한 전형 구조를 원문 그대로 옮기는 데 집중했다.</p>
+    <p><b>미확인은 실제로 미확인이다.</b> 원문에서 읽어내지 못한 칸을 기억이나 짐작으로 채우지 않았다. 표에 빈 곳이 많다면 그것이 현재 확보된 근거의 실제 범위다.</p>
+    <p>2028학년도 대학입학전형 시행계획 기준 · 2026년 8월 28일 최초 수집 · <b>2026년 8월 31일 각 대학 공식 입학처에서 재확인</b> · 최종 판단은 각 대학 입학처 공식 요강으로 확인할 것</p>
+  </div>
+</footer>
+</div>
+
+<script>
+const U = "미확인";
+
+/* 각 대학 공식 입학처의 2028학년도 전형 원문 위치. 2026-08-31 직접 접속해 응답을 확인한 주소만 넣었다.
+   확인하지 못한 대학은 키를 두지 않는다 — 링크가 없으면 아래 06 출처의 아카이브 경유가 유일한 경로다. */
+const LINKS = {
+  '상명대학교':      {u:'https://admission.smu.ac.kr/_seoul/board/bbs.html?bbsid=seoul_notice&ctg_cd=common&mode=view&bltn_seq=61705', p:'https://admission.smu.ac.kr/bbs/filedown.php?bbsid=seoul_notice&file_seq=8550', t:'상명대 입학처 — 2028학년도 신입학전형안내 [서울캠퍼스]'},
+  '인천대학교':      {u:'https://admission.inu.ac.kr/submenu.do?menuurl=qbbQ7Q9VDvDLfHUEghb13w%3d%3d&board_seq=15193&categoryid=47&', t:'인천대 입학처 — 2028학년도 대학입학전형시행계획(안)(최종)'},
+  '대진대학교':      {u:'https://admission.daejin.ac.kr/submenu.do?menuurl=V1eFtRP%2fhAdfBbp9t3CXcw%3d%3d&board_seq=10266&categoryid=', t:'대진대 입학처 — 2028학년도 대학입학전형 주요사항'},
+  '명지대학교':      {u:'http://ipsi.mju.ac.kr/pages/?p=30&b=B_1_1&m=read&bn=30093', p:'http://ipsi.mju.ac.kr/_common/new_download_file.php?menu=boardfile&file_no=10511', t:'명지대 입학처 — 2028학년도 대학입학전형 시행계획_수정 (2026-06-12 개정본)'},
+  '경기대학교':      {u:'https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&BOARD_SEQ=1&SITE_NO=2&BBS_SEQ=4364&FILE_SEQ=14', t:'경기대 입학처 — 2028학년도 대학입학전형 시행계획(안) PDF'},
+  '중부대학교':      {u:'https://www.joongbu.ac.kr/board.es?mid=a60501000000&bid=0232&list_no=333882&act=view', p:'https://www.joongbu.ac.kr/boardDownload.es?bid=0232&list_no=333882&seq=1', t:'중부대 입학홍보처 — 2028학년도 대학입학전형시행계획 (2026-04-30 게시)'},
+  '전남대학교':      {u:'https://admission.jnu.ac.kr/Susi/ImplPlan', p:'https://admission.jnu.ac.kr/Data/tmfiles/admission/doc/2028/2028plan-260618.pdf', t:'전남대 입학처 — 2028학년도 전남대학교 입학전형 시행계획(안)'},
+  '충남대학교':      {u:'https://ipsi.cnu.ac.kr/_prog/_board/?mode=V&no=2025645&code=notice_faculty&site_dvs_cd=uadm&menu_dvs_cd=0101', p:'https://ipsi.cnu.ac.kr/_prog/_board/common/download.php?code=notice_faculty&ntt_no=2025645', t:'충남대 입학본부 — 2028학년도 대학입학전형 시행계획 (2026-04-30 게시)'},
+  '협성대학교':      {u:'http://iphak.uhs.ac.kr/ipsi/board/notice/detail.do?bbsNo=32066', t:'협성대 입학처 — 2028학년도 협성대학교 대학입학전형 시행계획'},
+  '한신대학교':      {u:'https://ent.hs.ac.kr/ipsi/pages/?p=17&b=B_1_1&bn=22858&m=read', t:'한신대 입학처 — 2028학년도 한신대학교 입학전형 시행계획'},
+  '숭실대학교':      {u:'https://admission.ssu.ac.kr/upload/2028_plan.pdf', t:'숭실대 입학처 — 2028학년도 숭실대학교 입학전형 시행계획 PDF'},
+  '동국대학교':      {u:'https://ipsi.dongguk.edu/admission/html/counsel/noticeView.asp?BOARD_IDX=37098', t:'동국대 입학처 \u2014 (0430)2028학년도 대학입학전형 시행계획'},
+  '단국대학교':      {u:'https://ipsi.dankook.ac.kr/jukjeon/doumi/ex_view.html?bbsid=juk_ipca&mode=view&bltn_seq=47766', t:'단국대 입학처 \u2014 2028학년도 대학입학전형시행계획(재외국민 포함) 배포용'},
+  '한경국립대학교':   {u:'https://ipsi.hknu.ac.kr/help/notice_view.php?bn=5073', t:'한경국립대 입학처 \u2014 2028학년도 대학입학전형 시행계획(공지용 HWP)'},
+  '서울과학기술대학교': {u:'https://admission.seoultech.ac.kr/cms/CMN_CON/MainLink.do?GBN=BA&TEMP_CODE=IPSI_A&BASE_SITE_NO=2&CONFIG_CD=C1403&CONFIG_SEQ=4&SUB_SEQ=15&SITE_NO=2&BOARD_SEQ=3&BBS_SEQ=512', t:'서울과기대 입학처 \u2014 2028학년도 신입학 대학입학전형 시행계획 공개'},
+  '한성대학교':      {u:'https://enter.hansung.ac.kr/?m1=menu07%25&m2=board_detail%25&id=231526%25&name=sub04%25&board=entrance_helper%2Fnotice%25', p:'https://enter.hansung.ac.kr/api/file/get?path=board%2F%2F5b85e6f9-cd0b-4b03-861f-171182ae9f67.pdf&ignoreDestFilename=1', t:'한성대 입학처 \u2014 2028학년도 대학입학전형시행계획 주요사항 v1(배포용), 2026-04-30 게시'},
+  '추계예술대학교':   {u:'https://enter.chugye.ac.kr/BoardView.do?menuSeq=122&dataSeq=486&idx=1618456578', t:'추계예대 입학처 — 2028학년도 대학입학전형 시행계획 안내(고교내신 5등급제 도입 반영)'},
+  '성공회대학교':    {u:'https://enter.skhu.ac.kr/bbs/enter/89/59735/artclView.do', p:'https://enter.skhu.ac.kr/bbs/enter/89/24766/download.do', t:'성공회대 입학처 \u2014 2028학년도 성공회대학교 입학전형시행계획 안내 (2026-06-09 수정 게시)'}
+};
+
+/* 레코드에 개별 link 가 있으면 그쪽이 더 정확하다 (전공 단위 게시글·직링크). 없으면 대학 대표 주소. */
+const srcLink = u => u.link ? {u:u.link, t:'2028학년도 전형 원문 (공식)'} : (LINKS[u.name] || null);
+
+/* 학과군: A 문헌정보 / B 문예창작 / C 정보사회·데이터 / D 통합·자유전공 */
+const DATA = [
+  /* ---------- A군 문헌정보 ---------- */
+  {
+    tier:1, group:'A', name:'상명대학교', campus:'서울 종로', region:'서울',
+    unit:'인문콘텐츠학부 문헌정보학전공', quota:21, src:'A',
+    lead:'학생부교과(고교추천) (4명)', leadRatio:'교과 95% + 출결 5%',
+    minCsat:'없음 (수시 전체 미적용)', sens:'hi',
+    sensWhy:'교과전형이 학생부를 95% 반영하는데 수능최저가 전 전형 없다. 내신 하나가 결과를 정한다.',
+    adm:[
+      {t:'교과', n:'고교추천전형 (4명)', r:'학생부 교과 95% + 출결 5% (1,000점)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'학생부교과(그 외 전형)', r:'학생부 교과 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'학생부종합(상명인재) (4명)', r:'서류평가 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'정시', n:'정시 나군 수능 (8명)', r:'수능 100% — 국어 35% + 수학 30% + 영어 25% + 탐구 10%(1과목) (1,000점)', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'실기', n:'실기전형', r:'해당 없음', m:'—', c:'—', d:'문헌정보학전공 해당 없음', s:'A'}
+    ],
+    note:'문헌정보학전공은 독립 학과가 아니라 <b>인문콘텐츠학부 안의 전공</b>이다 — 같은 학부에 역사콘텐츠(25)·지적재산권(20)·한일문화콘텐츠(20)가 함께 있다. 실기전형은 스포츠·무용·조형·음악 계열에만 적용된다. 2028 수시 모집요강은 아직 미발표라 위 수치는 전형안내 단계 값이다.'
+  },
+  {
+    tier:1, group:'A', name:'인천대학교', campus:'인천 연수', region:'인천',
+    unit:'문헌정보학과', quota:26, src:'A',
+    lead:'학생부교과(교과성적우수자)', leadRatio:'학생부교과 100%',
+    minCsat:'2개영역 합7', sens:'hi',
+    sensWhy:'교과전형이 학생부교과 100%다. 수능최저까지 걸려 있어 내신·수능 양쪽이 필요하다.',
+    adm:[
+      {t:'교과', n:'교과성적우수자 (6명)', r:'학생부교과 100%', m:'일괄합산', c:'2개영역 합7', s:'A'},
+      {t:'교과', n:'지역균형전형', r:'학생부교과 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'교과', n:'사회통합 (1명)', r:'학생부교과 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'종합', n:'자기추천전형(면접형) (10명)', r:'1단계 서류 100%(3배수) → 2단계 1단계성적 60% + 면접 40%', m:'단계별', c:'없음', s:'A'},
+      {t:'종합', n:'기회균형 (2명)', r:'서류 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'특수교육대상자', r:'1단계 서류 100% → 2단계 면접 30% + 서류 70%', m:'단계별', c:U, s:'A'},
+      {t:'정시', n:'정시 가군 일반학생 (7명)', r:'수능 100% — 국어 35 + 수학 25 + 탐구(사회 1과목) 20 + 영어 20 (1,000점)', m:'일괄합산', c:'미적용', s:'A'}
+    ],
+    note:'국립대(사회과학대학). 수능최저에는 <b>한국사 응시 필수·직업탐구 및 제2외국어/한문 불인정</b> 조건이 붙는다. 정시 산출식은 국어에 가장 큰 가중치를 둔다. <span class="unk">앞선 판에서 교과성적우수자 608명·사회통합 82명이라 적었던 것은 대학 전체 규모를 학과 몫으로 잘못 읽은 것이라 정정했다.</span> 같은 학교에 <b>자유전공학부(인문)와 데이터과학과</b>가 있어 진입 경로가 셋이다.'
+  },
+  {
+    tier:1, group:'A', name:'경기대학교', campus:'경기 수원', region:'경기',
+    unit:'문헌정보학과', quota:21, src:'A',
+    lead:'학생부교과', leadRatio:'교과 90% + 비교과(출결) 10%',
+    minCsat:'2개영역 합7 (교과성적우수자만)', sens:'hi',
+    sensWhy:'교과전형의 교과 반영이 90%다. 나머지 10%는 출결이라 실질 변별은 내신뿐이다.',
+    adm:[
+      {t:'교과', n:'교과성적우수자 (3명)', r:'교과 90%(90점) + 출결 10%(10점)', m:'일괄합산 1배수', c:'2개영역 합7 이내', s:'A'},
+      {t:'교과', n:'학교장추천 (4명)', r:'교과 90% + 출결 10%', m:'일괄합산 1배수', c:'미적용', s:'A'},
+      {t:'종합', n:'KGU학생부종합 (10명)', r:'1단계 서류 100%(3배수) → 2단계 1단계성적 70% + 면접 30%', m:'단계별', c:'없음', s:'A'},
+      {t:'종합', n:'기회균형·사회배려 (2명)', r:'서류 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'정시', n:'정시 일반학생Ⅰ (다군 5명)', r:'수능 100% <span class="unk">(일반학생Ⅱ는 수능 95% + 교과 5%)</span>', m:'일괄합산', c:'—', s:'A'}
+    ],
+    note:'인문대학 소속. 수능최저에는 영어 1·2등급을 모두 1등급으로 반영하고 한국사 6등급 이내 조건이 붙는다. 교과 반영교과군(인문대학)은 국어·수학·영어·사회이며 학년별·교과별 가중치가 없고 3학년 1학기까지 이수학점을 적용한다. ⚑ 경기대 논술우수자전형은 문헌정보학과가 아니라 <b>자유전공학부</b> 모집이다 — D군 항목을 함께 보라.'
+  },
+  {
+    tier:1, group:'A', name:'대진대학교', campus:'경기 포천', region:'경기',
+    unit:'문헌정보학과 [교직]', quota:39, src:'A',
+    lead:'학생부교과(학생부우수자)', leadRatio:'교과 60% + 면접 30% + 출결 10%',
+    minCsat:'없음', sens:'mid',
+    sensWhy:'교과 비중이 60%로 낮고 면접이 30%다. 수능최저도 없어 내신 부담이 확인된 대학 중 가장 가볍다.',
+    adm:[
+      {t:'교과', n:'학생부우수자전형', r:'교과 60% + 면접 30% + 출결 10% (600·300·100 / 1,000점)', m:'일괄전형', c:'없음', s:'A'},
+      {t:'교과', n:'취업자전형', r:'학생부 교과 90% + 출결 10%', m:'일괄전형', c:U, s:'A'},
+      {t:'종합', n:'윈윈대진전형(면접형) (10명)', r:'1단계 서류평가 100%(3배수) → 2단계 1단계 60% + 면접 40% (1,000점)', m:'단계별', c:U, s:'A'},
+      {t:'정시', n:'정시 나군 일반학생 (15명)', r:'수능 90% + 출결 10% (900·100 / 1,000점)', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'논술', n:'논술전형', r:'해당 없음', m:'—', c:'—', d:'전형 목록에 없음 (미시행)', s:'A'}
+    ],
+    note:'교직과정 설치. 확인된 수도권 문헌정보 모집단위 중 <b>규모가 가장 크다</b>. 정시 수능은 국·영·수 중 상위 1개 영역 60% + 나머지 영역·탐구·한국사 중 1개 영역 40%를 백분위로 반영해, 잘 본 두 과목만 골라 쓰는 구조다. <span class="unk">학생부종합의 수능최저는 2028 문서에 "없음"이라는 문구조차 없어 미확인으로 둔다</span> — 같은 문서의 학생부우수자에는 "수능최저학력기준 : 없음"이 명시돼 있다. 같은 학교에 <b>문예콘텐츠창작학과</b>도 있다.'
+  },
+  {
+    tier:1, group:'A', name:'명지대학교', campus:'서울 서대문 / 경기 용인', region:'서울·경기',
+    unit:'문헌정보학전공', quota:17, src:'A',
+    lead:'학생부교과(학교장추천·교과면접)', leadRatio:'교과 90% + 출결 10%',
+    minCsat:'2개영역 합6 (학교장추천만)', sens:'hi',
+    sensWhy:'교과전형 두 개(학교장추천 3 + 교과면접 6)가 종합 두 개(5 + 3)보다 인원이 많고, 교과면접도 1단계가 교과 90%다.',
+    adm:[
+      {t:'교과', n:'학교장추천 (3명)', r:'교과 90% + 출결 10%', m:'일괄합산 1배수', c:'2개영역 합6 이내', s:'A'},
+      {t:'교과', n:'교과면접 (6명)', r:'1단계 교과 90% + 출결 10%(4배수) → 2단계 1단계 60% + 면접 40%', m:'단계별', c:'미적용', s:'A'},
+      {t:'종합', n:'명지인재면접 (5명)', r:'1단계 서류 100%(3배수) → 2단계 1단계 70% + 면접 30%', m:'단계별', c:'없음', s:'A'},
+      {t:'종합', n:'명지인재서류 (3명)', r:'서류 100%', m:'일괄합산', c:'2개영역 합6 이내', s:'A'},
+      {t:'종합', n:'사회적배려대상자', r:'서류 100% <span class="unk">(인문대학 단위 모집)</span>', m:'일괄합산', c:U, s:'A'},
+      {t:'정시', n:'정시 나군 수능(일반) — 인문대학 통합 85명', r:'수능 90% + 출결 10% — 영역별 국어 35% + 수학 25% + 영어 20% + 탐구 20% (900점)', m:'일괄합산 1배수', c:'미적용', s:'A'}
+    ],
+    note:'⚑ <b>이 자료에서 입결이 가장 온전히 확보된 수도권 문헌정보 모집단위다</b> — 2024·2025·2026 세 학년도 4개 전형이 모두 있다(아래 표). 단과대학 단위로 입학하면 "해당 모집단위 내의 학과 또는 전공을 제한 없이 선택할 수 있음"이 원문 각주다 — 정시로 들어가면 <b>인문대학 안에서 문헌정보학전공을 자유롭게 고를 수 있다</b>. 정시 수능은 백분위 활용에 한국사 가산점(1등급 3.0~9등급 1.4)이 붙고, 사회탐구는 백분위 반영점수 10% 가산 후 상위 1과목이다. ⚑ 2028 변경: 단계별 종합전형 2단계가 2027학년도 1단계 60% + 면접 40% → <b>1단계 70% + 면접 30%</b>으로 바뀌어 면접 비중이 10%p 줄었다. 근거 문서는 2026-06-12자 "_수정" 개정본이고, 전공별 인원은 원문 p.7 「Ⅲ. 2028학년도 전형별 모집인원 — 1. 인문캠퍼스」 표 기준이다. 같은 학교에 문예창작학과도 있다.'
+  },
+  {
+    tier:2, group:'A', name:'중부대학교', campus:'경기 고양', region:'경기',
+    unit:'문헌정보학전공', quota:20, src:'A',
+    lead:'학생부우수자 (13명)', leadRatio:'학생부교과 100%',
+    minCsat:'없음 (전 전형 미적용)', sens:'hi',
+    sensWhy:'주력 전형이 학생부교과 100%다. 수능최저가 전 전형 미적용이라 내신 하나로 갈린다.',
+    adm:[
+      {t:'교과', n:'학생부우수자 (13명)', r:'학생부교과 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'교과', n:'학교생활우수자Ⅰ (6명)', r:'학생부교과 70% + 면접 30%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'교과', n:'지역인재Ⅰ·국가보훈·농어촌 등', r:'학생부교과 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'정시', n:'정시 다군 수능우수자 (1명)', r:'수능 100% — 국어·영어·수학 중 상위 택2 각 35% + 탐구(사/과/직)·한국사 중 상위 택1 30%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'논술', n:'논술전형', r:'해당 없음', m:'—', c:'—', d:'대학 전체 미시행', s:'A'},
+      {t:'실기', n:'실기전형', r:'해당 없음', m:'—', c:'—', d:'문헌정보학전공 배정 없음', s:'A'}
+    ],
+    note:'고양창의캠퍼스 소속으로 확정했다 — 충청국제캠퍼스(금산) 모집단위 표에는 없다. 자율설계학부와 별개 행으로 잡혀 있어 <b>학부 통합모집이 아니다</b>. 교과 반영은 국어·수학·영어·과학·사회 중 석차등급 산출 과목 <b>상위 10개(3-1학기까지)</b>만 본다 — 반영 과목 수가 적어 특정 과목 한두 개가 크게 흔들린다.'
+  },
+  {
+    tier:1, group:'B', name:'추계예술대학교', campus:'서울 서대문', region:'서울',
+    unit:'문예창작과', quota:20, src:'A',
+    lead:'실기/실적', leadRatio:'실기 60% + 수능 40%',
+    minCsat:'—', sens:'lo',
+    sensWhy:'실기 60% + 수능 40%로 학생부를 아예 반영하지 않는다. 내신은 무관하다.',
+    adm:[
+      {t:'실기', n:'실기/실적전형 (가군)', r:'실기 60% + 수능 40% + 학생부 0%', m:'일괄합산', c:'—', s:'A'},
+      {t:'종합', n:'수상실적특기자전형', r:'서류 100% (모집 4명)', m:'일괄합산', c:'—', s:'A'},
+      {t:'정시', n:'정시 실기', r:'실기 60% + 수능 40%. 수능은 국어 60% + 영어 40% (한국사 응시필수·성적 미반영)', m:'일괄합산', c:'—', s:'A'},
+      {t:'실기', n:'실기고사 내용', r:'\u2014', m:'—', c:'—', d:'전공선택 · 고사시간 120분', s:'A'}
+    ],
+    note:'예술대학. 수상실적특기자전형은 본교가 인정하는 <b>문예대회 수상 실적</b>이 필요하다 — 전국고교생문예백일장(국립순천대 문예창작과) 등이 인정 목록에 있다. 2028학년도 정시 기회균형전형에서 문예창작과 장애유형 제한이 폐지됐다.'
+  },
+  {
+    tier:1, group:'B', name:'숭실대학교', campus:'서울 동작', region:'서울',
+    unit:'예술창작학부 문예창작전공', quota:25, src:'A',
+    lead:'실기/실적 위주 (다군)', leadRatio:'실기 70% + 수능 30%',
+    minCsat:'—', sens:'lo',
+    sensWhy:'정시 실기전형이 실기 70% + 수능 30%로 학생부를 반영하지 않는다. 신설된 수시 종합은 서류·면접 중심이다.',
+    adm:[
+      {t:'종합', n:'SSU미래인재(면접형) — 2028 신설', r:'1단계 서류 100% (문예창작전공 3.5배수) → 2단계 서류 50% + 면접 50%', m:'단계별', c:'없음', s:'A'},
+      {t:'실기', n:'실기/실적(일반전형) 다군', r:'실기 70% + 수능 30% (모집 20명)', m:'일괄합산', c:'—', s:'A'},
+      {t:'실기', n:'실기고사 내용', r:'\u2014', m:'—', c:'—', d:'작문 실기고사 — 고사 당일 주제 발표, 시·소설·희곡·중수필 중 자유선택', s:'A'},
+      {t:'종합', n:'SSU미래인재(서류형)', r:'서류 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'학생부교과 — 해당 없음', r:'해당 없음', m:'—', c:'—', d:'문예창작전공은 교과우수자(학교장추천) 모집인원이 없다 — 2028 시행계획 수시 모집인원표에서 이 칸이 공란이다. 대학 홈페이지 원문 재확인(2026-08-31)', s:'A'}
+    ],
+    note:'⚑ <b>2028학년도 최대 변화</b>: 원문에 "예술창작학부(문예창작전공) 수시 선발 전형 추가"가 명시됐다. 2027학년도에는 정시 실기실적위주만 있었고, 2028학년도에 수시모집 학생부종합(SSU미래인재 면접형)이 신설된다. 단계별 전형 1단계 배수는 인문대학 3배수와 달리 문예창작전공은 3.5배수를 적용한다.'
+  },
+  {
+    tier:2, group:'B', name:'단국대학교', campus:'충남 천안 (예술대학)', region:'지방',
+    unit:'문예창작과', quota:50, src:'A',
+    link:'https://ipsi.dankook.ac.kr/jukjeon/doumi/ex_view.html?bbsid=juk_ipca&mode=view&bltn_seq=47766',
+    lead:'정시 실기/실적위주 일반학생 (나군 35명)', leadRatio:'실기 70% + 수능 25% + 학생부 비교과(출결) 5%',
+    minCsat:'없음', sens:'lo',
+    sensWhy:'50명 중 35명이 정시 실기전형이고 실기가 70%다. 수시 15명도 서류\u00b7면접 종합이라 교과 정량 반영이 없다.',
+    adm:[
+      {t:'실기', n:'정시 나군 실기/실적위주 일반학생 (35명)', r:'<b>실기 70% + 수능 25% + 학생부 비교과(출결) 5%</b> <span class="unk">(2027학년도는 수능 30 + 실기 70이었다 \u2014 2028부터 출결 5%가 들어왔다)</span>', m:'일괄합산', c:'없음', s:'A'},
+      {t:'실기', n:'실기고사 \u2014 종목', r:'\u2014', m:'\u2014', c:'\u2014', d:'<b>운문창작, 산문창작 중 택 1</b> (반영 70%). <span class="unk">고사 시간과 배점은 시행계획에 표가 없어 미확인 \u2014 모집요강에서 확정된다.</span>', s:'A'},
+      {t:'종합', n:'DKU인재(면접형) (15명)', r:'1단계 학교생활기록부 100%(3배수) \u2192 2단계 1단계성적 60% + 면접 40%', m:'단계별', c:'없음 (수능최저는 의학\u00b7약학계열 전용)', s:'A'},
+      {t:'교과', n:'수시 학생부교과 \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'문예창작과 배정 없음. 수시는 DKU인재(면접형) 15명이 전부다', s:'A'},
+      {t:'정시', n:'정시 수능 반영식 (천안 예체능)', r:'<b>국어 50% + 영어 30% + 탐구 20%, 수학 미반영</b> (백분위, 탐구 상위 1과목). 영어 등급점수 100/98/95/85/70/40/15/5/0, 한국사 응시 필수 + 가산점 1~4등급 5점', m:'\u2014', c:'\u2014', s:'A'}
+    ],
+    note:'확인된 수도권 문예창작 모집단위 중 <b>최대 규모</b>다. 원문에 "문예창작과, 스포츠경영학과, 운동처방재활전공의 실기전형은 정시모집에서 선발함"이 명시돼 있어, 실기로 승부하려면 정시를 노려야 한다. ⚑ <b>수학을 아예 안 본다</b> — 정시 수능 반영식이 국어 50% + 영어 30% + 탐구 20%로 수학 미반영이라, 수학이 약한 학생에게 구조적으로 가장 유리한 곳이다. ⚑ 캠퍼스 정정: 죽전이 아니라 <b>충남 천안 예술대학</b> 소속이다 — 2026-08-31 원문 재확인 결과 모집인원표(천안캠퍼스)와 실기종목표([천안캠퍼스]) 양쪽에서 확인했다. <span class="unk">이전 판에 "경기 용인(죽전)"으로 적었던 것은 오류다.</span> 수도권 통학을 전제한다면 이 점이 결정적이다.'
+  },
+  {
+    tier:1, group:'B', name:'서울과학기술대학교', campus:'서울 노원', region:'서울',
+    unit:'문예창작학과', quota:36, src:'A',
+    lead:'학생부종합(서울텍인재) (32명)', leadRatio:'1단계 서류 100%(3배수) \u2192 2단계 1단계성적 70% + 면접 30%',
+    minCsat:'없음 (서울텍인재)', sens:'mid',
+    sensWhy:'모집 36명 중 32명이 서류\u00b7면접 종합전형이다. 내신은 서류평가의 한 요소로만 들어가고 수능최저도 없다.',
+    adm:[
+      {t:'종합', n:'서울텍인재 (32명)', r:'1단계 서류 1,000점 100%(300% = 3배수) \u2192 2단계 1단계성적 700점(70%) + 면접 300점(30%)', m:'단계별', c:'없음', s:'A'},
+      {t:'교과', n:'학생부교과(고교추천) \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'문예창작학과 배정 0명. <span class="unk">(참고로 이 전형은 교과 100%에 수능최저 2개영역 합 6이 걸린다)</span>', s:'A'},
+      {t:'종합', n:'기회균형 \u2014 국가보훈 (1명) \u00b7 기회균등 (2명) \u00b7 농어촌 (정원외 1명)', r:'1단계 서류 1,000점 100%(선발 300%) \u2192 2단계 1단계성적 700점(70%) + 면접 300점(30%)', m:'단계별 \u2014 서울텍인재\u00b7서울텍미래와 같은 반영비율표를 쓴다', c:'없음', s:'A'},
+      {t:'실기', n:'실기전형 \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'실기위주 모집 0명. 서울과기대 실기는 <b>조형대학 전용</b>이다(디자인\u00b7도예\u00b7금속공예 「기초 디자인」, 조형예술 「인물과 정물이 있는 상황」)', s:'A'},
+      {t:'정시', n:'정시 \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'문예창작학과 정시 정원내 0명. <span class="unk">(참고 인문 계열 반영식: 국어 35% + 수학 25% + 영어 20% + 탐구 20%(통합사회 15 + 통합과학 5), 한국사는 <b>감산</b> 1~3등급 0 / 9등급 \u221210)</span>', s:'A'}
+    ],
+    note:'⚑ <b>수시 종합 한 방향뿐이고 실기도 정시도 없다</b>. <span class="unk">이전 판에서 이 학과의 대표 전형을 “정시 수능”으로 적었던 것은 대학 공통 반영식을 학과 몫으로 잘못 읽은 것이라 정정했다.</span> 국립대이면서 수능 없이 생기부와 면접만으로 갈 수 있는 문예창작학과라는 점이 이 목록에서 가장 특이하다. 2028 변경: 학생부종합 명칭이 학교생활우수자→서울텍인재, 창의융합인재→서울텍미래로 바뀌었다. <span class="unk">국가보훈·기회균등·농어촌을 “학생부교과”로 적어 뒀던 것은 2026-08-31 원문 재확인으로 정정했다 — 이 셋은 <b>학생부위주(기회균형) = 학생부종합</b>이고, 원문 p.9 반영비율표상 서울텍인재·서울텍미래와 같은 단계별 방식을 쓴다.</span>'
+  },
+  {
+    tier:1, group:'B', name:'대진대학교', campus:'경기 포천', region:'경기',
+    unit:'문예콘텐츠창작학과', quota:35, src:'A',
+    lead:'학생부교과(학생부우수자) (6명)', leadRatio:'교과 60% + 면접 30% + 출결 10%',
+    minCsat:'없음', sens:'mid',
+    sensWhy:'교과 60% + 면접 30% 구조에 수능최저가 없다. 실기 없이 문예창작 계열에 진입할 수 있는 경로다.',
+    adm:[
+      {t:'교과', n:'학생부우수자전형 (6명)', r:'교과 60% + 면접 30% + 출결 10%', m:'일괄전형', c:'없음', s:'A'},
+      {t:'종합', n:'윈윈대진전형(서류형) (6명)', r:'서류평가 100% (1,000점)', m:'일괄합산', c:U, s:'A'},
+      {t:'종합', n:'윈윈대진전형(면접형) (10명)', r:'1단계 서류 100%(3배수) → 2단계 1단계 60% + 면접 40%', m:'단계별', c:U, s:'A'},
+      {t:'실기', n:'실기전형', r:'해당 없음', m:'—', c:'—', d:'해당 없음 — 수시 실기/실적 배정 없음, 정시 실기위주는 예체능계열만', s:'A'},
+      {t:'정시', n:'정시 다군 일반학생 (13명)', r:'수능 90% + 출결 10% (1,000점)', m:'일괄합산', c:'미적용', s:'A'}
+    ],
+    note:'⚑ <b>문예창작 계열인데 실기전형이 없다</b> — 같은 대학 미술만화게임학부 30명·시각디자인 20명은 실기 배정이 있는데 이 학과만 공란이다. 문예콘텐츠창작학과는 인문예술대학 수능위주다. 실기 준비 없이 문예창작에 진입하려는 경우 가장 확실한 카드다. 학과명이 순수 문예창작보다 콘텐츠 쪽으로 넓다. 같은 학교에 <b>문헌정보학과[교직]</b>가 함께 있어 두 계열을 한 학교에서 저울질할 수 있는 드문 조합이다. <span class="unk">학생부종합 수능최저는 2028 문서 미기재라 미확인이다.</span>'
+  },
+  {
+    tier:2, group:'B', name:'협성대학교', campus:'경기 화성', region:'경기',
+    unit:'문예창작학과', quota:24, src:'A',
+    lead:'학생부종합 (융합인재\u2161)', leadRatio:'1단계 서류 100%(400% = 4배수) \u2192 2단계 면접 50% + 1단계성적 50%',
+    minCsat:'없음 (전 모집단위\u00b7전 전형)', sens:'hi',
+    sensWhy:'수능최저도 없고 실기도 없다. 수시 20명 전부가 교과성적 또는 학생부 서류평가만으로 갈린다 \u2014 내신 외에 기댈 변수가 구조적으로 존재하지 않는다.',
+    adm:[
+      {t:'교과', n:'교과성적우수자 (3명)', r:'학생부교과성적 100% (일괄)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'미래창의인재 (3명)', r:'1단계 교과성적 100%(700% = 7배수) \u2192 2단계 면접 50% + 1단계성적 50%', m:'단계별', c:'없음', s:'A'},
+      {t:'교과', n:'기회균형 (2명)', r:'학생부교과성적 100% (일괄)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'사회배려자 (2명)', r:'학생부교과성적 100% (일괄)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'융합인재\u2160 (4명)', r:'학생생활기록부 서류평가 100% (일괄) \u2014 학업역량 30\u00b7진로역량 40\u00b7공동체역량 30', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'융합인재\u2161 (6명)', r:'1단계 서류평가 100%(400% = 4배수) \u2192 2단계 면접 50% + 1단계성적 50%', m:'단계별', c:'없음', s:'A'},
+      {t:'정시', n:'정시 일반전형 (4명, 다군)', r:'수능 100% \u2014 국어\u00b7수학\u00b7영어 중 상위 2과목 35%+35%=70% + 탐구 상위 1과목 30%. 한국사 응시 필수(가산점 없음)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'실기', n:'실기전형 \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'문예창작학과에는 실기\u00b7실적 전형이 없다. 협성대의 실기 전형은 음악학부\u00b7디자인 계열 전용이다', s:'A'}
+    ],
+    note:'대학 원문 재확인(2026-08-31)으로 전형별 반영비율을 모두 확정했다 — 이전 판의 미확인은 해소됐다. 원문 각주: "전체 모집단위 및 전형에서 수능최저학력기준을 적용하지 않음". 정시는 학과 단위로 뽑지만 전형 자체는 <b>인문사회과학대학(23명) 단위</b>로 묶여 운영된다. 실기 부담이 없어 글쓰기 준비가 안 된 상태에서도 지원 가능한 드문 문예창작학과다 — 대신 내신이 전부다.'
+  },
+  {
+    tier:2, group:'B', name:'명지대학교', campus:'서울 서대문 / 경기 용인', region:'서울·경기',
+    unit:'문예창작학과', quota:10, src:'A',
+    lead:'학생부종합(명지인재면접) (10명)', leadRatio:'1단계 서류 100%(3배수) → 2단계 1단계 70% + 면접 30%',
+    minCsat:'미적용', sens:'lo',
+    sensWhy:'수시에 학생부교과 위주 전형이 아예 없다. 수시는 서류·면접 종합 10명이 전부이고 수능최저도 없다.',
+    adm:[
+      {t:'종합', n:'명지인재면접 (10명)', r:'1단계 서류 100%(3배수) → 2단계 1단계 70% + 면접 30%', m:'단계별', c:'미적용', s:'A'},
+      {t:'교과', n:'학생부교과 위주 전형', r:'해당 없음', m:'—', c:'—', d:'해당 없음 — 7개 전형 칸 모두 미배정', s:'A'},
+      {t:'실기', n:'정시 나군 수능(실기전형) (10명)', r:'수능 50% + 실기 45% + 출결 5% (500·450·50 / 1,000점)', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'실기', n:'실기고사 종목', r:'\u2014', m:'—', c:'—', d:'운문 또는 산문 중 택1 — 운문: 주어진 제목에 맞는 시(시조) 1편과 창작 해설 / 산문: 주어진 조건에 맞는 이야기 창작', s:'A'},
+      {t:'정시', n:'정시 나군 수능(일반) — 인문대학 통합 85명', r:'수능 90% + 출결 10% — 영역별 국어 35% + 수학 25% + 영어 20% + 탐구 20% (900점)', m:'일괄합산', c:'미적용', s:'A'}
+    ],
+    note:'⚑ <b>실기가 수시가 아니라 정시에 있다</b>. 실기전형 수능은 국어 35% + 영어 35% + 수학·탐구 중 고득점 1개 영역 30%(500점)로, <b>수학을 버리고 국어·영어로 갈 수 있는</b> 드문 구조다. 수시에 학생부교과 위주 전형이 없어 내신으로 밀어붙일 길이 없는 대신, 서류·면접과 실기가 승부처다. <span class="unk">실기고사 시간과 세부 배점은 시행계획에 표가 없어 미확인이다 — 2028 모집요강 공개를 기다려야 한다.</span> 근거 문서는 2026-06-12자 "_수정" 개정본이고, 학과별 배정은 원문 p.7 「Ⅲ. 2028학년도 전형별 모집인원 — 1. 인문캠퍼스」 표에서 읽었다 — 앞쪽 「1. 대학입학전형 요약」의 학생부교과 소계 951명은 대학 전체 수치라 학과 몫이 아니다.'
+  },
+  {
+    tier:2, group:'B', name:'한신대학교', campus:'경기 오산', region:'경기',
+    unit:'문예창작학', quota:16, src:'A',
+    lead:'참인재전형 (10명)', leadRatio:'학생부교과 54% + 출결 6% + 면접 40%',
+    minCsat:'없음', sens:'lo',
+    sensWhy:'논술전형이 2028학년도부터 논술 100%로 바뀌어 학생부를 아예 반영하지 않는다. 참인재도 면접이 40%다.',
+    adm:[
+      {t:'논술', n:'논술전형 (6명) — 2028 변경', r:'논술 100% <span class="unk">(2026학년도는 논술 80% + 학생부 20%였다)</span>', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'참인재전형 (10명)', r:'학생부교과 54% + 출결 6% + 면접 40%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'교과우수자 (계열 35명)', r:'학생부교과 100% \u2014 신학\u00b7인문융합계열 통합 모집', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'학교장추천 (계열 15명)', r:'학생부교과 90% + 출결 10% \u2014 계열 통합', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'사회배려자 (계열 10명) \u00b7 고른기회 (계열 10명)', r:'학생부교과 100% \u2014 계열 통합', m:'일괄합산', c:'없음', s:'A'},
+      {t:'정시', n:'정시 다군 수능 일반학생 (계열 17명)', r:'수능 100% \u2014 국어\u00b7수학\u00b7영어\u00b7탐구(1과목) 중 <b>우수영역 순서대로 50% + 30% + 20%</b> (백분위)', m:'일괄합산', c:'없음', s:'A'}
+    ],
+    note:'⚑ <b>문예창작학과인데 실기고사가 없다</b>. 대학 원문 확인 결과 한신대에서 실기전형을 운영하는 곳은 특수체육학과(체육실기)뿐이고, 문예창작학 행에는 실기 열 자체가 존재하지 않는다. 이 학과의 유일한 시험형 전형은 <b>논술</b>이다. 인문융합대학 소속. 교과우수자·학교장추천·사회배려자·고른기회·정시는 "신학·인문융합계열" <b>계열 통합 모집</b>이라 문예창작학 단독 배정 인원이 없고, 원문 각주에 "계열모집으로 입학한 학생은 전공선택 시기에 해당 계열 내 전공 정원의 150% 이상 범위에서 전공을 선택할 수 있다"고 되어 있다 — 계열로 들어가도 <b>문예창작학 진입 여지가 정원의 1.5배까지</b> 열려 있다. 3개년 입결이 아래에 있다 — 다만 한신대는 50%·70%컷을 공시하지 않아 다른 대학 수치와 나란히 비교할 수 없다. 같은 학교에 <b>자유전공학부</b>(문예창작학 선택 가능)와 공공인재빅데이터융합학이 있다.'
+  },
+  {
+    tier:2, group:'B', name:'동국대학교', campus:'서울 중구', region:'서울',
+    unit:'국어국문·문예창작학부', quota:62, src:'A',
+    link:'https://ipsi.dongguk.edu/admission/html/counsel/noticeView.asp?BOARD_IDX=37098',
+    lead:'실기/실적위주 실기 (수시 23명)', leadRatio:'학생부 30%(교과 20% + 출결 10%) + 실기 70%(350점)',
+    minCsat:'미적용 (논술만 2개영역 합5)', sens:'lo',
+    sensWhy:'가장 큰 전형이 실기 23명이고 실기가 70%다. 학생부는 30%뿐이며 수능최저도 실기\u00b7종합\u00b7교과 전부 미적용이다.',
+    adm:[
+      {t:'실기', n:'실기/실적위주 실기 (23명)', r:'교과 20%(100점) + 출결 10%(50점) + <b>실기 70%(350점)</b> \u2014 학생부 합산 30% (1,000점)', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'실기', n:'실기고사 \u2014 종목\u00b7시간\u00b7배점', r:'\u2014', m:'\u2014', c:'\u2014', d:'<b>운문 또는 산문 / 120분 / 350점(반영 70%)</b>. 고사문제는 당일 안내, 답안지 1장 분량, 표현력\u00b7창의력\u00b7정서법 종합 평가', s:'A'},
+      {t:'종합', n:'학생부종합 Do Dream (13명)', r:'1단계 서류종합평가 100%(3배수) \u2192 2단계 1단계성적 60% + 면접 40%', m:'단계별', c:'미적용', s:'A'},
+      {t:'교과', n:'학교장추천인재 (5명)', r:'학생부교과 70% + 교과 관련 영역 서류종합평가 30%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'교과', n:'기회균형통합 (2명)', r:'학생부교과 70% + 교과 관련 영역 서류종합평가 30%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'논술', n:'논술위주 논술 (5명)', r:'교과 20%(100점) + 출결 10%(50점) + <b>논술 70%(350점)</b> \u2014 학생부 합산 30% (1,000점)', m:'일괄합산', c:'2개영역 등급합 5 (한국사 4등급)', s:'A'},
+      {t:'정시', n:'정시 나군 수능 일반 (8명)', r:'수능 80% + 학생부평가 20% \u2014 인문 반영식 국어 35 / 수학 25 / 영어 15 / 사회 15 / 과학 10 (표준점수, 영어는 환산표준점수, 한국사 감점)', m:'일괄합산', c:'미적용', s:'A'}
+    ],
+    note:'⚑ <b>이 목록에서 실기 비중이 가장 높은 서울 소재 학부</b>다. 대학 원문 재확인(2026-08-31)으로 전 항목을 확정했다. 실기전형이 단일 최대 규모라, <b>글쓰기 실력이 내신을 덮을 수 있는</b> 몇 안 되는 경로다. 국어국문학과와 <b>학부 통합 모집</b>이라 문예창작만 따로 뽑지 않는다 — 국어국문 지망자와 같은 풀에서 경쟁하고, 전공 배정 조건은 시행계획에 없다. <span class="unk">용어 주의: 동국대의 Do Dream은 학생부<b>종합</b> 전형명이다(교과 아님).</span>'
+  },
+  {
+    tier:2, group:'B', name:'한경국립대학교', campus:'경기 안성', region:'경기',
+    unit:'인문융합공공인재학부 문예창작미디어콘텐츠홍보전공', quota:null, src:'A',
+    link:'https://ipsi.hknu.ac.kr/help/notice_view.php?bn=5073',
+    lead:'학생부교과(일반전형)', leadRatio:'학생부교과 90% + 출결 10%',
+    minCsat:'2개영역 합8 (일반전형만)', sens:'hi',
+    sensWhy:'교과전형이 교과 90% + 출결 10%라 실질 변별이 내신 하나다. 종합전형도 서류 100%로 정성평가뿐이다.',
+    adm:[
+      {t:'교과', n:'학생부교과(일반전형) \u2014 안성캠퍼스', r:'학생부교과 90% + 출결 10% <span class="unk">(2027학년도는 교과 100%였다 \u2014 2028부터 출결 10%가 들어왔다)</span>', m:'일괄합산', c:'4개 영역 중 성적우수 2개 영역 등급 합 8 이내', s:'A'},
+      {t:'교과', n:'학생부교과(지역균형선발)', r:'학생부교과 90% + 출결 10%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'학생부교과(특수교육대상자)', r:'학생부교과 60% + 면접 40%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'학생부종합(잠재력우수자)', r:'서류 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'학생부종합(사회통합)', r:'서류 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'정시', n:'수능위주(일반전형) 다군', r:'수능 90% + 출결 10% \u2014 인문사회 반영식 <b>국\u00b7수\u00b7영 중 성적우수 2개 영역 각 40%(=80%) + 탐구 1과목 20%</b>', m:'일괄합산', c:'없음', s:'A'},
+      {t:'실기', n:'실기고사 \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'2028 시행계획 「8. 실기고사」 대상은 시각미디어\u00b7제품공간디자인(기초디자인 5시간)\u00b7실용음악\u00b7스포츠과학뿐이다', s:'A'},
+      {t:'교과', n:'2028 전공별 모집인원', r:'\u2014', m:'\u2014', c:'\u2014', d:'<span class="unk">미확인 \u2014 2028 시행계획에 모집단위별 인원표가 아예 없다. 목차에 「모집시기 및 전형유형별 모집인원」만 있고 학과\u00b7전공 분해가 없다(대학 전체 수시 1,008 / 정시 263 / 계 1,271).</span> 2027 참고치: 입학정원 17 = 일반 6 \u00b7 지역균형 1 \u00b7 잠재력우수자 6 \u00b7 사회통합 1 \u00b7 수시 계 14 + 농어촌(정원외) 1', s:'A'}
+    ],
+    note:'국립대(안성). 2026-08-31 공식 HWP 원문 재확인으로 전형별 반영비율과 수능최저를 모두 확정했다 — 다만 <span class="unk">2028 전공별 모집인원만은 여전히 미확인이다.</span> 게시글 제목부터 “2028학년도 대학입학전형 시행계획(주요 변경사항)”이고, 본문에 “향후 구조개혁 등 학생정원 조정이 있을 시 재공지 하겠습니다”라고 못박혀 있다 — 즉 이 대학의 2028 인원은 대학 스스로도 아직 확정하지 않았다. ⚑ <b>2028부터 학과가 아니라 학부 산하 전공이 된다</b> — 2027 모집요강에는 “문예창작미디어콘텐츠홍보학과”(독립)였는데 2028 시행계획은 “인문융합공공인재학부 / 문예창작미디어콘텐츠홍보전공”이다. 영미언어문화·행정학·법경영과 같은 학부에 묶이므로 실질적으로 D군(통합·자유전공) 성격을 함께 갖는다. 수능최저의 “수학 미적분/기하 응시자 2등급 감산”은 2028부터 폐지된다.'
+  },
+
+  /* ---------- C군 정보사회·데이터 · D군 통합·자유전공 ---------- */
+  {
+    tier:2, group:'C', name:'숭실대학교', campus:'서울 동작', region:'서울',
+    unit:'정보사회학과', quota:26, src:'A',
+    lead:'학생부교과(교과우수자)', leadRatio:'교과 정량 90% + 학생부 정성 10%',
+    minCsat:'2개영역 합6', sens:'hi',
+    sensWhy:'교과우수자전형이 교과 정량 90%를 반영하고 수능최저까지 걸린다. 내신·수능 양쪽이 필요하다.',
+    adm:[
+      {t:'교과', n:'교과우수자(학교장추천)', r:'학생부교과 정량 90% + 학생부 정성 10%', m:'일괄합산', c:'국·수·영·탐(1) 중 2개영역 등급합 6 이내', s:'A'},
+      {t:'종합', n:'SSU미래인재(면접형)', r:'1단계 서류 100%(3~3.5배수) → 2단계 서류 50% + 면접 50%', m:'단계별', c:'없음', s:'A'},
+      {t:'종합', n:'SSU미래인재(서류형)', r:'서류 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'논술', n:'논술우수자', r:'논술 90% + 학생부교과 10%', m:'일괄합산', c:'2개영역 등급합 6 이내', s:'A'},
+      {t:'정시', n:'정시 일반(인문)', r:'국어 35% + 수학 20% + 영어 20% + 사탐 15% + 과탐 10%', m:'일괄합산', c:'—', s:'A'}
+    ],
+    note:'사회학이 아니라 <b>정보사회학</b>으로, 정보·미디어의 사회적 작용을 다루는 학과다. 문헌정보학과 직접 동일 분야는 아니지만 정보 조직·이용자 연구와 접점이 있다 — <span class="unk">학과 공식 소개문은 확인하지 못했으므로 진로 연관성은 미확인으로 둔다</span>. 같은 학교에 <b>예술창작학부 문예창작전공</b>이 있어 한 학교 안에서 두 방향을 볼 수 있다. 2028학년도부터 정시 탐구 가산점이 폐지된다.'
+  },
+  {
+    tier:2, group:'D', name:'한성대학교', campus:'서울 성북 (주간)', region:'서울',
+    unit:'크리에이티브인문학부 (주간)', quota:110, src:'A',
+    lead:'학생부교과(교과우수)', leadRatio:'학생부교과 100%',
+    minCsat:'2개영역 합7', sens:'hi',
+    sensWhy:'교과우수전형이 학생부교과 100%다. 지역균형전형은 같은 100%이지만 수능최저가 없다.',
+    adm:[
+      {t:'교과', n:'교과우수전형', r:'학생부교과 100%', m:'일괄합산', c:'국·수·영·탐 중 2개영역 등급합 7 이내', s:'A'},
+      {t:'교과', n:'지역균형전형', r:'학생부교과 100% (10명)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'한성인재 (35명)', r:'학교생활기록부 서류평가 100% (1,000점, 일괄)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'논술', n:'논술전형 (9명)', r:'논술고사 80% + 학생부교과 20% (1,000점) \u2014 반영교과 국\u00b7영\u00b7수\u00b7사\u00b7과 전과목', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'기회균형 \u2014 고른기회 (12명)', r:'학교생활기록부 서류평가 100% (1,000점)', m:'일괄합산 \u2014 한성인재와 같은 서류평가 100% 표를 쓴다', c:'없음', s:'A'},
+      {t:'정시', n:'정시 가군 (41명)', r:'수능 100% (1,000점) \u2014 국어 35% + 수학 25% + 영어 20% + 탐구 1과목 20%, 한국사 가산점(1~4등급 10 / 9등급 0). 백분위 반영. 영어 등급점수 100/97/94/80/70/55/40/25/10', m:'일괄합산', c:'없음', s:'A'}
+    ],
+    note:'⚑ <b>문헌정보 인접성이 가장 높은 C군 후보</b>. 학부 하위 전공트랙에 지식정보문화·디지털인문정보학·역사문화큐레이션이 있다. 단 <span class="unk">이 트랙 표는 원문에서 "2027학년도 기준"으로 표기되어 있어 2028학년도에도 동일한지는 확인되지 않았다 — 지원 전 반드시 재확인해야 한다.</span> 2026-08-31 원문 재확인으로 한성인재·논술·정시 반영비율을 모두 확정했다. <span class="unk">고른기회를 “학생부교과”로 적어 뒀던 것도 이때 바로잡았다 — 원문 「Ⅳ. 전형요소별 반영방법」에서 고른기회는 <b>학생부종합(기회균형)</b>이고 <b>서류평가 100%</b>다.</span>'
+  },
+  {
+    tier:2, group:'C', name:'인천대학교', campus:'인천 연수', region:'인천',
+    unit:'데이터과학과', quota:19, src:'A',
+    lead:'학생부교과(교과성적우수자)', leadRatio:'학생부교과 100%',
+    minCsat:'2개영역 합7', sens:'hi',
+    sensWhy:'교과전형이 교과 100%다. 지역균형·사회통합은 같은 100%이나 수능최저를 적용하지 않는다.',
+    adm:[
+      {t:'교과', n:'교과성적우수자', r:'학생부교과 100%', m:'일괄합산', c:'2개영역 등급합 7 이내', s:'A'},
+      {t:'교과', n:'지역균형전형', r:'학생부교과 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'교과', n:'사회통합전형', r:'학생부교과 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'종합', n:'자기추천전형(면접형)', r:'1단계 서류 100%(4배수) → 2단계 면접 40% + 1단계성적 60%', m:'단계별', c:'없음', s:'A'}
+    ],
+    note:'경영대학 소속이지만 원문에 계열이 <b>"인문"</b>으로 명시되어 있어 인문계열 지원이 가능하다. 데이터 조직·분석 역량은 문헌정보학의 메타데이터·정보조직과 접점이 있으나 <span class="unk">학과 공식 소개문을 확인하지 못했으므로 진로 연관성은 미확인이다</span>. 같은 학교 사회과학대학에 <b>문헌정보학과</b>가 별도로 있어, 인천대는 A군과 C군을 동시에 노릴 수 있다.'
+  },
+  {
+    tier:2, group:'C', name:'한신대학교', campus:'경기 오산', region:'경기',
+    unit:'공공인재빅데이터융합학', quota:16, src:'A',
+    lead:'학생부교과(참인재)', leadRatio:'교과 54% + 출결 6% + 면접 40%',
+    minCsat:'없음', sens:'mid',
+    sensWhy:'참인재전형의 면접 비중이 40%로 확인된 대학 중 가장 크고, 전 전형에 수능최저가 없다.',
+    adm:[
+      {t:'교과', n:'참인재전형', r:'학생부교과(교과 54% + 출결 6%) + 면접 40%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'교과우수자전형', r:'학생부교과 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'학교장추천전형', r:'학생부교과 90% + 출결 10%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'사회배려자전형', r:'학생부교과 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'논술', n:'논술전형 — 2028 변경', r:'논술 100%', m:'일괄합산', c:'없음', s:'A'}
+    ],
+    note:'글로벌융합계열(인문사회) 소속 — 원문 각주가 자연계열을 "첨단융합계열·AI·SW계열·AI시스템반도체학"으로 한정하고 있어 이 학과는 <b>인문사회</b>로 판단했다. 같은 학교에 <b>문예창작학</b>이 있어 두 계열을 함께 볼 수 있다. 학과명에 "과/부"가 없는 것은 한신대 표기 관행이다(동아시아통상학·경제금융학 등도 동일).'
+  },
+  {
+    tier:3, group:'D', name:'성공회대학교', campus:'서울 구로', region:'서울',
+    unit:'인문융합콘텐츠학부', quota:53, src:'A',
+    lead:'학생부종합(열린인재) (36명)', leadRatio:'면접 40% + 서류 60%',
+    minCsat:'없음 (대학 전체)', sens:'mid',
+    sensWhy:'53명 중 36명이 서류 60% + 면접 40% 종합전형이다. 교과 100% 전형은 7명뿐이라 학부 전체로 보면 내신 정량 비중이 낮다.',
+    adm:[
+      {t:'종합', n:'열린인재 (36명)', r:'면접 40% + 서류 60%', m:'일괄전형', c:'없음', s:'A'},
+      {t:'교과', n:'교과성적 (7명)', r:'학생부교과 100% (일괄) \u2014 반영교과 국어/영어/수학/사회(한국사 포함)/과학 중 <b>높은 성적 12과목만</b>, 전학년 동일비율, 3학년 1학기까지, 출결 미반영', m:'일괄전형', c:'없음', s:'A'},
+      {t:'교과', n:'국가보훈대상자 (1명) \u00b7 사회기여자 및 배려대상자 (1명)', r:'학생부교과 100% (일괄)', m:'일괄전형', c:'없음', s:'A'},
+      {t:'교과', n:'정원외 \u2014 기회균형선발 (2명) \u00b7 농어촌학생 (1명) \u00b7 북한이탈주민 (2명)', r:'학생부교과 100% (일괄). 북한이탈주민만 면접 100%', m:'일괄전형', c:'없음', s:'A'},
+      {t:'정시', n:'정시 나군 일반학생 (8명)', r:'수능 100% (일괄전형)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'정시', n:'정시 수능 반영식', r:'국어/수학/영어/탐구(1과목) 중 <b>백분위가 높은 상위 3개 영역만</b> 반영 \u2014 1위 40%, 2위 35%, 3위 25%. 영어는 등급을 백분위로 환산(100/97/93/86/77/66/53/38/21). <b>이 학부에는 수학 가산점이 없다</b>(가산은 미래융합\u00b7소프트웨어융합 전용)', m:'\u2014', c:'\u2014', s:'A'},
+      {t:'논술', n:'논술\u00b7실기 \u2014 대학 전체 미시행', r:'해당 없음', m:'\u2014', c:'\u2014', d:'2028 시행계획 전문에 \u201c논술\u201d\u00b7\u201c실기\u201d가 <b>단 한 번도 등장하지 않는다</b>. 성공회대는 두 전형을 운영하지 않는다', s:'A'}
+    ],
+    note:'⚑ <b>이 학부는 문헌정보·문예창작과 접점이 없다</b> — 후보에서 제외해야 한다. 2026-08-31 대학 원문(2026.6.9 수정본)에서 하위 전공을 확인한 결과 영어학·일어일본학·중어중국학·종교와신학 네 전공뿐인 어학·신학 학부다. <span class="unk">이전 판에서 “학부명이 광범위해 접점 확인이 필요하다 — 미확인”이라 유보했던 항목이 이렇게 해소됐고, 결론은 접점 없음이다.</span> 아래 수치는 참고용으로만 남긴다. ⚑ 다만 교과 반영 방식은 이 목록에서 가장 유리한 축이라 대학 자체는 기억해 둘 만하고, 같은 규정이 아래 미디어콘텐츠융합학부에도 그대로 적용된다.'
+  },
+  {
+    tier:2, group:'D', name:'성공회대학교', campus:'서울 구로', region:'서울',
+    unit:'미디어콘텐츠융합학부 (신문방송\u00b7디지털콘텐츠\u00b7영상콘텐츠 통합모집)', quota:67, src:'A',
+    lead:'학생부종합(열린인재) (33명)', leadRatio:'면접 40% + 서류 60%',
+    minCsat:'없음 (대학 전체)', sens:'mid',
+    sensWhy:'67명 중 33명이 서류 60% + 면접 40%다. 교과 100% 전형은 10명이라 정량 내신만으로 가는 문은 좁다.',
+    adm:[
+      {t:'종합', n:'열린인재 (33명)', r:'면접 40% + 서류 60%', m:'일괄전형', c:'없음', s:'A'},
+      {t:'종합', n:'대안학교출신자 (5명)', r:'면접 40% + 서류 60%', m:'일괄전형', c:'없음', s:'A'},
+      {t:'교과', n:'교과성적 (10명)', r:'학생부교과 100% (일괄) \u2014 반영교과 국어/영어/수학/사회(한국사 포함)/과학 중 <b>높은 성적 12과목만</b>, 전학년 동일비율, 3학년 1학기까지, 출결 미반영', m:'일괄전형', c:'없음', s:'A'},
+      {t:'교과', n:'국가보훈대상자 (2명) \u00b7 사회기여자 및 배려대상자 (2명) \u00b7 특성화고교교과성적 (4명)', r:'학생부교과 100% (일괄)', m:'일괄전형', c:'없음', s:'A'},
+      {t:'교과', n:'정원외 \u2014 기회균형선발 (3명) \u00b7 농어촌학생 (1명) \u00b7 특성화고교졸업자 (2명) \u00b7 북한이탈주민 (2명)', r:'학생부교과 100% (일괄). 북한이탈주민만 면접 100%', m:'일괄전형', c:'없음', s:'A'},
+      {t:'정시', n:'정시 나군 일반학생 (11명)', r:'수능 100% (일괄전형)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'정시', n:'정시 수능 반영식', r:'\u2014', m:'\u2014', c:'\u2014', d:'국어/수학/영어/탐구(1과목) 중 <b>백분위가 높은 상위 3개 영역만</b> 반영 \u2014 1위 40%, 2위 35%, 3위 25%. 영어 등급\u2192백분위 100/97/93/86/77/66/53/38/21. 수학 가산점 없음', s:'A'},
+      {t:'논술', n:'논술\u00b7실기 \u2014 대학 전체 미시행', r:'해당 없음', m:'\u2014', c:'\u2014', d:'성공회대는 논술\u00b7실기 전형을 운영하지 않는다', s:'A'}
+    ],
+    note:'⚑ <b>모집 단위 정정</b>: 표의 인원은 디지털콘텐츠전공 몫이 아니라 학부 전체 정원이다. 2026-08-31 대학 원문 재확인 결과 미디어콘텐츠융합학부는 <b>신문방송학·디지털콘텐츠·영상콘텐츠 세 전공을 묶어</b> 뽑고, 시행계획에는 <span class="unk">전공별 인원 분해도 전공 배정 방식도 나오지 않는다 — 미확인이다</span>. <span class="unk">이전 판에서 이 인원을 “디지털콘텐츠전공” 한 전공의 모집인원으로 적었던 것은 오류라 정정했다.</span> 문헌정보·문예창작 직접 대응은 아니지만 디지털·영상 콘텐츠 제작 쪽이라 C군(정보·콘텐츠) 성격은 분명하다.'
+  },
+  {
+    tier:2, group:'A', name:'충남대학교', campus:'대전 유성', region:'지방',
+    unit:'문헌정보학과', quota:21, src:'A',
+    lead:'학생부교과(일반) (6명)', leadRatio:'교과성적 100%',
+    minCsat:'2개영역 합6', sens:'hi',
+    sensWhy:'교과전형이 교과성적 100%이고 수능최저(2개 영역 합 6)까지 걸린다.',
+    adm:[
+      {t:'교과', n:'학생부교과 일반 (6명)', r:'교과성적 100%', m:'일괄합산', c:'국·수·영·탐(1과목) 중 상위 2개 영역 합 6등급 이내', s:'A'},
+      {t:'교과', n:'학생부교과 지역인재 (4명)', r:'교과성적 100%', m:'일괄합산', c:'상위 2개 영역 합 6등급 이내', s:'A'},
+      {t:'교과', n:'학생부교과 기회균형선발Ⅰ (1명)', r:'학생부(교과) 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'종합', n:'학생부종합Ⅰ 면접 (3명)', r:'1단계 서류 100%(3배수) → 2단계 서류 66.7% + 면접 33.3%', m:'단계별', c:'미적용', s:'A'},
+      {t:'종합', n:'학생부종합Ⅰ 서류 (2명)', r:'서류 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'종합', n:'학생부종합Ⅱ 농어촌 (1명) · Ⅲ 특수교육대상자 (1명)', r:'서류 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'정시', n:'정시 나군 수능(일반) (3명)', r:'수능 80% + 학생부교과 15% + 비교과(출결) 5% (500점 만점)', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'논술', n:'논술전형', r:'해당 없음', m:'—', c:'—', d:'전형 목록에 없음 (미시행)', s:'A'}
+    ],
+    note:'⚑ <b>2028 전형과 최근 입결을 동시에 가장 완전하게 확보한 곳</b>이다. 사회과학대학 소속. 이전 판에 실려 있던 수치는 2027학년도 문서에서 온 것이어서 2028학년도 시행계획 원문으로 전면 교체했다 — 교과전형 평가는 "학생부교과 정성평가"가 아니라 <b>교과성적 100점</b>이다. 논술은 시행하지 않는다. 입결의 50%컷은 충남대가 애초에 공개하지 않는 지표라 70%컷으로 읽어야 한다. 지역인재는 <b>대전·세종·충남북 고교 출신</b>만 지원할 수 있다.'
+  },
+  {
+    tier:2, group:'A', name:'전남대학교', campus:'광주', region:'지방',
+    unit:'문헌정보학과', quota:24, src:'A',
+    lead:'학생부종합(고교생활우수자Ⅰ) (8명)',
+    leadRatio:'1단계 서류 100%(3배수) → 2단계 서류 70% + 면접 30%',
+    minCsat:'미적용', sens:'mid',
+    sensWhy:'주력이 서류·면접 종합전형이고 수능최저가 없다. 교과전형(5명)만 수능최저 2개영역 합7이 걸린다.',
+    adm:[
+      {t:'종합', n:'고교생활우수자Ⅰ (8명)', r:'1단계 서류 100%(3배수) → 2단계 서류 70% + 면접 30%', m:'단계별', c:'미적용', s:'A'},
+      {t:'교과', n:'학생부교과(일반) (5명)', r:'학생부 100%', m:'일괄합산', c:'국·수·영·탐(1과목) 중 2개 영역 합 7등급 이내', s:'A'},
+      {t:'교과', n:'학생부교과(지역인재) (3명)', r:'학생부 100%', m:'일괄합산', c:'2개 영역 합 8등급 이내', s:'A'},
+      {t:'교과', n:'학생부교과(사회배려대상자) (1명)', r:'학생부 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'종합', n:'농어촌학생 (정원외 2명)', r:'서류 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'정시', n:'정시 나군 수능(일반) (5명)', r:'수능 100% — 국어 40% + 수학 30% + 영어 20% + 탐구 1과목 10% (1,000점)', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'논술', n:'논술전형', r:'해당 없음', m:'—', c:'—', d:'전형 목록에 없음 (미시행)', s:'A'}
+    ],
+    note:'⚑ <b>주력이 교과가 아니라 종합</b>이다. 모집인원이 가장 많은 전형이 학생부종합(고교생활우수자Ⅰ)이라 세특·활동 기록이 내신만큼 무겁다. 사회과학대학 소속. 지역인재는 <b>광주·전남 소재 고교 출신</b>만 지원할 수 있어 수도권 학생에게는 해당되지 않는다. 논술은 시행하지 않는다. 통학이 불가능한 거리다.'
+  },
+  {
+    tier:2, group:'D', name:'경기대학교', campus:'경기 수원 / 서울 서대문', region:'경기·서울',
+    unit:'자유전공학부 (수원·서울)', quota:239, src:'A',
+    lead:'논술우수자 (단일 전형)', leadRatio:'논술 90% + 학생부교과 10%',
+    minCsat:'없음', sens:'lo',
+    sensWhy:'2028학년도 자유전공학부는 논술우수자전형만으로 뽑고 논술이 90%다. 내신은 10%뿐이고 수능최저도 없다.',
+    adm:[
+      {t:'논술', n:'논술우수자 — 수원 185명 (언어사회 93 · 수리 92)', r:'논술 90% + 학생부교과 10%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'논술', n:'논술우수자 — 서울 54명 (언어사회 41 · 수리 13)', r:'논술 90% + 학생부교과 10%', m:'일괄합산', c:'없음', s:'A'}
+    ],
+    note:'⚑ <b>내신이 밀렸을 때 문헌정보학과로 들어가는 가장 현실적인 우회로</b>다. 원문: "자유전공학부(수원, 서울)으로 선발된 학생은 2학년 진급 시 수원 및 서울캠퍼스에 개설된 학과(학부, 전공) 중에서 자유롭게 선택할 수 있으며, 전공 선택 후에도 변경 가능함" — 조사한 7개 자유전공 중 <b>전공 재변경까지 허용하는 유일한 곳</b>이다. 제외 대상은 ☆ 표시 학과(유아교육·입체조형·디자인비즈·체육·경호보안·스포츠레저·SW안전보안·AI컴퓨터공학·연기·애니메이션·실용음악)뿐이고 문헌정보학과와 국어국문학과는 ☆ 표시가 없어 둘 다 선택 가능하다. <span class="unk">단 논술 준비가 별도로 필요하고, 자유전공 입학생이 실제로 문헌정보학과에 몇 명까지 배정되는지(정원 상한)는 시행계획에 없어 미확인이다.</span>'
+  },
+  {
+    tier:2, group:'D', name:'한신대학교', campus:'경기 오산', region:'경기',
+    unit:'자유전공학부', quota:120, src:'A',
+    lead:'논술전형 (40명)', leadRatio:'논술 100%',
+    minCsat:'없음', sens:'lo',
+    sensWhy:'논술전형 40명은 논술 100%로 내신을 아예 반영하지 않고, 확인된 전 전형에 수능최저가 없다.',
+    adm:[
+      {t:'논술', n:'논술전형 (40명)', r:'논술 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'참인재전형 (35명)', r:'학생부교과 54% + 비교과 6% + 면접 40%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'교과우수자전형 (35명)', r:'학생부교과 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'기회균형선발 (정원외 7명)', r:'학생부교과 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'농어촌학생 (정원외 7명)', r:'학생부교과 100%', m:'일괄합산', c:'없음', s:'A'},
+      {t:'정시', n:'정시 가군 수능 일반학생 (10명)', r:'수능 100% \u2014 국어\u00b7수학\u00b7영어\u00b7탐구(1과목) 중 <b>우수영역 순서대로 50% + 30% + 20%</b> (백분위)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'실기', n:'실기전형 \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'자유전공학부에는 실기 배정이 없다 (한신대 실기전형은 특수체육학 전용)', s:'A'}
+    ],
+    note:'⚑ <b>문예창작학으로 진입 가능한 우회로</b>. 원문: "자유전공학부로 입학한 학생은 전공선택 시기에 모든 전공을 100% 자율 선택할 수 있음" — 계열 구분 없이 대학 전체 전공에 접근할 수 있고, 문예창작학과 한국어문학 모두 포함된다. 2026-08-31 원문 좌표 재검증으로 인원 배분을 확정했다 — <span class="unk">이전 판에서 “고른기회 7 · 실기우수자 7 · 농어촌 10”이라 적었던 것은 표 열을 한 칸씩 밀려 읽은 오류라 정정했다.</span> 문예창작학과에 직접 지원하는 경로보다 <b>자유전공 쪽 문이 훨씬 넓다</b>는 점을 비교해 볼 만하다.'
+  },
+  {
+    tier:2, group:'D', name:'인천대학교', campus:'인천 연수 (송도)', region:'인천',
+    unit:'자유전공학부 (인문)', quota:87, src:'A',
+    lead:'학생부종합(자기추천 서류형) — 2028 신설', leadRatio:'서류 100%',
+    minCsat:'2개영역 합7', sens:'hi',
+    sensWhy:'서류형(30명)은 교과 정량 반영이 없지만, 거의 같은 규모인 교과성적우수자 28명이 학생부교과 100%에 수능최저 2개영역 합7까지 건다.',
+    adm:[
+      {t:'종합', n:'자기추천(서류형) — 2028 신설, 인문 30명', r:'서류 100%', m:'일괄합산', c:'미적용', s:'A'},
+      {t:'교과', n:'교과성적우수자 (28명)', r:'학생부교과 100% (350점)', m:'일괄합산', c:'2개영역 합7', s:'A'}
+    ],
+    note:'⚑ <b>문헌정보학과로 진입 가능한 우회로</b> — 조건이 원문에 못박혀 있다. "자유전공학부(인문·자연) 입학생은 2학년 진입 시 계열, 성적, 정원에 관계 없이 본인이 희망하는 전공 선택 가능(단, 예술체육대학 및 사범대학 소속 학과, 동북아국제통상물류학부의 스마트물류공학전공 및 IBE전공은 선택 불가)". 문헌정보학과·국어국문학과 모두 인문대학 소속이고 제외 목록에 없어 진입 가능하며, <b>원문상 인원 제한이 없다</b>. 수능최저에는 한국사 응시 필수·직업탐구 및 제2외국어/한문 불인정 조건이 붙는다. 문헌정보학과 직접 지원과 데이터과학과를 합치면 인천대는 진입 경로가 셋이다.'
+  },
+  {
+    tier:2, group:'D', name:'협성대학교', campus:'경기 화성', region:'경기',
+    unit:'자율전공학부 (1유형)', quota:100, src:'A',
+    lead:'학생부교과(교과성적우수자) (30명)', leadRatio:'학생부교과성적 100%',
+    minCsat:'없음 (대학 전체)', sens:'hi',
+    sensWhy:'수시 50명이 교과 100%(30명)와 서류 100%(20명) 둘뿐이다. 수능최저도 실기도 면접도 없어 내신·서류 외에 변수가 없다.',
+    adm:[
+      {t:'교과', n:'교과성적우수자 (30명)', r:'학생부교과성적 100% (일괄)', m:'일괄합산', c:'없음', s:'A'},
+      {t:'종합', n:'융합인재\u2160 (20명)', r:'학생생활기록부 서류평가 100% (일괄) \u2014 학업역량 30\u00b7진로역량 40\u00b7공동체역량 30', m:'일괄합산', c:'없음', s:'A'},
+      {t:'교과', n:'그 외 수시 전형 \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'미래창의인재\u00b7웨슬리\u00b7기회균형\u00b7사회배려자\u00b7융합인재\u2161\u00b7실기우수자\u00b7농어촌\u00b7특성화고 모두 자율전공학부(1유형) 배정 0명', s:'A'},
+      {t:'정시', n:'정시 나군 일반전형 (50명)', r:'수능 100% \u2014 국\u00b7수\u00b7영 중 상위 2과목 35%+35%=70% + 탐구 상위 1과목 30% (백분위). <span class="unk">모집인원은 원문 두 표가 50명(모집단위별 표)과 100명(일반전형 표)으로 상충한다 \u2014 50 + 수시 50 = 입학정원 100이 맞아떨어지는 쪽은 50이다.</span>', m:'일괄합산', c:'없음', s:'A'},
+      {t:'실기', n:'실기전형 \u2014 해당 없음', r:'해당 없음', m:'\u2014', c:'\u2014', d:'자율전공학부(1유형) 실기 배정 0명', s:'A'}
+    ],
+    note:'⚑ <b>문예창작학과로 진입 가능한 우회로</b>. 원문: "자율전공학부(1유형)은 광역계열로 에이블아트·스포츠학과와 음악학부 외 모든 학과로 지원 가능" — 제외가 3개뿐이라 문예창작학과(인문사회과학대학)는 당연히 포함된다. 협성대는 시행계획에 "전체 모집단위 및 전형에서 수능최저학력기준을 적용하지 않음"이라고 <b>대학 전체에 걸쳐</b> 명시했다. 대학 원문 재확인(2026-08-31)으로 전형 구성을 확정했다 — 이전 판의 미확인은 해소됐다. <span class="unk">이전 판에서 “수시 100명”이라 적었던 것은 입학정원을 수시 인원으로 잘못 읽은 것이라 정정했다.</span> 면접도 실기도 없어, 준비물이 <b>내신과 생기부 둘뿐</b>인 드문 광역모집이다.'
+  }
+];
+
+/* 지방 개설 확인 (전형 미확인) — 참고용 */
+const CENSUS = {
+  '문헌정보학 — 수도권':[
+    {n:'상명대학교 (서울)', h:14}, {n:'대진대학교 (경기 포천)', h:3},
+    {n:'명지대학교 (서울·경기)', h:2}, {n:'경기대학교 (경기 수원)', h:2},
+    {n:'인천대학교 (인천)', h:1}, {n:'중부대학교 (경기 고양·충남)', h:7},
+    {n:'동덕여자대학교', h:13, x:1}, {n:'서울여자대학교', h:6, x:1},
+    {n:'숙명여자대학교', h:5, x:1}, {n:'덕성여자대학교', h:2, x:1},
+    {n:'성균관대학교', h:4, x:1}, {n:'중앙대학교', h:3, x:1}, {n:'연세대학교', h:3, x:1}
+  ],
+  '문헌정보학 — 지방':[
+    {n:'건국대학교 (글로컬·충북)', h:4}, {n:'대구대학교 (경북)', h:4},
+    {n:'청주대학교 (충북)', h:3}, {n:'한남대학교 (대전)', h:3},
+    {n:'전주대학교 (전북)', h:2}, {n:'전북대학교 (전북)', h:2},
+    {n:'계명대학교 (대구)', h:2}, {n:'전남대학교 (광주·전남)', h:2},
+    {n:'광주대학교 (광주)', h:2}, {n:'국립공주대학교 (충남)', h:1},
+    {n:'부산대학교 (부산)', h:1}, {n:'신라대학교 (부산)', h:1},
+    {n:'동의대학교 (부산)', h:1}, {n:'경성대학교 (부산)', h:1},
+    {n:'충남대학교 (대전)', h:1}, {n:'경북대학교 (대구)', h:1}
+  ],
+  '문예창작 — 수도권':[
+    {n:'추계예술대학교 (서울)', h:27}, {n:'숭실대학교 (서울)', h:9},
+    {n:'서울과학기술대학교 (서울)', h:4},
+    {n:'명지대학교 (서울·경기)', h:4}, {n:'협성대학교 (경기 화성)', h:3},
+    {n:'대진대학교 (경기 포천)', h:3}, {n:'동국대학교 (서울)', h:2},
+    {n:'한신대학교 (경기 오산)', h:1}, {n:'한경국립대학교 (경기 안성)', h:18},
+    {n:'중앙대학교', h:17, x:1}, {n:'동덕여자대학교', h:13, x:1}
+  ],
+  '문예창작 — 지방':[
+    {n:'동국대학교 (WISE·경북)', h:48}, {n:'계명대학교 (대구)', h:6},
+    {n:'단국대학교 (충남 천안)', h:6}, {n:'광주대학교 (광주)', h:3},
+    {n:'한서대학교 (충남)', h:2}, {n:'국립순천대학교 (전남)', h:2},
+    {n:'국립경국대학교 (경북)', h:2}, {n:'우석대학교 (전북)', h:2},
+    {n:'원광대학교 (전북)', h:1}, {n:'국립목포대학교 (전남)', h:1},
+    {n:'신라대학교 (부산)', h:1}, {n:'고려대학교 (세종)', h:2, x:1}
+  ]
+};
+
+const TYPES = [
+  {
+    t:'학생부교과', meta:'내신이 곧 결과',
+    p:'확인된 수도권 문헌정보 모집단위에서 지배적인 전형이다. 교과 반영이 90~100%라 다른 요소로 뒤집을 여지가 거의 없다.',
+    li:[
+      '<b>인천대</b> 교과성적우수자 — 학생부교과 100%, 수능최저 적용',
+      '<b>인천대</b> 사회통합 — 학생부교과 100%, 수능최저 미적용',
+      '<b>경기대</b> — 교과 90% + 출결 10%',
+      '<b>상명대</b> — 교과 95% + 출결 5% (일부 전형 교과 100%)',
+      '<b>대진대</b> 학생부우수자 — 교과 60% + 면접 30% + 출결 10%, <b>수능최저 없음</b>'
+    ]
+  },
+  {
+    t:'학생부종합', meta:'서류와 면접',
+    p:'교과 정량이 아니라 세특·활동의 서사를 본다. 문헌정보는 독서·정보활용 경험, 문예창작은 창작 이력이 서류의 중심이 된다. 1단계 서류 100%로 걸러낸 뒤 면접을 붙이는 단계별 구조가 표준이다.',
+    li:[
+      '<b>상명대</b> — 서류평가 100% (일괄합산)',
+      '<b>경기대</b> — 1단계 서류 100%(3배수) → 2단계 1단계 70% + 면접 30%',
+      '<b>인천대</b> 자기추천(면접형) — 1단계 서류 100% → 2단계 면접 40% + 1단계 60%',
+      '<b>명지대</b> 명지인재면접 — 1단계 서류 100%(3배수) → 2단계 1단계 70% + 면접 30% <span class="b new">2028 변경</span>',
+      '<b>숭실대</b> SSU미래인재(면접형) — 문예창작전공 <span class="b new">2028 신설</span>, 1단계 3.5배수'
+    ]
+  },
+  {
+    t:'실기 / 실적', meta:'문예창작의 본선',
+    p:'문예창작 계열의 중심축이다. 실기 60~70%가 표준이고, 학생부를 아예 반영하지 않는 전형이 있어 내신이 약해도 승산이 있다. 대신 고사 당일 주제를 받아 완성하는 형식이라 축적 없이는 통과할 수 없다.',
+    li:[
+      '<b>숭실대</b> — 실기 70% + 수능 30%. 작문 실기고사: 당일 주제 발표, 시·소설·희곡·중수필 중 자유선택',
+      '<b>추계예대</b> — 실기 60% + 수능 40%. 전공선택, <b>120분</b>',
+      '<b>단국대</b>(천안) — <b>실기 70% + 수능 25% + 출결 5%</b>. 운문창작·산문창작 중 택 1. <b>실기전형은 정시에서만</b> 선발',
+      '<b>동국대</b> — 학생부 30% + <b>실기 70%</b>(350점). 운문·산문 <b>120분</b>, 수시 실기 23명',
+      '<b>명지대</b> — 운문: 주어진 제목에 맞는 시(시조) 1편 + <b>창작 해설</b>',
+      '<b>추계예대</b> 수상실적특기자 — 서류 100%. 인정 문예대회 수상 실적 필요'
+    ]
+  },
+  {
+    t:'정시 수능', meta:'마지막 관문',
+    p:'2028학년도 수능은 선택과목이 없는 통합형(통합사회·통합과학)으로 처음 치러진다. 전례가 없어 난이도와 표준점수 분포를 예측할 수 없다는 점이 이 전형 최대의 불확실성이다.',
+    li:[
+      '<b>상명대</b> — 수능 100%',
+      '<b>서울과기대</b> 인문 — 국어 35% + 수학 25% + 영어 20% + 사회 15% + 과학 5%. <span class="unk">단 문예창작학과는 2028 정시 정원내 배정이 0명이라 이 식으로 들어갈 자리가 없다</span>',
+      '<b>추계예대</b> 문예창작 — 수능 40% + 실기 60%. 수능은 국어 60% + 영어 40% (한국사 응시필수·성적 미반영)',
+      '<b>숭실대</b> 문예창작 — 수능 30% + 실기 70%',
+      '<b>단국대</b> — 문예창작 실기전형이 정시에만 있어 정시가 주 경로'
+    ]
+  },
+  {
+    t:'논술', meta:'문예창작에는 실제로 배정돼 있다',
+    p:'이 절은 2026-08-31 재확인으로 결론이 바뀐 곳이다. <b>문예창작 모집단위 두 곳에는 논술이 학과 단위로 직접 배정돼 있다</b> — 한신대 문예창작학 6명, 동국대 국어국문·문예창작학부 5명. 실기가 부담스러운 학생에게는 이쪽이 현실적인 우회로다. 반대로 <b>문헌정보 모집단위에서는 학과 배정 논술을 하나도 찾지 못했다</b>.',
+    li:[
+      '<b>한신대</b> 문예창작학 — <b>논술 100%</b>(학생부 미반영), 수능최저 없음, <b>6명</b> <span class="b new">2028 변경</span>. 2026학년도는 논술 80% + 학생부 20%였다',
+      '<b>동국대</b> 국어국문·문예창작학부 — 논술 70%(350점) + 학생부 30%, <b>5명</b>. 수능최저 <b>2개영역 등급합 5</b>(한국사 4등급) — 이 표에서 가장 빡빡한 최저다',
+      '<b>한성대</b> 크리에이티브인문학부 — <b>논술 80% + 학생부교과 20%</b>, 수능최저 없음. 주간 9명 <span class="b new">2026-08-31 확정</span>',
+      '<b>숭실대</b> — 논술 90% + 학생부교과 10%, 수능최저 2개영역 등급합 6 이내 (대학 전체 240명). 문예창작전공 배정은 <span class="unk">미확인</span>',
+      '<b>경기대</b> 자유전공학부 — 논술 90% + 교과 10%, 수능최저 없음, 수원 185명. <b>문헌정보학과로 가는 유일한 논술 경로</b>이고 학과 직접 배정이 아니라 학부 우회다',
+      '<span class="unk">문헌정보 모집단위 직접 배정: 대진대·중부대·충남대·전남대는 원문에 미시행으로 명시. 상명대·경기대·인천대·명지대는 학과 단위 배정 여부 미확인</span>'
+    ]
+  },
+  {
+    t:'학부 통합모집', meta:'전공진입이 관문',
+    p:'학과가 아니라 학부로 뽑고 2학년에 전공을 배정하는 구조다. 진입 정원이 제한되면 입학 후 다시 경쟁해야 하므로, 지원 전에 배정 방식을 반드시 확인해야 한다.',
+    li:[
+      '<b>동국대</b> 국어국문·문예창작학부 — 문예창작 단독 모집이 아니다. 전공진입 조건 <span class="unk">미확인</span>',
+      '<b>한경국립대</b> 인문융합공공인재학부 — 문예창작미디어콘텐츠홍보전공이 행정학·법경영 등과 같은 학부에 소속. 전공진입 조건 <span class="unk">미확인</span>',
+      '<b>경기대</b> 자유전공학부 239명 — 논술 90% + 교과 10%, 수능최저 없음. 원문에 <b>문헌정보학과 선택 가능</b>, 전공 선택 후 재변경까지 허용',
+      '<b>한신대</b> 자유전공학부 120명 — 전공 100% 자율 선택. <b>문예창작학 포함</b>. 논술 40명은 논술 100%',
+      '<b>인천대</b> 자유전공학부(인문) — 2학년 진입 시 "계열·성적·정원에 관계 없이" 선택. <b>문헌정보학과 포함</b>. 2028 자기추천(서류형) 신설 30명',
+      '<b>협성대</b> 자율전공학부 1유형 100명(<b>수시 50 + 정시 50</b>) — 3개 학과 외 전 학과 지원 가능, <b>문예창작학과 포함</b>. 수시 50은 교과성적우수자 30 · 융합인재Ⅰ 20 두 전형뿐이고, 대학 전체가 수능최저 미적용',
+      '<span class="unk">✗ 단국대 인문계열광역·인하대 자유전공융합학부·국민대 인문기술융합학부는 국어국문만 포함하고 문헌정보·문예창작이 없다 — 후보에서 제외했다</span>'
+    ]
+  }
+];
+
+/* ---------- 과거 3년 입결 (9등급제 원본, 환산하지 않음) ----------
+   전부 각 대학 입학처에서 직접 내려받은 공시 자료. 확인일 2026-08-28.
+   대학마다 공표하는 통계 종류가 다르다 — 없는 항목은 만들지 않았다. */
+/* ---------- 어디가(대입정보포털) 2026학년도 입시결과 ----------
+   www.adiga.kr 전형정보 > 대학별 전형 상세에서 직접 조회한 값이다(2026-09-02).
+   수시 학생부위주 전형의 최종등록자 교과등급 50%/70%컷이며 9등급제 원본이다.
+   정시 행은 어디가가 컷을 공개하지 않는다 — 경쟁률·모집인원만 온다.
+   rank 는 이 표 안에서만 유효한 상대 순위다. 대학 서열이 아니다. */
+const ADIGA = {
+  '동국대학교|국어국문·문예창작학부': {rank:1, cut:1.1, by:'학생부교과(학교장추천인재)', n:2,
+    rows:[{t:'학생부종합(Do Dream)',w:'수시 23.38',q:'8',p50:'2.45',p70:'2.15'}, {t:'학생부교과(학교장추천인재)',w:'수시 8.6',q:'5',p50:'1',p70:'1.1'}, {t:'수능(나군(일반))',w:'정시(나) 5.75',q:'12',p50:null,p70:null}, {t:'수능(나군(농어촌학생))',w:'정시(나) 6.5',q:'2',p50:null,p70:null}, {t:'수능(나군(기초생활수급자및차상위계층))',w:'정시(나) 7',q:'2',p50:null,p70:null}]},
+  '성공회대학교|미디어콘텐츠융합학부 (신문방송·디지털콘텐츠·영상콘텐츠 통합모집)': {rank:2, cut:2.13, by:'학생부교과(교과성적)', n:2,
+    rows:[{t:'학생부종합(열린인재)',w:'수시 10.27',q:'33',p50:'3.89',p70:'4.13'}, {t:'학생부종합(대안학교출신자)',w:'수시 4',q:'5',p50:'2.97',p70:'3.07'}, {t:'학생부교과(교과성적)',w:'수시 8.45',q:'11',p50:'1.88',p70:'2.13'}, {t:'학생부교과(특성화고교 교과성적)',w:'수시 5.5',q:'4',p50:'2.36',p70:'3.17'}, {t:'수능(일반학생)',w:'정시(나) 6.27',q:'11',p50:null,p70:null}]},
+  '숭실대학교|정보사회학과': {rank:3, cut:2.28, by:'학생부교과(교과우수자전형)', n:2,
+    rows:[{t:'학생부종합(SSU미래인재전형)(면접형)',w:'수시 25.83',q:'4',p50:'2.56',p70:'2.59'}, {t:'학생부종합(기회균형전형)',w:'수시 17',q:'1',p50:'2.76',p70:'2.76'}, {t:'학생부종합(특수교육대상자전형)',w:'수시 6',q:'1',p50:'3.52',p70:'3.52'}, {t:'학생부교과(교과우수자전형)',w:'수시 7.25',q:'4',p50:'2.28',p70:'2.28'}, {t:'수능(일반전형)',w:'정시(가) 4.8',q:'10',p50:null,p70:null}]},
+  '한성대학교|크리에이티브인문학부 (주간)': {rank:4, cut:2.44, by:'학생부교과(교과우수-수능 최저학력기준 적용)', n:4, note:'주·야 합산',
+    rows:[{t:'학생부교과(교과우수-수능 최저학력기준 적용)',w:'수시 7.35',q:'12',p50:'2.4',p70:'2.44'}, {t:'학생부교과(지역균형-수능 최저학력기준 미적용)',w:'수시 12.1',q:'10',p50:'2.87',p70:'2.88'}, {t:'학생부종합(고른기회전형)',w:'수시 8.25',q:'12',p50:'3.68',p70:'3.74'}, {t:'학생부교과(농어촌학생 전형)',w:'수시 5.4',q:'10',p50:'3.36',p70:'3.51'}, {t:'학생부종합(한성인재전형)',w:'수시 8.74',q:'35',p50:'3.39',p70:'3.55'}, {t:'수능(일반학생전형)',w:'정시(가) 5.81',q:'41',p50:null,p70:null}, {t:'학생부교과(교과우수-수능 최저학력기준 적용)',w:'수시 7.07',q:'15',p50:'2.92',p70:'2.94'}, {t:'학생부교과(지역균형-수능 최저학력기준 미적용)',w:'수시 4.4',q:'10',p50:'3.28',p70:'3.38'}, {t:'학생부교과(농어촌학생 전형)',w:'수시 4',q:'4',p50:'3.59',p70:'3.66'}, {t:'학생부종합(한성인재전형)',w:'수시 9.44',q:'9',p50:'3.79',p70:'3.82'}, {t:'수능(일반학생전형)',w:'정시(다) 6.06',q:'33',p50:null,p70:null}]},
+  '대진대학교|문예콘텐츠창작학과': {rank:5, cut:2.48, by:'학생부교과(학교장추천전형)', n:3,
+    rows:[{t:'학생부교과(학생부우수자전형)',w:'수시 14.8',q:'5',p50:'2.94',p70:'2.99'}, {t:'학생부교과(고른기회전형)',w:'수시 4.33',q:'3',p50:'2.98',p70:'3.61'}, {t:'학생부교과(학교장추천전형)',w:'수시 17.6',q:'4',p50:'2.46',p70:'2.48'}, {t:'학생부교과(농어촌학생전형)',w:'수시 5',q:'2',p50:'3.73',p70:'3.76'}, {t:'학생부종합(윈윈대진전형)',w:'수시 8.38',q:'10',p50:'4.69',p70:'4.94'}, {t:'수능(일반학생전형)',w:'정시(다) 10.21',q:'14',p50:null,p70:null}]},
+  '대진대학교|문헌정보학과 [교직]': {rank:6, cut:2.67, by:'학생부교과(학교장추천전형)', n:3,
+    rows:[{t:'학생부교과(학생부우수자전형)',w:'수시 6.8',q:'5',p50:'2.92',p70:'2.93'}, {t:'학생부교과(고른기회전형)',w:'수시 4.5',q:'4',p50:'3.2',p70:'3.26'}, {t:'학생부교과(학교장추천전형)',w:'수시 3.8',q:'5',p50:'2.6',p70:'2.67'}, {t:'학생부교과(농어촌학생전형)',w:'수시 5.5',q:'2',p50:'3.57',p70:'3.6'}, {t:'학생부종합(윈윈대진전형)',w:'수시 5.3',q:'10',p50:'4.8',p70:'4.98'}, {t:'수능(일반학생전형)',w:'정시(나) 6.6',q:'15',p50:null,p70:null}]},
+  '인천대학교|데이터과학과': {rank:7, cut:2.7, by:'학생부교과(지역균형전형)', n:3,
+    rows:[{t:'학생부교과(교과성적우수자전형)',w:'수시 9.67',q:'3',p50:'2.83',p70:'2.83'}, {t:'학생부교과(지역균형전형)',w:'수시 12.67',q:'3',p50:'2.7',p70:'2.7'}, {t:'학생부종합(자기추천전형)',w:'수시 7.33',q:'6',p50:'3.35',p70:'3.36'}, {t:'학생부종합(기회균형전형)',w:'수시 16',q:'1',p50:'4.95',p70:'4.95'}, {t:'수능(일반학생전형)',w:'정시(가) 5.8',q:'5',p50:null,p70:null}, {t:'수능(기회균형전형)',w:'정시(가) 7',q:'1',p50:null,p70:null}, {t:'수능(농어촌학생전형)',w:'정시(가) 6',q:'1',p50:null,p70:null}, {t:'수능(특성화고출신자전형)',w:'정시(가) 5',q:'1',p50:null,p70:null}]},
+  '중부대학교|문헌정보학전공': {rank:7, cut:2.7, by:'학생부교과(학생부우수자)', n:1,
+    rows:[{t:'학생부교과(학생부우수자)',w:'수시 6.45',q:'20',p50:'2.5',p70:'2.7'}]},
+  '명지대학교|문헌정보학전공': {rank:8, cut:2.72, by:'학생부교과(교과면접전형)', n:4,
+    rows:[{t:'학생부교과(학교장추천전형)',w:'수시 4.67',q:'3',p50:'2.32',p70:'3.23'}, {t:'학생부교과(교과면접전형)',w:'수시 14.6',q:'5',p50:'2.62',p70:'2.72'}, {t:'학생부종합(명지인재면접전형)',w:'수시 19',q:'6',p50:'3.31',p70:'3.48'}, {t:'학생부종합(명지인재서류전형)',w:'수시 18',q:'3',p50:'2.97',p70:'3.17'}, {t:'학생부종합(농어촌학생전형)',w:'수시 8.5',q:'2',p50:'2.99',p70:'3.48'}]},
+  '전남대학교|문헌정보학과': {rank:9, cut:2.73, by:'학생부교과(일반)', n:2,
+    rows:[{t:'학생부교과(일반)',w:'수시 11.2',q:'5',p50:'2.73',p70:'2.73'}, {t:'학생부교과(지역인재)',w:'수시 6.5',q:'4',p50:'3.01',p70:'3.01'}, {t:'학생부종합(고교생활우수자Ⅰ)',w:'수시 6.67',q:'6',p50:'3.43',p70:'3.51'}, {t:'수능(일반)',w:'정시(나) 8.67',q:'6',p50:null,p70:null}]},
+  '상명대학교|인문콘텐츠학부 문헌정보학전공': {rank:10, cut:2.76, by:'학생부교과(고교추천전형)', n:2,
+    rows:[{t:'학생부교과(고교추천전형)',w:'수시 13.75',q:'4',p50:'2.76',p70:'2.76'}, {t:'학생부종합(상명인재전형)',w:'수시 20.25',q:'4',p50:'3.14',p70:'3.29'}, {t:'학생부종합(기회균형전형)',w:'수시 10.5',q:'2',p50:'2.64',p70:'2.64'}, {t:'논술(논술전형)',w:'수시 48',q:'3',p50:'3.96',p70:'4.23'}, {t:'수능(수능전형)',w:'정시(나) 6.13',q:'8',p50:null,p70:null}, {t:'수능(농어촌학생전형)',w:'정시(나) 0',q:'52',p50:null,p70:null}, {t:'수능(특성화고교졸업자전형)',w:'정시(나) 2',q:'20',p50:null,p70:null}]},
+  '인천대학교|자유전공학부 (인문)': {rank:11, cut:2.87, by:'학생부교과(지역균형전형)', n:2,
+    rows:[{t:'학생부교과(교과성적우수자전형)',w:'수시 8.51',q:'35',p50:'2.93',p70:'2.98'}, {t:'학생부교과(지역균형전형)',w:'수시 8.73',q:'26',p50:'2.76',p70:'2.87'}, {t:'수능(일반학생전형)',w:'정시(나) 5.89',q:'26',p50:null,p70:null}]},
+  '성공회대학교|인문융합콘텐츠학부': {rank:12, cut:2.88, by:'학생부교과(교과성적)', n:2,
+    rows:[{t:'학생부종합(열린인재)',w:'수시 5.44',q:'36',p50:'4.3',p70:'4.5'}, {t:'학생부교과(교과성적)',w:'수시 5.79',q:'14',p50:'2.63',p70:'2.88'}, {t:'수능(일반학생)',w:'정시(나) 5.5',q:'8',p50:null,p70:null}]},
+  '경기대학교|문헌정보학과': {rank:13, cut:2.96, by:'학생부교과(교과성적우수자전형)', n:3,
+    rows:[{t:'학생부교과(교과성적우수자전형)',w:'수시 18',q:'2',p50:'2.96',p70:'2.96'}, {t:'학생부교과(학교장추천전형)',w:'수시 6',q:'4',p50:'3.02',p70:'3.02'}, {t:'학생부교과(농어촌학생전형)',w:'수시 7.5',q:'2',p50:'2.7',p70:'2.7'}, {t:'학생부종합(KGU학생부종합전형)',w:'수시 12.1',q:'10',p50:'3.5',p70:'3.62'}, {t:'학생부종합(기회균형선발전형)',w:'수시 11.33',q:'3',p50:'3.45',p70:'3.57'}, {t:'수능(일반학생Ⅰ전형)',w:'정시(다) 14.6',q:'5',p50:null,p70:null}]},
+  '인천대학교|문헌정보학과': {rank:14, cut:3.17, by:'학생부교과(지역균형전형)', n:3,
+    rows:[{t:'학생부교과(교과성적우수자전형)',w:'수시 13.67',q:'3',p50:'3.24',p70:'3.24'}, {t:'학생부교과(지역균형전형)',w:'수시 8.33',q:'3',p50:'3.17',p70:'3.17'}, {t:'학생부종합(자기추천전형)',w:'수시 12.1',q:'10',p50:'3.36',p70:'3.5'}, {t:'학생부종합(기회균형전형)',w:'수시 10',q:'2',p50:'3.36',p70:'3.36'}, {t:'수능(일반학생전형)',w:'정시(가) 5.38',q:'7',p50:null,p70:null}, {t:'수능(기회균형전형)',w:'정시(가) 6',q:'1',p50:null,p70:null}, {t:'수능(농어촌학생전형)',w:'정시(가) 5',q:'1',p50:null,p70:null}]},
+  '충남대학교|문헌정보학과': {rank:15, cut:3.19, by:'학생부종합Ⅰ[면접(300)]', n:3,
+    rows:[{t:'학생부교과(일반전형)',w:'수시 6.5',q:'6',p50:'3.23',p70:'3.36'}, {t:'학생부교과(지역인재전형)',w:'수시 5.75',q:'4',p50:'2.55',p70:'2.58'}, {t:'학생부종합Ⅰ[면접(300)]',w:'수시 11.67',q:'3',p50:'2.97',p70:'3.19'}, {t:'학생부종합Ⅰ[서류]',w:'수시 16',q:'2',p50:'3.17',p70:'3.25'}, {t:'수능위주(일반전형)',w:'정시(나) 0',q:'3',p50:null,p70:null}]},
+  '협성대학교|문예창작학과': {rank:16, cut:3.22, by:'학생부교과(교과성적우수자)', n:3,
+    rows:[{t:'학생부교과(교과성적우수자)',w:'수시 11.43',q:'3',p50:'3.15',p70:'3.22'}, {t:'학생부교과(미래창의인재)',w:'수시 6',q:'3',p50:'4.28',p70:'4.28'}, {t:'학생부교과(기회균형)',w:'수시 7',q:'2',p50:'3.53',p70:'3.53'}, {t:'학생부교과(사회배려자)',w:'수시 6',q:'2',p50:'3',p70:'3'}, {t:'학생부종합(융합인재 Ⅱ 면접)',w:'수시 7.4',q:'6',p50:'4.36',p70:'4.5'}, {t:'학생부교과(기초생활수급자, 차상위계층, 한부모가족)',w:'수시 12',q:'1',p50:'3.66',p70:'3.66'}, {t:'수능(일반)',w:'정시(다) 7.6',q:'4',p50:null,p70:null}]},
+  '서울과학기술대학교|문예창작학과': {rank:17, cut:3.52, by:'학생부종합(학교생활우수자전형)', n:1,
+    rows:[{t:'학생부종합(학교생활우수자전형)',w:'수시 10.69',q:'31',p50:'3.37',p70:'3.52'}]},
+  '단국대학교|문예창작과': {rank:18, cut:3.62, by:'학생부종합(DKU인재-면접형)', n:1,
+    rows:[{t:'학생부종합(DKU인재-면접형)',w:'수시 25.33',q:'15',p50:'3.48',p70:'3.62'}, {t:'실기/실적(일반학생)',w:'정시(나) 16.66',q:'35',p50:null,p70:null}]},
+  '한경국립대학교|인문융합공공인재학부 문예창작미디어콘텐츠홍보전공': {rank:19, cut:3.92, by:'학생부교과(일반전형 안성)', n:2,
+    rows:[{t:'학생부교과(일반전형 안성)',w:'수시 12.18',q:'6',p50:'3.72',p70:'3.92'}, {t:'학생부종합(잠재력우수자)',w:'수시 22.17',q:'6',p50:'3.88',p70:'4.37'}]},
+  '명지대학교|문예창작학과': {rank:20, cut:4.3, by:'학생부종합(명지인재면접전형)', n:1,
+    rows:[{t:'학생부종합(명지인재면접전형)',w:'수시 31.08',q:'12',p50:'3.65',p70:'4.3'}, {t:'수능(실기전형)',w:'정시(나) 18.63',q:'8',p50:null,p70:null}]},
+  '한신대학교|문예창작학': {rank:21, cut:4.34, by:'학생부교과(참인재)', n:1,
+    rows:[{t:'논술(논술)',w:'수시 4',q:'6',p50:'3.84',p70:'4.74'}, {t:'학생부교과(참인재)',w:'수시 14.4',q:'10',p50:'4.38',p70:'4.34'}]},
+  '한신대학교|공공인재빅데이터융합학': {rank:22, cut:5.05, by:'학생부교과(참인재)', n:1,
+    rows:[{t:'논술(논술)',w:'수시 4',q:'7',p50:'5.09',p70:'4.59'}, {t:'학생부교과(참인재)',w:'수시 3.78',q:'9',p50:'5.49',p70:'5.05'}]},
+  '경기대학교|자유전공학부 (수원·서울)': {rank:null, cut:null, by:null, n:0,
+    rows:[{t:'수능(일반학생Ⅱ전형)',w:'정시(나) 0',q:'20',p50:null,p70:null}]},
+  '숭실대학교|예술창작학부 문예창작전공': {rank:null, cut:null, by:null, n:0,
+    rows:[{t:'실기/실적(일반전형_문예창작)',w:'정시(다) 39.92',q:'25',p50:null,p70:null}]},
+  '추계예술대학교|문예창작과': {rank:null, cut:null, by:null, n:0,
+    rows:[{t:'실기/실적(일반학생전형)',w:'정시(가) 35.5',q:'16',p50:null,p70:null}, {t:'실기/실적(기회균형전형)(정원외)',w:'정시(가) 14',q:'1',p50:null,p70:null}, {t:'실기/실적(기회균형전형)(정원외)',w:'정시(가) 1',q:'2',p50:null,p70:null}]},
+  '한신대학교|자유전공학부': {rank:null, cut:null, by:null, n:0, absent:'2028학년도 신설 — 어디가 2027 학과 목록에 아직 없다', rows:[]},
+  '협성대학교|자율전공학부 (1유형)': {rank:null, cut:null, by:null, n:0, absent:'어디가 2027 학과 목록에 협성대 자율전공학부(1유형)이 없다', rows:[]},
+};
+
+const PAST = {
+  '명지대학교|문헌정보학전공': {
+    stat:'70%컷', src:'A',
+    src_note:'명지대 입학처 수시 입시결과 PDF (2026: file_no=10446 / 2025: 9563 / 2024: 8661), 대학 입학처 직접 다운로드',
+    caveat:'명지대는 <b>70%컷만</b> 공표하고 50%컷·충원율(%)은 공표하지 않는다(대신 최종 예비순위를 공표). 50%컷·충원율은 <span class="unk">미확인</span>.',
+    rows:[
+      {y:2026, t:'학교장추천',    q:3, ap:14,  cr:4.67,  cut:3.23, avg:2.47},
+      {y:2026, t:'교과면접',      q:5, ap:73,  cr:14.60, cut:2.72, avg:2.62},
+      {y:2026, t:'명지인재면접',  q:6, ap:114, cr:19.00, cut:3.48, avg:3.36},
+      {y:2026, t:'명지인재서류',  q:3, ap:54,  cr:18.00, cut:3.17, avg:3.04},
+      {y:2025, t:'학교장추천',    q:3, ap:32,  cr:10.67, cut:2.17, avg:2.31},
+      {y:2025, t:'교과면접',      q:5, ap:34,  cr:6.80,  cut:2.87, avg:2.57},
+      {y:2025, t:'명지인재면접',  q:6, ap:85,  cr:14.17, cut:3.69, avg:3.74},
+      {y:2025, t:'명지인재서류',  q:3, ap:50,  cr:16.67, cut:3.73, avg:3.37},
+      {y:2024, t:'학교장추천',    q:4, ap:60,  cr:15.00, cut:2.47, avg:2.29},
+      {y:2024, t:'교과면접',      q:5, ap:60,  cr:12.00, cut:2.83, avg:2.52},
+      {y:2024, t:'명지인재면접',  q:6, ap:81,  cr:13.50, cut:3.69, avg:3.41},
+      {y:2024, t:'명지인재서류',  q:5, ap:52,  cr:10.40, cut:4.23, avg:3.33}
+    ]
+  },
+  '전남대학교|문헌정보학과': {
+    stat:'70%컷', src:'A',
+    src_note:'전남대 입학처 <a href="https://admission.jnu.ac.kr/Susi/ImplPlan" target="_blank" rel="noopener">입시자료실</a> 게시 입시결과 xlsx (학년도별 파일), 대학 입학처 직접 다운로드',
+    caveat:'전남대는 50%컷과 70%컷을 함께 공표한다. 다만 <b>모집인원이 4~6명인 소규모 전형</b>이라 연도별 변동폭이 크다. 논술전형은 <b>운영하지 않는다</b>.',
+    rows:[
+      {y:2026, t:'학생부교과(일반)',        q:5, ap:56, cr:11.20, cut50:2.725, cut:2.725},
+      {y:2026, t:'학생부교과(지역인재)',    q:4, ap:null, cr:6.50,  cut50:3.01,  cut:3.01},
+      {y:2026, t:'학생부종합(고교생활우수자Ⅰ)', q:6, ap:40, cr:6.67, cut50:3.434, cut:3.505},
+      {y:2025, t:'학생부교과(일반)',        q:5, ap:51, cr:10.20, cut50:2.859, cut:3.417},
+      {y:2025, t:'학생부교과(지역인재)',    q:4, ap:null, cr:8.00,  cut50:2.78,  cut:2.78},
+      {y:2025, t:'학생부종합(고교생활우수자Ⅰ)', q:6, ap:55, cr:9.17, cut50:2.911, cut:3.143},
+      {y:2024, t:'학생부교과(일반)',        q:5, ap:37, cr:7.40,  cut50:2.55,  cut:3.40},
+      {y:2024, t:'학생부교과(지역인재)',    q:4, ap:null, cr:9.75,  cut50:2.83,  cut:2.83},
+      {y:2024, t:'학생부종합(고교생활우수자Ⅰ)', q:6, ap:35, cr:5.83, cut50:3.29, cut:3.54}
+    ],
+    jeongsi:'정시 나군 일반(수능환산 1000점 만점 70%컷) — 2026: 모집 6 · 지원 52 · 경쟁 8.67:1 · 844.22점 / 2025: 모집 6 · 지원 41 · 경쟁 6.83:1 · 859.53점 / 2024: 모집 7 · 지원 24 · 경쟁 3.43:1 · 823.45점'
+  },
+  '충남대학교|문헌정보학과': {
+    stat:'70%컷', src:'A',
+    src_note:'충남대 입학처 "결과분석자료" (<a href="https://ipsi.cnu.ac.kr/_prog/_board/?mode=V&amp;no=2025630&amp;code=recsroom_01&amp;site_dvs_cd=uadm&amp;menu_dvs_cd=0105" target="_blank" rel="noopener">2026학년도</a> / <a href="https://ipsi.cnu.ac.kr/_prog/_board/?mode=V&amp;no=2021596&amp;code=recsroom_01&amp;site_dvs_cd=uadm&amp;menu_dvs_cd=0105" target="_blank" rel="noopener">2025학년도</a>), 대학 입학처 직접 다운로드',
+    caveat:'충남대는 <b>50%컷을 공시하지 않고 70%컷만</b> 제공한다(대학 원문 명시 사양). 등급은 전학년 전교과 100% 반영 기준이다. <b>이전 판에서 미확인이던 2025학년도 입결을 확보했다</b> — 공시 PDF의 표가 JPEG 이미지여서 300dpi로 렌더링해 원문을 직접 판독했다. 2026 기회균형Ⅰ은 등록자가 2명 미만이라 대학이 <span class="unk">공개하지 않는다</span>. 논술전형은 <b>운영하지 않는다</b>.',
+    rows:[
+      {y:2026, t:'학생부교과(일반)',     q:6, ap:39, cr:6.50,  cut:3.36, avg:3.16, fill:'183%'},
+      {y:2026, t:'학생부교과(지역인재)', q:4, ap:null, cr:5.75,  cut:2.58, avg:2.52},
+      {y:2026, t:'학생부종합Ⅰ 면접',     q:3, ap:null, cr:11.67, cut:3.19, avg:3.12},
+      {y:2026, t:'학생부종합Ⅰ 서류',     q:2, ap:null, cr:16.00, cut:3.25, avg:3.17},
+      {y:2025, t:'학생부교과(일반)',     q:6, ap:null, cr:9.83,  cut:2.58, avg:2.53},
+      {y:2025, t:'학생부교과(지역인재)', q:4, ap:null, cr:9.50,  cut:2.75, avg:2.64},
+      {y:2025, t:'학생부종합Ⅰ 면접',     q:3, ap:null, cr:20.00, cut:3.00, avg:2.97},
+      {y:2025, t:'학생부종합Ⅰ 서류',     q:2, ap:null, cr:12.00, cut:3.34, avg:3.25},
+      {y:2024, t:'학생부교과(일반)',     q:8, ap:74, cr:9.25,  cut:2.59, avg:2.57, fill:'125%'},
+      {y:2024, t:'학생부교과(지역인재)', q:4, ap:25, cr:6.25,  cut:3.02, avg:2.93, fill:'75%'},
+      {y:2024, t:'학생부종합Ⅰ 면접',     q:4, ap:39, cr:9.75,  cut:3.58, avg:3.48, fill:'175%'},
+      {y:2024, t:'학생부종합Ⅰ 서류',     q:2, ap:20, cr:10.00, cut:2.99, avg:2.92, fill:'50%'}
+    ],
+    jeongsi:'정시 나군 일반(수능환산 300점 만점 70%컷) — 2026: 모집 4 · 지원 33 · 경쟁 8.25:1 · 충원율 25% · 175.45점 / 2024: 모집 6 · 지원 35 · 경쟁 5.83:1 · 충원율 83.3% · 173.838점'
+  },
+  '한신대학교|문예창작학': {
+    stat:'등록자 평균', src:'A',
+    src_note:'한신대 입학처 ent.hs.ac.kr 입시결과 게시물 (2026: bn=22846 / 2025·2024: bn=22881 부록), 직접 다운로드',
+    caveat:'⚑ 한신대는 <b>50%컷·70%컷 통계 자체를 공시하지 않는다.</b> 최고·평균·최저 등급과 최종예비순위만 공표하므로, 아래 수치는 <b>등록자 평균등급</b>과 <b>합격 최저등급</b>이다. 다른 대학의 70%컷과 같은 기준이 아니므로 나란히 비교하면 안 된다.',
+    rows:[
+      {y:2026, t:'논술전형',   cr:4.00,  avg:3.90, low:4.74},
+      {y:2026, t:'참인재전형', cr:14.40, avg:3.82, low:5.26},
+      {y:2025, t:'논술전형',   cr:3.90,  avg:4.77, low:7.00},
+      {y:2025, t:'참인재전형', cr:19.00, avg:3.21, low:4.65},
+      {y:2024, t:'논술전형',   cr:4.60,  avg:5.16, low:6.19},
+      {y:2024, t:'참인재전형', cr:26.33, avg:3.57, low:4.35}
+    ]
+  }
+};
+
+/* 5등급제 시나리오 → 9등급제 대표 등급.
+   누적 백분위를 맞춘 산술적 대응일 뿐이다. 근거는 아래 NOTE 문자열에 그대로 노출한다. */
+const CONV = {
+  '2':   {g9:3.0, band:'2.4~3.6', why:'5등급제 2등급은 누적 상위 10~34% 구간이다. 구간 중앙(22%)을 9등급제 누적표에 대응시키면 3등급(누적 23%) 근처가 된다.'},
+  '2.5': {g9:3.8, band:'3.4~4.3', why:'5등급제 평균 2.5는 2등급 하단~3등급 상단, 누적 약 34~50%다. 9등급제로는 4등급(누적 40%) 근처다.'},
+  '3':   {g9:4.5, band:'3.6~5.5', why:'5등급제 3등급은 누적 34~66% 구간이다. 구간 중앙(50%)은 9등급제 4등급(40%)과 5등급(60%) 사이다.'}
+};
+
+/* 판정: 확보된 과거 컷 중 가장 완화된 값(= 가장 들어가기 쉬운 전형)과 환산 등급을 비교한다.
+   입결이 없으면 판정하지 않는다. */
+function verdict(u, g){
+  const P = PAST[u.name + '|' + u.unit];
+  if(!P) return {k:'X', label:'판정불가', why:'이 모집단위의 과거 입결을 확보하지 못했다. 추정치로 판정하지 않는다.'};
+  const my = CONV[g].g9;
+  const vals = P.rows.map(r => r.cut != null ? r.cut : r.avg).filter(v => v != null);
+  if(!vals.length) return {k:'X', label:'판정불가', why:'입결 자료에 비교 가능한 등급 수치가 없다.'};
+  const best = Math.max(...vals);
+  const bestRow = P.rows.find(r => (r.cut != null ? r.cut : r.avg) === best);
+  const d = best - my;
+  const k = d >= 0.5 ? 'L' : (d <= -0.5 ? 'H' : 'M');
+  const label = {L:'하향', M:'적정', H:'상향'}[k];
+  const stat = P.stat;
+  return {k, label, best, d,
+    why:`가장 완화된 과거 기준은 <b>${bestRow.y}학년도 ${bestRow.t} ${stat} ${best.toFixed(2)}등급</b>(9등급제 원본)이다. `
+      + `5등급제 ${g}등급을 9등급제로 환산하면 약 <b>${my.toFixed(1)}등급</b>(${CONV[g].band})이므로 차이는 `
+      + `<b>${d > 0 ? '+' : ''}${d.toFixed(2)}등급</b> — ${d>0?'환산 등급이 과거 기준보다 우수':'환산 등급이 과거 기준에 미달'}하다. `
+      + `${CONV[g].why} <span class="unk">단 5등급제에서 대학이 컷을 어떻게 낼지는 알 수 없다. 이 판정은 확정이 아니다.</span>`
+      + (P.caveat ? ` ${P.caveat}` : '')};
+}
+
+/* ---------- 상태 ---------- */
+const ALLTYPES = ['교과','종합','논술','실기','정시'];
+const state = { grade:'2', src:'A', groups:new Set(['A','B','C','D']), types:new Set(ALLTYPES),
+                sort:{k:'rank', d:1} };
+/* '해당 없음'·'미시행' 으로만 적힌 행은 그 대학이 그 전형을 운영하지 않는다는 뜻이라 필터에서 뺀다 */
+const runsType = a => !/해당 없음|미시행|배정 없음/.test(a.n) && parseMix(a.r).kind !== 'none';
+const isMix    = a => parseMix(a.r).kind === 'mix';
+/* 필터는 표에 실제로 행이 남는 전형만 센다 */
+const hasType  = u => u.adm.some(a => state.types.has(a.t) && runsType(a) && isMix(a));
+
+const SENSLABEL = {hi:'높음', mid:'중간', lo:'낮음'};
+
+function mask(v, s){
+  /* 출처 필터: 기준 미달 수치는 미확인으로 마스킹 */
+  const allow = {A:['A'], AB:['A','B'], ABC:['A','B','C']}[state.src];
+  if(v === U || v === '—' || v == null) return v;
+  return allow.includes(s) ? v : U;
+}
+function cell(v){
+  if(v === U || v == null) return '<span class="unk">미확인</span>';
+  return v;
+}
+/* 전형명 끝의 "(…N명)"에서 인원만 떼어 별도 열로 보낸다. 괄호에 군 표기가 같이 있으면 그것은 전형명에 남긴다 */
+function splitQuota(n){
+  if(typeof n !== 'string') return {n, q:null};
+  const m = /^(.*?)\s*\(([^()]*?)\s*(\d+)\uba85\s*\)\s*$/.exec(n);
+  if(!m) return {n, q:null};
+  const rest = m[2].trim();
+  return {n: m[1] + (rest ? ` (${rest})` : ''), q: m[3]};
+}
+
+/* ---------- 반영비율 문장 → 요소별 비중 ----------
+   표의 숫자는 원문 문장에서 그때그때 파싱한다. 별도 수치를 손으로 옮겨 적지 않으므로
+   표와 원문이 어긋날 수 없다. 파싱하지 못한 문장은 원문 그대로 보여준다. */
+const MIXCOLS = [['gy','교과'],['sr','서류'],['mj','면접'],['ns','논술'],['sg','실기'],['sn','수능'],['gt','출결']];
+const MIXKEY = [
+  ['sg', /실기/], ['ns', /논술/], ['sr', /서류/], ['mj', /면접/],
+  ['sn', /수능|수학능력/], ['gt', /출결|비교과/], ['gy', /교과|학생부|생활기록부/]
+];
+const MIXSUBJ = /국어|수학|영어|탐구|사탐|과탐|사회|과학|한국사/;
+const MIXUNK  = /미확인|수치 없음|적용 여부/;
+const MIXNONE = /해당 없음|배정 없음|미시행|전형 목록에 없음|없다|0명/;
+
+function parseMix(raw){
+  if(raw == null || raw === U) return {kind:'unknown'};
+  /* 괄호 부기(다른 전형·다른 학년도 수치)는 이 전형의 비중이 아니므로 파싱에서 뺀다 */
+  let s = String(raw).replace(/<span[^>]*>.*?<\/span>/g, '').replace(/<[^>]+>/g, '').trim();
+  if(!s) return {kind:'desc'};
+  /* 천단위 콤마를 지운다 \u2014 아래 split(/[+\u00b7,]/) 가 '1,000점' 을 두 청크로 쪼개 비율을 잃는다 */
+  s = s.replace(/(\d),(?=\d)/g, '$1');
+  const pct = /\d+(\.\d+)?%/;
+  /* '\u2014' 뒤는 반영 방법 서술이라 비중 계산에서 잘라낸다 (앞부분에 비율이 있을 때만) */
+  const em = s.indexOf('\u2014');
+  if(em > 0 && pct.test(s.slice(0, em))) s = s.slice(0, em).trim();
+  /* 비율이 하나도 없는 문장만 '미확인'\u00b7'해당 없음'으로 가른다 \u2014 비율이 있으면 둘 다 아니다 */
+  if(!pct.test(s)) return MIXUNK.test(s) ? {kind:'unknown'}
+                        : MIXNONE.test(s) ? {kind:'none'} : {kind:'desc'};
+
+  const stage = s.includes('→');
+  function pick(seg, isStage2){
+    const out = {}; let unmapped = 0, subj = 0;
+    for(const chunk of seg.split(/[+·,]/)){
+      const m = chunk.match(/(\d+(?:\.\d+)?)\s*%/);
+      if(!m) continue;
+      const v = parseFloat(m[1]), label = chunk.slice(0, m.index);
+      if(isStage2 && /1단계/.test(label)){ out.__prev = v; continue; }
+      const hit = MIXKEY.find(([, re]) => re.test(label));
+      if(hit) out[hit[0]] = (out[hit[0]] || 0) + v;
+      else if(MIXSUBJ.test(label)) subj += v;
+      else unmapped++;
+    }
+    return {out, unmapped, subj};
+  }
+
+  if(!stage){
+    const {out, unmapped, subj} = pick(s, false);
+    /* 정시 배점이 과목별로만 적힌 경우 — 전형요소로는 수능 100% */
+    if(subj > 0 && !Object.keys(out).length) return {kind:'mix', v:{sn:100}};
+    if(unmapped || !Object.keys(out).length) return {kind:'desc'};
+    return {kind:'mix', v:out};
+  }
+
+  const parts = s.split('→');
+  /* 1단계 세그먼트의 '1단계'는 접두어일 뿐이다 — 2단계에서만 앞 단계 성적 참조로 읽는다 */
+  const A = pick(parts[0].replace(/1단계/g, ''), false), B = pick(parts[1], true);
+  /* 단계별에서도 못 읽은 라벨이 있으면 조용히 반쪽 비중을 내보내지 않는다 */
+  if(A.unmapped || B.unmapped) return {kind:'desc'};
+  const a = A.out, b = B.out;
+  const w = b.__prev; delete b.__prev;
+  const v = {};
+  if(w != null) for(const k in a) v[k] = +(a[k] * w / 100).toFixed(1);
+  for(const k in b) v[k] = (v[k] || 0) + b[k];
+  if(!Object.keys(v).length) return {kind:'desc'};
+  return {kind:'mix', v, stage:true};
+}
+
+/* 반영 비중 7열이 숫자로 보여주는 내용을 옆 열에 또 적지 않는다.
+   파서가 비중 계산에서 버린 것 \u2014 미확인 부기와 '\u2014' 뒤 서술 \u2014 만 특이사항으로 남긴다.
+   비중으로 환산하지 못한 원문은 그 자체가 유일한 정보이므로 통째로 남긴다 */
+function residual(raw){
+  if(raw == null || raw === U) return raw;
+  if(parseMix(raw).kind !== 'mix') return raw;
+  const keep = [];
+  const stripped = String(raw).replace(/<span[^>]*class="unk"[^>]*>([\s\S]*?)<\/span>/g,
+    (_, inner) => { keep.push(inner.trim()); return ''; });
+  const plain = stripped.replace(/<[^>]+>/g, '');
+  const em = plain.indexOf('\u2014');
+  if(em > 0 && /\d+(\.\d+)?%/.test(plain.slice(0, em))){
+    const tail = plain.slice(em + 1).trim();
+    if(tail) keep.push(tail);
+  }
+  return keep.length ? keep.join(' \u00b7 ') : null;
+}
+
+function mixCells(raw, s){
+  const v = mask(raw, s);
+  const p = parseMix(v);
+  if(p.kind !== 'mix'){
+    const body = p.kind === 'unknown' ? '<span class="unk">미확인</span>'
+      : p.kind === 'none' ? '<span class="z">해당 없음</span>'
+      : '<span class="z">전형요소 비중 없음</span>';
+    return `<td colspan="7" class="mx mxg mxend mxwide">${body}</td>`;
+  }
+  let marked = false;
+  return MIXCOLS.map(([k], i) => {
+    const cls = 'mx' + (i === 0 ? ' mxg' : '') + (i === 6 ? ' mxend' : '');
+    const n = p.v[k];
+    if(n == null) return `<td class="${cls}"><span class="z">·</span></td>`;
+    const dagger = (p.stage && !marked) ? (marked = true, '<span class="mxs">†</span>') : '';
+    return `<td class="${cls}"><b>${n}</b>${dagger}</td>`;
+  }).join('');
+}
+const MIXTH = MIXCOLS.map(([, l], i) =>
+  `<th class="mx${i === 0 ? ' mxg' : ''}${i === 6 ? ' mxend' : ''}">${l}</th>`).join('');
+/* 요약표 헤더만 요소별로 정렬할 수 있다 — 펼친 상세표는 그대로 둔다 */
+const MIXTH_MAIN = MIXCOLS.map(([k, l], i) =>
+  `<th class="mx sortable${i === 0 ? ' mxg' : ''}${i === 6 ? ' mxend' : ''}" data-sort="mx:${k}" title="\uc8fc\ub825 \uc804\ud615\uc758 ${l} \ubc18\uc601 \ube44\uc911\uc73c\ub85c \uc815\ub82c">${l}</th>`).join('');
+document.getElementById('mxHead').innerHTML = MIXTH_MAIN;
+
+/* 상세 카드용 입결 표 — 대학마다 공표 통계가 달라 열을 데이터에서 결정한다 */
+/* 어디가 공시 2026학년도 입시결과 \u2014 순위 산정의 근거를 그대로 펼쳐 보인다 */
+function adigaBlock(u){
+  const A = adiga(u);
+  if(!A) return '';
+  if(!A.rows.length){
+    return `<div class="dnote" style="border-top:none"><b>어디가 2026학년도 입시결과 \u2014</b>
+      <span class="unk">${A.absent || '공시 없음'}</span></div>`;
+  }
+  const body = A.rows.map(r => {
+    const m = /^(\S+)\s+([\d.]+)$/.exec(r.w) || [];
+    const cut = v => v == null ? '<span class="unk">\u2013</span>' : v;
+    const isBase = A.by && r.t === A.by;
+    return `<tr${isBase ? ' class="abase"' : ''}>
+      <td>${m[1] || r.w}</td><td>${r.t}</td>
+      <td class="num">${m[2] ? m[2] + ':1' : '<span class="unk">\u2013</span>'}</td>
+      <td class="num">${r.q || '<span class="unk">\u2013</span>'}</td>
+      <td class="num">${cut(r.p50)}</td><td class="num">${cut(r.p70)}</td></tr>`;
+  }).join('');
+  return `<div class="dnote" style="border-top:none">
+    <b>어디가 공시 2026학년도 입시결과 \u2014 9등급제 원본, 환산 없음</b>
+    <span class="b s-A">A 공식</span>
+    ${A.rank ? `<span class="unk"> \u00b7 이 표의 <b>${A.rank}번</b>은 아래 굵은 행의 70%컷 ${A.cut}등급을 근거로 한다${A.note ? ' (' + A.note + ')' : ''}</span>`
+             : '<span class="unk"> \u00b7 일반전형 등급컷이 없어 번호를 매기지 않았다</span>'}
+    <div style="overflow-x:auto;margin:8px 0 2px">
+      <table class="dtable atable">
+        <thead><tr><th style="width:74px">시기</th><th style="width:100%">전형명</th>
+          <th class="num" style="width:76px">경쟁률</th><th class="num" style="width:62px">모집</th>
+          <th class="num" style="width:70px">50%컷</th><th class="num" style="width:70px">70%컷</th></tr></thead>
+        <tbody>${body}</tbody>
+      </table>
+    </div>
+    <span class="unk">정시 행의 컷이 \u2013 인 것은 어디가가 정시 수능 성적 컷을 공개하지 않기 때문이다.</span>
+  </div>`;
+}
+
+function pastBlock(u){
+  const P = PAST[u.name + '|' + u.unit];
+  if(!P) return '';
+  const has = k => P.rows.some(r => r[k] != null);
+  const cols = [
+    ['y','학년도'], ['t','전형'], ['q','모집'], ['ap','지원'], ['cr','경쟁률'],
+    ['cut50','50%컷'], ['cut', P.stat === '등록자 평균' ? '평균등급' : '70%컷'],
+    ['avg','평균등급'], ['low','합격 최저'], ['fill','충원율']
+  ].filter(([k]) => k === 'y' || k === 't' || has(k));
+  /* 값과 같은 기준으로 숫자 열 머리글도 오른쪽 정렬한다.
+     전형 열이 width:100% 로 남는 폭을 다 가져가야 숫자 열이 서로 붙어 읽힌다 */
+  const HW = {y:'68px', t:'100%'};
+  const head = cols.map(([k, l]) =>
+    `<th${(k === 'y' || k === 't') ? '' : ' class="num"'} style="width:${HW[k] || '86px'}">${l}</th>`).join('');
+  const body = P.rows.map(r => '<tr>' + cols.map(([k]) => {
+    const v = r[k];
+    const txt = v == null ? '<span class="unk">—</span>'
+      : (k === 'cr' ? v.toFixed(2) + ':1'
+      : (typeof v === 'number' && k !== 'y' && k !== 'q' && k !== 'ap' ? v.toFixed(2) : v));
+    const cls = (k === 'y' || k === 't') ? '' : ' class="num"';
+    return `<td${cls}>${txt}</td>`;
+  }).join('') + '</tr>').join('');
+  return `<div class="dnote" style="border-top:none">
+    <b>최근 3년 입결 — 9등급제 원본, 환산 없음</b>
+    <span class="b s-${P.src}">${P.src} 원문</span>
+    <div style="overflow-x:auto;margin:8px 0 6px">
+      <table class="dtable"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+    </div>
+    <div style="font-size:12px;line-height:1.6">${P.caveat}</div>
+    ${P.jeongsi ? `<div style="font-size:12px;line-height:1.6;margin-top:5px">${P.jeongsi}</div>` : ''}
+    <div style="font-size:11.5px;color:var(--dim);margin-top:5px;font-family:var(--mono)">출처: ${P.src_note} · 확인 2026-08-28</div>
+  </div>`;
+}
+
+/* ---------- 어디가 입시결과 · 순위 ---------- */
+const adiga  = u => ADIGA[u.name + '|' + u.unit] || null;
+const rankOf = u => { const a = adiga(u); return a && a.rank ? a.rank : null; };
+
+/* ---------- 표 정렬 ---------- */
+const SENSORD = {hi:3, mid:2, lo:1};
+/* 정렬 키별 값. null 은 방향과 무관하게 항상 맨 뒤로 보낸다 */
+function sortVal(u, k){
+  if(k === 'rank')  return rankOf(u);
+  if(k === 'quota') return typeof u.quota === 'number' ? u.quota : null;
+  if(k === 'sens')  return SENSORD[u.sens] || null;
+  if(k.slice(0,3) === 'mx:'){
+    const p = parseMix(mask(u.leadRatio, u.src));
+    if(p.kind !== 'mix') return null;          /* 미확인은 뒤로 */
+    const v = p.v[k.slice(3)];
+    return v == null ? 0 : v;                  /* 반영하지 않는 요소는 0 */
+  }
+  return null;
+}
+/* 처음 클릭했을 때의 방향 — 순위는 오름차순, 나머지는 큰 값부터 */
+const firstDir = k => k === 'rank' ? 1 : -1;
+/* 같은 값일 때의 고정 기준 */
+const tieBreak = (a,b) => (rankOf(a) || 900) - (rankOf(b) || 900)
+  || a.tier - b.tier || a.group.localeCompare(b.group) || (b.quota||0) - (a.quota||0);
+
+function render(){
+  const tb = document.getElementById('tbody');
+  const rows = DATA.filter(u => state.groups.has(u.group) && hasType(u));
+  if(!rows.length){
+    tb.innerHTML = '<tr><td colspan="16" class="empty">선택한 학과군·전형 조합에 해당하는 모집단위가 없다.</td></tr>';
+    document.getElementById('tally').innerHTML = '표시 <b>0</b>개';
+    return;
+  }
+  /* 표 헤더에서 고른 열로 정렬한다. 값이 없는 모집단위는 방향과 무관하게 뒤로 간다 */
+  const {k:sk, d:sd} = state.sort;
+  rows.sort((a,b) => {
+    const va = sortVal(a, sk), vb = sortVal(b, sk);
+    if(va == null && vb == null) return tieBreak(a,b);
+    if(va == null) return 1;
+    if(vb == null) return -1;
+    return (va - vb) * sd || tieBreak(a,b);
+  });
+  document.querySelectorAll('#mainHead th[data-sort]').forEach(th => {
+    if(th.dataset.sort === sk) th.setAttribute('aria-sort', sd === 1 ? 'ascending' : 'descending');
+    else th.removeAttribute('aria-sort');
+  });
+
+  let html = '', filled = 0, total = 0;
+  rows.forEach((u,i) => {
+    const q = u.quota == null ? '<span class="unk">미확인</span>' : u.quota;
+    const lead = cell(mask(u.lead, u.src));
+    const mc = cell(mask(u.minCsat, u.src));
+    const sens = u.sens
+      ? `<span class="sens sens-${u.sens}" title="${u.sensWhy.replace(/"/g,'&quot;')}">${SENSLABEL[u.sens]} ⓘ</span>`
+      : '<span class="unk">미확인</span>';
+
+    /* 데이터 충족률 계산 */
+    [u.lead,u.leadRatio,u.minCsat,u.quota,u.sens].forEach(v=>{
+      total++; if(v!=null && v!==U) filled++;
+    });
+
+    const rk = rankOf(u), ad = adiga(u);
+    const rkCell = rk
+      ? `<td class="num rk" title="${(ad.by + ' 70%컷 ' + ad.cut + '등급 (9등급제) — 일반전형 ' + ad.n + '개 중 최저값' + (ad.note ? ' · ' + ad.note : '')).replace(/"/g,'&quot;')}"><b>${rk}</b></td>`
+      : `<td class="num rk"><span class="unk" title="${((ad && ad.absent) || '어디가에 이 모집단위의 전년도 등급컷이 없다').replace(/"/g,'&quot;')}">—</span></td>`;
+    html += `<tr class="uni" data-i="${i}" tabindex="0" role="button" aria-expanded="false">
+      ${rkCell}
+      <td><span class="uname">${u.name}</span><span class="ucamp">${u.campus}</span></td>
+      <td><span class="unit g-${u.group}">${u.unit}</span></td>
+      <td class="num">${q}</td>
+      <td style="font-size:12.5px">${lead}</td>
+      ${mixCells(u.leadRatio, u.src)}
+      <td style="font-family:var(--mono);font-size:11.5px">${mc}</td>
+      <td>${sens}</td>
+      <td>${(()=>{const v=verdict(u,state.grade);return `<span class="b s-${v.k}" title="${v.why.replace(/<[^>]+>/g,'').replace(/"/g,'&quot;')}">${v.label}${v.k!=='X'?' ⓘ':''}</span>`})()}</td>
+      <td>${srcLink(u)?`<a class="b s-${u.src} lnk" href="${srcLink(u).u}" target="_blank" rel="noopener" title="${srcLink(u).t}" onclick="event.stopPropagation()">${u.src} 원문</a>`:`<span class="b s-${u.src}">${u.src} 원문</span>`}</td>
+    </tr>`;
+
+    /* 펼친 상세도 전형 필터를 따른다 — 켠 전형만 보인다 */
+    const on = a => state.types.has(a.t);
+    const noAdm = u.adm.filter(a => on(a) && !runsType(a));
+    /* 실기고사 종목·정시 반영식처럼 전형이 아닌 원문 항목은 표 밖으로 뺀다 */
+    const refs = u.adm.filter(a => on(a) && runsType(a) && !isMix(a));
+    const admRows = u.adm.filter(a => on(a) && runsType(a) && isMix(a)).map(a => {
+    const sp = splitQuota(mask(a.n, a.s));
+    return `<tr>
+      <td style="font-family:var(--mono);font-size:11px;color:var(--ink);white-space:nowrap">${a.t}</td>
+      <td style="font-weight:500">${cell(sp.n)}</td>
+      <td class="num">${sp.q || ''}</td>
+      ${mixCells(a.r, a.s)}
+      <td class="rawr">${(rz => rz == null ? '' : cell(rz))(residual(mask(a.r, a.s)))}</td>
+      <td style="font-family:var(--mono);font-size:11px">${cell(mask(a.m, a.s))}</td>
+      <td style="font-family:var(--mono);font-size:11px">${cell(mask(a.c, a.s))}</td>
+      <td><span class="b s-${a.s}">${a.s}</span></td>
+    </tr>`;
+    }).join('');
+
+    html += `<tr class="detail" data-d="${i}"><td colspan="16">
+      <table class="dtable ftable">
+        <thead>
+          <tr>
+            <th style="width:56px" rowspan="2">유형</th><th style="width:190px" rowspan="2">전형명</th><th class="num" style="width:44px" rowspan="2" title="원문 전형명에 적힌 모집인원">모집</th>
+            <th colspan="7" class="mxhead">반영 비중 (%)</th>
+            <th rowspan="2">특이사항</th>
+            <th style="width:100px" rowspan="2">선발방법</th><th style="width:86px" rowspan="2">수능최저</th><th style="width:46px" rowspan="2">출처</th>
+          </tr>
+          <tr>${MIXTH}</tr>
+        </thead>
+        <tbody>${admRows}</tbody>
+      </table>
+      ${refs.length ? `<div class="dnote"><b>전형이 아닌 원문 항목 —</b> ${refs.map(a =>
+        `<b>${a.t}</b> ${a.n}: ${a.d || a.r}`).join('<br>')}</div>` : ''}
+      ${noAdm.length ? `<div class="dnote"${refs.length ? ' style="border-top:none"' : ''}><b>이 모집단위에 배정이 없는 전형 —</b> ${noAdm.map(a =>
+        `<b>${a.t}</b> ${a.n.replace(/\s*[—-]\s*(해당 없음|미시행|배정 없음).*$/, '')}: ${a.d || a.r}`).join('<br>')}</div>` : ''}
+      <div class="dnote"${(noAdm.length || refs.length) ? ' style="border-top:none"' : ''}><b>원문 확인 내용 —</b> ${u.note}</div>
+      ${u.sensWhy ? `<div class="dnote" style="border-top:none"><b>내신 민감도 근거 —</b> ${u.sensWhy} <span class="unk">(전형 구조에서 도출한 추정. 과거 합격선과 무관하다.)</span></div>` : ''}
+      ${adigaBlock(u)}
+      ${pastBlock(u)}
+      <div class="dnote" style="border-top:none"><b>입결 판정 근거 —</b> ${verdict(u, state.grade).why}</div>
+    </td></tr>`;
+  });
+  tb.innerHTML = html;
+
+  const pct = Math.round(filled / total * 100);
+  document.getElementById('tally').innerHTML =
+    `모집단위 <b>${rows.length}</b>개 · 주후보 <b>${rows.filter(r=>r.tier===1).length}</b> / 추가 <b>${rows.filter(r=>r.tier===2).length}</b> · 핵심항목 충족률 <b>${pct}%</b>`;
+
+  tb.querySelectorAll('tr.uni').forEach(tr => {
+    const toggle = () => {
+      const d = tb.querySelector(`tr.detail[data-d="${tr.dataset.i}"]`);
+      const on = d.classList.toggle('show');
+      tr.classList.toggle('open', on);
+      tr.setAttribute('aria-expanded', on);
+    };
+    tr.addEventListener('click', toggle);
+    tr.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+  });
+}
+
+/* ---------- 컨트롤 ---------- */
+function single(id, key){
+  const seg = document.getElementById(id);
+  seg.addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    seg.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    state[key] = b.dataset.v;
+    render();
+  });
+}
+single('segGrade','grade');
+
+/* 다중선택 세그먼트 — 학과군·전형이 같은 규칙을 쓴다(최소 하나는 유지) */
+function multi(id, set){
+  document.getElementById(id).addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    const v = b.dataset.v;
+    if(set.has(v)){ if(set.size === 1) return; set.delete(v); } else set.add(v);
+    b.setAttribute('aria-pressed', String(set.has(v)));
+    render();
+  });
+}
+multi('segType', state.types);
+
+/* 표 헤더 클릭 — 같은 열을 다시 누르면 방향이 뒤집힌다 */
+document.getElementById('mainHead').addEventListener('click', e => {
+  const th = e.target.closest('th[data-sort]'); if(!th) return;
+  const k = th.dataset.sort;
+  state.sort = state.sort.k === k ? {k, d:-state.sort.d} : {k, d:firstDir(k)};
+  render();
+});
+
+document.getElementById('segGroup').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  const v = b.dataset.v;
+  if(state.groups.has(v)){
+    if(state.groups.size === 1) return;   /* 최소 하나는 유지 */
+    state.groups.delete(v);
+  } else state.groups.add(v);
+  b.setAttribute('aria-pressed', String(state.groups.has(v)));
+  render();
+});
+
+/* ---------- 정적 섹션 ---------- */
+document.getElementById('types').innerHTML = TYPES.map(t => `
+  <div class="tcard">
+    <h3>${t.t}</h3>
+    <p class="tmeta">${t.meta}</p>
+    <p>${t.p}</p>
+    <ul>${t.li.map(x => `<li>${x}</li>`).join('')}</ul>
+  </div>`).join('');
+
+document.getElementById('census').innerHTML = Object.entries(CENSUS).map(([r, list]) => `
+  <div class="cregion">
+    <h4>${r}</h4>
+    <ul>${list.map(u => `<li class="${u.x ? 'excl' : ''}"><span>${u.n}</span><span class="hit">${u.h}</span></li>`).join('')}</ul>
+  </div>`).join('');
+
+document.getElementById('srclinks').innerHTML = Object.entries(LINKS).map(([n,l]) => `
+  <tr><td style="font-weight:600">${n}</td>
+      <td>${l.t}<br><a href="${l.u}" target="_blank" rel="noopener">${l.u}</a>${l.p ? `<br><span class="pdfl">원문 PDF</span> <a href="${l.p}" target="_blank" rel="noopener">${l.p}</a>` : ''}</td></tr>`).join('');
+
+/* 컨트롤 바가 sticky 헤더를 덮지 않게, 바 높이를 실측해 오프셋으로 쓴다 */
+function stickyOffsets(){
+  const bar = document.querySelector('.bar');
+  document.documentElement.style.setProperty('--barh', bar.offsetHeight + 'px');
+}
+addEventListener('resize', stickyOffsets);
+
+render();
+stickyOffsets();
+</script>
+
+</body>
+</html>
