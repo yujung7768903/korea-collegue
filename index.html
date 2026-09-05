@@ -121,19 +121,18 @@ h2{
 }
 .sdesc{color:var(--text-2); margin:0 0 22px; max-width:66ch; font-size:14.5px}
 /* ---------- 컬럼 정의 ---------- */
-/* 요약표 바로 위. 항목이 아홉이라 가로를 다 쓰도록 두 단으로 흘린다 —
-   grid 가 아니라 multi-column 이어야 읽는 순서가 위에서 아래로 유지된다 */
+/* 요약표 바로 위. 한 단으로 위에서 아래로 쭉 읽는다 —
+   정의가 긴 항목이 있어 단을 나누면 줄 길이가 들쭉날쭉해진다 */
 .coldef{margin:14px 0 24px}
 .coldef h3{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
   color:var(--text-3); font-weight:600; margin:0 0 4px; padding-bottom:8px;
   border-bottom:1px solid var(--line);
 }
-.coldef dl{margin:0; columns:2; column-gap:48px}
+.coldef dl{margin:0}
 /* 컬럼명과 정의를 두 칸으로 — 컬럼명은 표 머리글과 같은 모노 서체로 맞춘다 */
 .coldef dl > div{
-  break-inside:avoid;
-  display:grid; grid-template-columns:112px 1fr; gap:0 16px;
+  display:grid; grid-template-columns:132px 1fr; gap:0 20px;
   padding:9px 0; border-bottom:1px solid var(--line-soft);
 }
 .coldef dt{
@@ -142,7 +141,6 @@ h2{
 }
 .coldef dd{margin:0; font-size:13px; line-height:1.68; color:var(--text-2); word-break:keep-all}
 .coldef dd b{color:var(--text); font-weight:600}
-@media(max-width:1000px){ .coldef dl{columns:1} }
 @media(max-width:760px){
   .coldef dl > div{grid-template-columns:1fr; gap:3px}
 }
